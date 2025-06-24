@@ -1,7 +1,8 @@
 {
-  "name": "bearcnc",
+  "name": "eslint-config-bearcnc-react",
   "version": "0.0.1",
-  "description": "Monorepo containing airbnb/javascript style guide ESLint configs.",
+  "description": "ESLint config with airbnb/javascript style guide. Only Base",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Yukinosuke-Takada/bearcnc"
@@ -11,13 +12,11 @@
   "bugs": {
     "url": "https://github.com/Yukinosuke-Takada/bearcnc/issues"
   },
-  "type": "module",
-  "scripts": {
-    "lint:md": "eslint --ext .md ."
+  "peerDependencies": {
+    "eslint": "^8.57.0 || >=9.0.0",
+    "eslint-plugin-import": "^2.31.0"
   },
-  "devDependencies": {
-    "@eslint/markdown": "^6.6.0",
-    "eslint": "^9.29.0",
-    "prettier": "^3.6.0"
+  "engine": {
+    "node": "^18.18.0 || >=20.0.0"
   }
 }

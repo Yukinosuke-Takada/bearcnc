@@ -1,2 +1,11 @@
 # IDE
 .vscode/
+
+# Node modules
+node_modules/
+
+# npm stuff
+package-lock.json
+
+# Misc
+.DS_Store
