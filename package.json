@@ -1,0 +1,5 @@
+{
+  "name": "bearcnc",
+  "version": "0.0.1",
+  "description": "Monorepo containing airbnb/javascript style guide with ESLint V9 support and TypeScript."
+}
