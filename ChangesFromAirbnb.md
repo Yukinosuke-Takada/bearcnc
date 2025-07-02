@@ -30,3 +30,18 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   Uses ESLint to lint .md files. Added Prettier.
 
 ### Individual Project
+
+#### Base
+
+- Removed following code:
+  ```js
+  // don't know why this is necessary. looks like it was needed during eslint V2
+  			'jsx': true,
+        'generators': false,
+        'objectLiteralDuplicateProperties': false
+  ```
+
+  [original commit](https://github.com/airbnb/javascript/commit/75807b9d5ead326be45f4719d81bda52d2bbb32a)
+
+- Changed Rules due to deprecation:
+  [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
