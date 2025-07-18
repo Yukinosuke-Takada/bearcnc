@@ -11,6 +11,7 @@ export default defineConfig([
       "markdown/no-html": "error",
       "markdown/no-duplicate-headings": "error",
       "markdown/no-bare-urls": "error",
+      "markdown/no-empty-definitions": ["error", { allowDefinitions: ["//"] }], // Allow comments
     },
   },
 ]);

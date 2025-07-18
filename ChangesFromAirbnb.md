@@ -13,6 +13,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 - Supported Node version change.
   Above `10.12.0` or Later versions after `12.0.0` → Above `18.18.0` or Later versions after `20.0.0`
   This is due to ESLint V9 only supporting the latter versions.
+  **Note:** Node only required for development environment. Your code can still target like ES5.
 - Package rename.
   `javascript` → `bearcnc` (The mono-repo that contains all the package)
   `eslint-config-airbnb-base` → `eslint-config-bearcnc-base`

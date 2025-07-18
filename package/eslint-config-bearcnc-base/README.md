@@ -4,9 +4,9 @@
 - [Rules](#rules)
   - [References](#references)
   - [Objects](#objects)
+- [Something else](#something-else)
 
 ## Rules
-
 
 ### References
 
@@ -16,6 +16,8 @@
   > Why? This ensures that you can’t reassign your references, which can lead to bugs and difficult to comprehend code.
 
   Bad:
+
+  [//]: # (expectedErrors: 5)
 
   ```js
   // it's initialized and never reassigned.
@@ -46,6 +48,8 @@
   ```
 
   Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
 
   ```js
   // using const.
@@ -115,12 +119,16 @@
 
   Bad:
 
+  [//]: # (expectedErrors: 1)
+
   ```js
   let {a, b} = obj;    /*error 'b' is never reassigned, use 'const' instead.*/
   a = a + 1;
   ```
 
   Good:
+
+  [//]: # (expectedErrors: 0)
 
   ```js
   // using const.
@@ -136,6 +144,8 @@
   **ignoreReadBeforeAssign**
   Good:
 
+  [//]: # (expectedErrors: 0)
+
   ```js
   let timer;
   function initialize() {
@@ -146,9 +156,11 @@
   timer = setInterval(initialize, 100);
   ```
 
-- 2.1.1 eslint: `no-const-assign`
+- 2.1.1 eslint: [`no-const-assign`](https://eslint.org/docs/latest/rules/no-const-assign)
   **Availability:** `es6`
   Bad:
+
+  [//]: # (expectedErrors: 1)
 
   ```js
   const a = 0;
@@ -156,21 +168,43 @@
   ```
   
   Bad:
-  
+
+  [//]: # (expectedErrors: 1)
+
   ```js
   const a = 0;
   a += 1;
   ```
 
   Bad:
-  
+
+  [//]: # (expectedErrors: 1)
+
   ```js
   const a = 0;
   ++a;
   ```
   
-  Good:
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  if (foo) {
+  	using a = getSomething();
+  	a = somethingElse;
+  }
   
+  if (bar) {
+  	await using a = getSomething();
+  	a = somethingElse;
+  }
+  ```
+  
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
   ```js
   const a = 0;
   console.log(a);
@@ -178,13 +212,33 @@
   
   Good:
 
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (foo) {
+  	using a = getSomething();
+  	a.execute();
+  }
+  
+  if (bar) {
+  	await using a = getSomething();
+  	a.execute();
+  }
+  ```
+  
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
   ```js
   for (const a in [1, 2, 3]) { // `a` is re-defined (not modified) on each loop step.
       console.log(a);
   }
   ```
-
+  
   Good:
+
+  [//]: # (expectedErrors: 0)
 
   ```js
   for (const a of [1, 2, 3]) { // `a` is re-defined (not modified) on each loop step.
@@ -196,12 +250,17 @@
   **Availability:** `es6`, ("off" for `es5`)
   Bad:
 
+  [//]: # (expectedErrors: 2)
+
   ```js
   var x = "y";
   var CONFIG = {};
   ```
 
   Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
   ```js
   let x = "y";
   const CONFIG = {};
@@ -226,27 +285,28 @@
   **Note:** Originally it was eslint: [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) but was deprecated as of V8.50.0 so it was replaced with this.
   Bad:
 
+  [//]: # (expectedErrors: 2)
+
   ```js
-  var myObject = new Object();
+  Object();
   
   new Object();
-  
-  var foo = new Object("foo");
   ```
-
+  
   Good:
 
-  ```js
-  var myObject = new CustomObject();
-  
-  var myObject = {};
-  
-  var Object = function Object() {};
-  new Object();
-  
-  var foo = Object("foo");
-  ```
+  [//]: # (expectedErrors: 0)
 
+  ```js
+  Object("foo");
+  
+  const obj = { a: 1, b: 2 };
+  
+  const isObject = value => value === Object(value);
+  
+  const createObject = Object => new Object();
+  ```
+  
 - 3.2 Use computed property names when creating objects with dynamic property names.
 
   > Why? They allow you to define all the properties of an object in one place.
@@ -404,5 +464,10 @@
   };
   ```
 
-  
+
+
+
+## Something else
+
+Fdasfd
 

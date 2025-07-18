@@ -3,7 +3,7 @@ import objects from "./objects.js";
 
 export default defineConfig({
   languageOptions: {
-    ecmaVersion: "5",
+    ecmaVersion: 5,
   },
   rules: {
     ...objects[0].rules,
