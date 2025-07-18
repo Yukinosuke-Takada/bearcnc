@@ -1,12 +1,13 @@
 import { ESLint } from "eslint";
-import { getTestCasesDataWithRule } from "./markdown.js";
+import { getTestCasesData } from "./markdown.js";
 import { expect } from "chai";
 
 const DEBUG = true; // Set to true to enable debug logging
 
 class Linter {
-  constructor(configFilePath, configType) {
+  constructor(configFilePath, docPath, configType) {
     this.configFilePath = configFilePath;
+    this.docPath = docPath;
     this.configType = configType;
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
@@ -14,7 +15,7 @@ class Linter {
   }
 
   async checkRule(rule) {
-    const { availability, testCases } = getTestCasesDataWithRule(rule);
+    const { availability, testCases } = getTestCasesData(rule, this.docPath);
 
     // check if the config type is available for the rule
     expect(availability, `Config type "${this.configType}" should be available for rule "${rule}"`).to.include(this.configType);

@@ -1,11 +1,4 @@
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const DOC_PATH = '../../README.md';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // helper function to remove common leading indentation
 function dedent(str) {
@@ -22,32 +15,23 @@ function dedent(str) {
   return lines.map(line => line.slice(minIndent)).join('\n');
 }
 
-function getTestCasesData(rule) {
-  // Read the README.md file
-  const readmePath = path.resolve(__dirname, DOC_PATH);
-  const readmeContent = fs.readFileSync(readmePath, 'utf8');
-
-  // extract the section under "## Rules"
-  const sectionsByH2 = readmeContent.split('\n## ');
-  const rulesSection = sectionsByH2.find(section => section.startsWith('Rules'));
-  
-  if (!rulesSection) {
-    throw new Error('Rules section not found in README.md');
-  }
+function getTestCasesData(rule, docPath) {
+  // Read the document file
+  const doc = fs.readFileSync(docPath, 'utf8');
 
   // find the section for the specific rule
-  const rules = rulesSection.split('\n- ');
-  const rule = rules.find(item => {
+  const rulesSection = doc.split('\n- ');
+  const ruleSection = rulesSection.find(item => {
     const firstLine = item.split('\n')[0]; // only search it in the bullet point line
     return firstLine.includes(`eslint: [\`${rule}\`]`);
   });
-  if (!rule) {
+  if (!ruleSection) {
     throw new Error(`Rule "${rule}" not found in Rules section`);
   }
 
   // extract availability from the specific rule
   // **Availability:** `es5`, `es6` will return ['es5', 'es6']
-  const lines = rule.split('\n');
+  const lines = ruleSection.split('\n');
   const availabilityLine = lines.find(line => line.includes('**Availability:**'));
   if (!availabilityLine) {
     throw new Error(`Availability not found for rule "${rule}"`);
@@ -63,7 +47,7 @@ function getTestCasesData(rule) {
   const markerRegex = /\n\s*(Good:|Bad:)\s*([\s\S]*?)(?=\n\s*(Good:|Bad:)|$)/g;
   const testCaseSections = [];
   let markerMatch;
-  while ((markerMatch = markerRegex.exec(rule)) !== null) {
+  while ((markerMatch = markerRegex.exec(ruleSection)) !== null) {
     testCaseSections.push({
       isGood: markerMatch[1] === 'Good:',
       code: markerMatch[2].trim(),
@@ -122,4 +106,4 @@ function getTestCasesData(rule) {
   };
 };
 
-export { getTestCasesData as getTestCasesDataWithRule };
+export { getTestCasesData };
