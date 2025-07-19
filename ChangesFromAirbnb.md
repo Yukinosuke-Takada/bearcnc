@@ -13,6 +13,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 - Supported Node version change.
   Above `10.12.0` or Later versions after `12.0.0` → Above `18.18.0` or Later versions after `20.0.0`
   This is due to ESLint V9 only supporting the latter versions.
+  **Note:** Node only required for development environment. Your code can still target like ES5.
 - Package rename.
   `javascript` → `bearcnc` (The mono-repo that contains all the package)
   `eslint-config-airbnb-base` → `eslint-config-bearcnc-base`
@@ -30,3 +31,18 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   Uses ESLint to lint .md files. Added Prettier.
 
 ### Individual Project
+
+#### Base
+
+- Removed following code:
+  ```js
+  // don't know why this is necessary. looks like it was needed during eslint V2
+  			'jsx': true,
+        'generators': false,
+        'objectLiteralDuplicateProperties': false
+  ```
+
+  [original commit](https://github.com/airbnb/javascript/commit/75807b9d5ead326be45f4719d81bda52d2bbb32a)
+
+- Changed Rules due to deprecation:
+  [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
