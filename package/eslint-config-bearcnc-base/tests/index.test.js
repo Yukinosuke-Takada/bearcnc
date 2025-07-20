@@ -37,4 +37,13 @@ describe("ES6 Rules", () => {
   it("should lint expectedly for 'no-prototype-builtins'", async () => {
     await linter.checkRule("no-prototype-builtins");
   });
+
+  // Arrays rules
+  it("should lint expectedly for 'no-array-constructor'", async () => {
+    await linter.checkRule("no-array-constructor");
+  });
+
+  it("should lint expectedly for 'array-callback-return'", async () => {
+    await linter.checkRule("array-callback-return");
+  });
 });

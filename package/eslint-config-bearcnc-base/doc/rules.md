@@ -7,6 +7,7 @@
   - [See also](#see-also)
   - [References](#references)
   - [Objects](#objects)
+  - [Arrays](#arrays)
 
 ## See also
 
@@ -626,4 +627,205 @@ This doc was created by referencing the following material:
   const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
 
   const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
+  ```
+
+## Arrays
+
+- 4.1 Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.style/rules/no-array-constructor)
+
+  > Why?
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  Array();
+
+  Array(0, 1, 2);
+
+  new Array(0, 1, 2);
+
+  Array(...args);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Array(500);
+
+  new Array(someOtherArray.length);
+
+  [0, 1, 2];
+
+  const createArray = Array => new Array();
+  ```
+
+- 4.2 Use [Array#push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) instead of direct assignment to add items to an array.
+
+  Bad:
+
+  ```js
+  const someStack = [];
+
+  someStack[someStack.length] = 'abracadabra';
+  ```
+
+  Good:
+
+  ```js
+  const someStack = [];
+
+  someStack.push('abracadabra');
+  ```
+
+
+
+- 4.3 Use array spreads ... to copy arrays.
+
+  Bad:
+
+  ```js
+  const len = items.length;
+  const itemsCopy = [];
+
+  let i;
+
+  for (i = 0; i < len; i+= 1) {
+    itemsCopy[i] = items[i];
+  }
+  ```
+
+  Good:
+
+  ```js
+  const itemsCopy = [...items];
+  ```
+
+- 4.4 To convert an array-like object to an array, use spreads ... instead of [Array.from](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/from).
+
+  Good:
+
+  ```js
+  const foo = document.querySelectorAll('.foo');
+
+  const nodes = Array.from(foo);
+  ```
+
+  Good:
+
+  ```js
+  const foo = document.querySelectorAll('.foo');
+
+  const nodes = [...foo];
+  ```
+
+- 4.5 Use [Array.from](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/from) instead of spread ... for mapping over iterables, because it avoids creating an intermediate array.
+
+  Bad:
+
+  ```js
+  const baz = [...foo].map(bar);
+  ```
+
+  Good:
+
+  ```js
+  const baz = Array.from(foo, bar);
+  ```
+
+- 4.6 Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following 8.2. eslint: [`array-callback-return`](https://eslint.style/rules/array-callback-return)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  const indexMap = myArray.reduce(function(memo, item, index) {
+      memo[item] = index;
+  }, {});
+
+  const foo = Array.from(nodes, function(node) {
+      if (node.tagName === "DIV") {
+          return true;
+      }
+  });
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const indexMap = myArray.reduce(function(memo, item, index) {
+      memo[item] = index;
+      return memo;
+  }, {});
+
+  const foo = Array.from(nodes, function(node) {
+      if (node.tagName === "DIV") {
+          return true;
+      }
+      return false;
+  });
+
+  const bar = foo.map(node => node.getAttribute("id"));
+  ```
+
+  **allowImplicit**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const undefAllTheThings = myArray.map(function(item) {
+      return;
+  });
+  ```
+
+- 4.7 Use line breaks after open and before close array brackets if an array has multiple lines
+
+  Bad:
+
+  ```js
+  const arr = [
+    [0, 1], [2, 3], [4, 5],
+  ];
+
+  const objectInArray = [{
+    id: 1,
+  }, {
+    id: 2,
+  }];
+
+  const numberInArray = [
+    1, 2,
+  ];
+  ```
+
+  Good:
+
+  ```js
+  const arr = [[0, 1], [2, 3], [4, 5]];
+
+  const objectInArray = [
+    {
+      id: 1,
+    },
+    {
+      id: 2,
+    },
+  ];
+
+  const numberInArray = [
+    1,
+    2,
+  ];
   ```

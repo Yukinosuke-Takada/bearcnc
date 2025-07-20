@@ -26,7 +26,7 @@ function getTestCasesData(rule, docPath) {
     return firstLine.includes(`eslint: [\`${rule}\`]`);
   });
   if (!ruleSection) {
-    throw new Error(`Rule "${rule}" not found in Rules section`);
+    throw new Error(`Rule "${rule}" not found in Rules docs`);
   }
 
   // extract availability from the specific rule
