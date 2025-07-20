@@ -11,4 +11,8 @@ describe("ES5 (legacy) Rules", () => {
   it("should lint expectedly for 'no-object-constructor'", async () => {
     await linter.checkRule("no-object-constructor");
   });
+
+  it("should lint expectedly for '@stylistic/quote-props'", async () => {
+    await linter.checkRule("@stylistic/quote-props");
+  });
 });

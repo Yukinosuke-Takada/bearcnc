@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 const linter = new Linter(path.resolve(__dirname, "../index.js"), path.resolve(__dirname, "../doc/rules.md"), "es6");
 
 describe("ES6 Rules", () => {
+  // Reference rules
   it("should lint expectedly for 'prefer-const'", async () => {
     await linter.checkRule("prefer-const");
   });
@@ -20,11 +21,16 @@ describe("ES6 Rules", () => {
     await linter.checkRule("no-var");
   });
 
+  // Objects rules
   it("should lint expectedly for 'no-object-constructor'", async () => {
     await linter.checkRule("no-object-constructor");
   });
 
   it("should lint expectedly for 'object-shorthand'", async () => {
     await linter.checkRule("object-shorthand");
+  });
+
+  it("should lint expectedly for '@stylistic/quote-props'", async () => {
+    await linter.checkRule("@stylistic/quote-props");
   });
 });

@@ -2,7 +2,7 @@ import { ESLint } from "eslint";
 import { getTestCasesData } from "./markdown.js";
 import { expect } from "chai";
 
-const DEBUG = true; // Set to true to enable debug logging
+const DEBUG = false; // Set to true to enable debug logging
 
 class Linter {
   constructor(configFilePath, docPath, configType) {

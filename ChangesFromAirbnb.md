@@ -45,4 +45,6 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   [original commit](https://github.com/airbnb/javascript/commit/75807b9d5ead326be45f4719d81bda52d2bbb32a)
 
 - Changed Rules due to deprecation:
-  [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
+  - [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
+  - [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
+
