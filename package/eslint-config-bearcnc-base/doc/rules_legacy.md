@@ -152,3 +152,29 @@ This doc was created by referencing the following material:
 
   var barIsEnumerable = {}.propertyIsEnumerable.call(foo, "bar");
   ```
+
+- 3.8 Prefer the object spread operator over Object.assign to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
+
+  Bad:
+
+  ```js
+  const original = { a: 1, b: 2 };
+  const copy = Object.assign(original, { c: 3 }); // this mutates `original` ಠ_ಠ
+  delete copy.a; // so does this
+  ```
+
+  Bad:
+
+  ```js
+  const original = { a: 1, b: 2 };
+  const copy = Object.assign({}, original, { c: 3 }); // copy => { a: 1, b: 2, c: 3 }
+  ```
+
+  Good:
+
+  ```js
+  const original = { a: 1, b: 2 };
+  const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
+
+  const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
+  ```
