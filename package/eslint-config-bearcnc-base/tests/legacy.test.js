@@ -15,4 +15,8 @@ describe("ES5 (legacy) Rules", () => {
   it("should lint expectedly for '@stylistic/quote-props'", async () => {
     await linter.checkRule("@stylistic/quote-props");
   });
+
+  it("should lint expectedly for 'no-prototype-builtins'", async () => {
+    await linter.checkRule("no-prototype-builtins");
+  });
 });

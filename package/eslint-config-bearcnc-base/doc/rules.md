@@ -571,3 +571,33 @@ This doc was created by referencing the following material:
     100: 1
   }
   ```
+
+- 3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf. eslint: [`no-prototype-builtins`](https://eslint.style/rules/no-prototype-builtins)
+
+  > Why? These methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  const hasBarProperty = foo.hasOwnProperty("bar");
+
+  const isPrototypeOfBar = foo.isPrototypeOf(bar);
+
+  const barIsEnumerable = foo.propertyIsEnumerable("bar");
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const hasBarProperty = Object.prototype.hasOwnProperty.call(foo, "bar");
+
+  const isPrototypeOfBar = Object.prototype.isPrototypeOf.call(foo, bar);
+
+  const barIsEnumerable = {}.propertyIsEnumerable.call(foo, "bar");
+  ```

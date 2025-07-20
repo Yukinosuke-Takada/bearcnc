@@ -11,5 +11,8 @@ export default defineConfig({
 
     // Enforce consistent use of object literal shorthand syntax
     '@stylistic/quote-props': ['error', 'as-needed', { keywords: false, unnecessary: true, numbers: false }],
+  
+    // Disallow the use of Object.prototype built-in methods directly on objects
+    'no-prototype-builtins': 'error',
   }
 });
