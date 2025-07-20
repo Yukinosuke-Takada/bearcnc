@@ -61,4 +61,20 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/quotes'", async () => {
     await linter.checkRule('@stylistic/quotes', { ignoreGlobalConfig: true });
   });
+
+  it("should lint expectedly for 'prefer-template'", async () => {
+    await linter.checkRule('prefer-template');
+  });
+
+  it("should lint expectedly for '@stylistic/template-curly-spacing'", async () => {
+    await linter.checkRule('@stylistic/template-curly-spacing');
+  });
+
+  it("should lint expectedly for 'no-eval'", async () => {
+    await linter.checkRule('no-eval');
+  });
+
+  it("should lint expectedly for 'no-useless-escape'", async () => {
+    await linter.checkRule('no-useless-escape');
+  });
 });

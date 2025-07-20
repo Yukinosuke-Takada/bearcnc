@@ -361,3 +361,130 @@ This doc was created by referencing the following material:
   var double = "a string containing 'single' quotes";
   ```
 
+- 6.2 Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
+
+  > Why? Broken strings are painful to work with and make code less searchable.
+
+  Bad:
+
+  ```js
+  const errorMessage = 'This is a super long error that was thrown because \
+  of Batman. When you stop to think about how Batman had anything to do \
+  with this, you would get nowhere \
+  fast.';
+
+  const errorMessage = 'This is a super long error that was thrown because ' +
+    'of Batman. When you stop to think about how Batman had anything to do ' +
+    'with this, you would get nowhere fast.';
+  ```
+
+  Good:
+
+  ```js
+  const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+  ```
+
+- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.style/rules/no-eval)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'prefer-template: "off"')
+
+  ```js
+  var obj = { x: "foo" },
+      key = "x",
+      value = eval("obj." + key);
+
+  (0, eval)("var a = 0");
+
+  var foo = eval;
+  foo("var a = 0");
+
+  // This `this` is the global object.
+  this.eval("var a = 0");
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  /*global window*/
+
+  window.eval("const a = 0");
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  /*global global*/
+
+  global.eval("const a = 0");
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var obj = { x: "foo" },
+      key = "x",
+      value = obj[key];
+
+  function A() {}
+
+  A.prototype.foo = function() {
+      // This is a user-defined method.
+      this.eval("const a = 0");
+  };
+
+  A.prototype.eval = function() {
+  };
+
+  A.eval = function() {};
+  ```
+
+- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.style/rules/no-useless-escape)
+
+  > Why? Backslashes harm readability, thus they should only be present when necessary.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 8)
+
+  ```js
+  "\'";
+  '\"';
+  "\#";
+  "\e";
+  /\!/;
+  /\@/;
+  /[\[]/;
+  /[a-z\-]/;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  "\"";
+  '\'';
+  "\x12";
+  "\u00a9";
+  "\371";
+  "xs\u2111";
+  /\\/g;
+  /\t/g;
+  /\w\$\*\^\./;
+  /[[]/;
+  /[\]]/;
+  /[a-z-]/;
+  ```
+

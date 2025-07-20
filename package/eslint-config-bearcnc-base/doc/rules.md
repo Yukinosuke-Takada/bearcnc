@@ -972,3 +972,200 @@ This doc was created by referencing the following material:
   var double = "a string containing 'single' quotes";
   ```
 
+- 6.2 Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
+
+  > Why? Broken strings are painful to work with and make code less searchable.
+
+  Bad:
+
+  ```js
+  const errorMessage = 'This is a super long error that was thrown because \
+  of Batman. When you stop to think about how Batman had anything to do \
+  with this, you would get nowhere \
+  fast.';
+
+  const errorMessage = 'This is a super long error that was thrown because ' +
+    'of Batman. When you stop to think about how Batman had anything to do ' +
+    'with this, you would get nowhere fast.';
+  ```
+
+  Good:
+
+  ```js
+  const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+  ```
+
+- 6.3 When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](https://eslint.style/rules/prefer-template)
+
+  > Why?
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  const str = "Hello, " + name + "!";
+  const str1 = "Time: " + (12 * 60 * 60 * 1000);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const str = "Hello World!";
+  const str1 = `Hello, ${name}!`;
+  const str2 = `Time: ${12 * 60 * 60 * 1000}`;
+
+  // This is reported by `no-useless-concat`.
+  const str4 = "Hello, " + "World!";
+  ```
+
+- 6.3.1 eslint: [`@stylistic/template-curly-spacing`](https://eslint.style/rules/template-curly-spacing)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`template-curly-spacing`](https://eslint.org/docs/latest/rules/template-curly-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  `hello, ${ people.name}!`;
+  `hello, ${people.name }!`;
+
+  `hello, ${ people.name }!`;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  `hello, ${people.name}!`;
+
+  `hello, ${
+      people.name
+  }!`;
+  ```
+
+
+- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.style/rules/no-eval)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3, eslint: 'prefer-template: "off"')
+
+  ```js
+  const obj = { x: "foo" },
+      key = "x",
+      value = eval("obj." + key);
+
+  (0, eval)("const a = 0");
+
+  const foo = eval;
+  foo("const a = 0");
+
+  // This `this` is the global object.
+  this.eval("const a = 0");
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  /*global window*/
+
+  window.eval("const a = 0");
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  /*global global*/
+
+  global.eval("const a = 0");
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const obj = { x: "foo" },
+      key = "x",
+      value = obj[key];
+
+  class A {
+      foo() {
+          // This is a user-defined method.
+          this.eval("const a = 0");
+      }
+
+      eval() {
+      }
+
+      static {
+          // This is a user-defined static method.
+          this.eval("const a = 0");
+      }
+
+      static eval() {
+      }
+  }
+  ```
+
+
+- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.style/rules/no-useless-escape)
+
+  > Why? Backslashes harm readability, thus they should only be present when necessary.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 12)
+
+  ```js
+  "\'";
+  '\"';
+  "\#";
+  "\e";
+  `\"`;
+  `\"${foo}\"`;
+  `\#{foo}`;
+  /\!/;
+  /\@/;
+  /[\[]/;
+  /[a-z\-]/;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  "\"";
+  '\'';
+  "\x12";
+  "\u00a9";
+  "xs\u2111";
+  `\``;
+  `\${${foo}}`;
+  `$\{${foo}}`;
+  /\\/g;
+  /\t/g;
+  /\w\$\*\^\./;
+  /[[]/;
+  /[\]]/;
+  /[a-z-]/;
+  ```
+
