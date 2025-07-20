@@ -1,6 +1,6 @@
-import { ESLint } from "eslint";
-import { getTestCasesData } from "./markdown.js";
-import { expect } from "chai";
+import { ESLint } from 'eslint';
+import { getTestCasesData } from './markdown.js';
+import { expect } from 'chai';
 
 const DEBUG = false; // Set to true to enable debug logging
 
@@ -39,9 +39,9 @@ class Linter {
       if (DEBUG) {
         console.log(`[${title}]\n`);
         console.log(result[0]);
-        console.log("------------------------------\n");
+        console.log('------------------------------\n');
       }
-      const errorCount = result[0].errorCount;
+      const {errorCount} = result[0];
 
       expect(errorCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
 

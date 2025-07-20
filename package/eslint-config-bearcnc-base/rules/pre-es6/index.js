@@ -1,7 +1,7 @@
-import { defineConfig } from "eslint/config";
+import { defineConfig } from 'eslint/config';
 import arraysConfig from './arrays.js';
 import objectsConfig from './objects.js';
-import stringsConfig from "./strings.js";
+import stringsConfig from './strings.js';
 
 export default defineConfig([
   arraysConfig,

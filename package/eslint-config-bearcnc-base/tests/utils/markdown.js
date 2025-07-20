@@ -78,7 +78,7 @@ function getTestCasesData(rule, docPath) {
     let eslintConfig = null;
     const eslintConfigMatch = commentOut.match(/eslint:\s*'([^']+)'/);
     if (eslintConfigMatch) {
-      eslintConfig = eslintConfigMatch[1];
+      [, eslintConfig] = eslintConfigMatch;
     }
 
     const codeSectionSplit = section.code.split('```js')

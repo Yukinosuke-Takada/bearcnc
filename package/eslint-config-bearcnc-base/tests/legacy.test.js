@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import path from "path";
+import path from 'path';
 import { Linter } from './utils/linter.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,31 +12,31 @@ const linter = new Linter({
   globalEslintConfig: '@stylistic/quotes: "off"',
 });
 
-describe("ES5 (legacy) Rules", () => {
+describe('ES5 (legacy) Rules', () => {
   // Objects rules
   it("should lint expectedly for 'no-object-constructor'", async () => {
-    await linter.checkRule("no-object-constructor");
+    await linter.checkRule('no-object-constructor');
   });
 
   it("should lint expectedly for '@stylistic/quote-props'", async () => {
-    await linter.checkRule("@stylistic/quote-props");
+    await linter.checkRule('@stylistic/quote-props');
   });
 
   it("should lint expectedly for 'no-prototype-builtins'", async () => {
-    await linter.checkRule("no-prototype-builtins");
+    await linter.checkRule('no-prototype-builtins');
   });
 
   // Arrays rules
   it("should lint expectedly for 'no-array-constructor'", async () => {
-    await linter.checkRule("no-array-constructor");
+    await linter.checkRule('no-array-constructor');
   });
 
   it("should lint expectedly for 'array-callback-return'", async () => {
-    await linter.checkRule("array-callback-return");
+    await linter.checkRule('array-callback-return');
   });
 
   // Strings rules
   it("should lint expectedly for '@stylistic/quotes'", async () => {
-    await linter.checkRule("@stylistic/quotes", { ignoreGlobalConfig: true });
+    await linter.checkRule('@stylistic/quotes', { ignoreGlobalConfig: true });
   });
 });
