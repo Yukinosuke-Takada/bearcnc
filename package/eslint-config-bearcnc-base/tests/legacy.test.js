@@ -5,7 +5,12 @@ import { Linter } from './utils/linter.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const linter = new Linter(path.resolve(__dirname, "../legacy.js"), path.resolve(__dirname, "../doc/rules_legacy.md"),"es5");
+const linter = new Linter({
+  configFilePath: path.resolve(__dirname, '../legacy.js'),
+  docPath: path.resolve(__dirname, '../doc/rules_legacy.md'),
+  configType: 'es5',
+  globalEslintConfig: '@stylistic/quotes: "off"',
+});
 
 describe("ES5 (legacy) Rules", () => {
   // Objects rules
@@ -28,5 +33,10 @@ describe("ES5 (legacy) Rules", () => {
 
   it("should lint expectedly for 'array-callback-return'", async () => {
     await linter.checkRule("array-callback-return");
+  });
+
+  // Strings rules
+  it("should lint expectedly for '@stylistic/quotes'", async () => {
+    await linter.checkRule("@stylistic/quotes", { ignoreGlobalConfig: true });
   });
 });

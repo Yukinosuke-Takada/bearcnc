@@ -5,7 +5,12 @@ import { Linter } from './utils/linter.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const linter = new Linter(path.resolve(__dirname, "../index.js"), path.resolve(__dirname, "../doc/rules.md"), "es6");
+const linter = new Linter({
+  configFilePath: path.resolve(__dirname, "../index.js"),
+  docPath: path.resolve(__dirname, "../doc/rules.md"),
+  configType: "es6",
+  globalEslintConfig: '@stylistic/quotes: "off"',
+});
 
 describe("ES6 Rules", () => {
   // Reference rules
@@ -50,5 +55,10 @@ describe("ES6 Rules", () => {
   // Destructuring rules
   it("should lint expectedly for 'prefer-destructuring'", async () => {
     await linter.checkRule("prefer-destructuring");
+  });
+
+  // Strings rules
+  it("should lint expectedly for '@stylistic/quotes'", async () => {
+    await linter.checkRule("@stylistic/quotes", { ignoreGlobalConfig: true });
   });
 });

@@ -9,6 +9,7 @@
   - [Objects](#objects)
   - [Arrays](#arrays)
   - [Destructuring](#destructuring)
+  - [Strings](#strings)
 
 ## See also
 
@@ -508,7 +509,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note:** Originally it was eslint: [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) but was deprecated as of V8.53.0 so it was replaced.
+  **Note:** Originally it was eslint: [`quote-props`](https://eslint.org/docs/latest/rules/quote-props) but was deprecated as of V8.53.0 so it was replaced.
 
   Bad:
 
@@ -934,3 +935,40 @@ This doc was created by referencing the following material:
   // the caller selects only the data they need
   const { left, top } = processInput(input);
   ```
+
+## Strings
+
+- 6.1 Use single quotes '' for strings. eslint: [`@stylistic/quotes`](https://eslint.style/rules/quotes)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`quotes`](https://eslint.org/docs/latest/rules/quotes) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2, eslint: 'no-var: "off"')
+
+  ```js
+  var double = "double";
+  var backtick = `backtick`;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+
+  ```js
+  var single = 'single';
+  var backtick = `back${x}tick`; // backticks are allowed due to substitution
+  ```
+
+  **avoidEscape**
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+
+  ```js
+  var double = "a string containing 'single' quotes";
+  ```
+

@@ -7,6 +7,7 @@
   - [See also](#see-also)
   - [Objects](#objects)
   - [Arrays](#arrays)
+  - [Strings](#strings)
 
 ## See also
 
@@ -58,11 +59,11 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note:** Originally it was eslint: [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) but was deprecated as of V8.53.0 so it was replaced.
+  **Note:** Originally it was eslint: [`quote-props`](https://eslint.org/docs/latest/rules/quote-props) but was deprecated as of V8.53.0 so it was replaced.
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 4)
 
   ```js
   var object = {
@@ -75,7 +76,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var object1 = {
@@ -103,7 +104,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -116,7 +117,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -324,5 +325,39 @@ This doc was created by referencing the following material:
     1,
     2,
   ];
+  ```
+
+## Strings
+
+- 6.1 Use single quotes '' for strings. eslint: [`@stylistic/quotes`](https://eslint.style/rules/quotes)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`quotes`](https://eslint.org/docs/latest/rules/quotes) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  var double = "double";
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var single = 'single';
+  ```
+
+  **avoidEscape**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var double = "a string containing 'single' quotes";
   ```
 

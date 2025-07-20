@@ -5,16 +5,17 @@ import { expect } from "chai";
 const DEBUG = false; // Set to true to enable debug logging
 
 class Linter {
-  constructor(configFilePath, docPath, configType) {
+  constructor({ configFilePath, docPath, configType, globalEslintConfig = '' }) {
     this.configFilePath = configFilePath;
     this.docPath = docPath;
     this.configType = configType;
+    this.globalEslintConfig = globalEslintConfig;
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
     });
   }
 
-  async checkRule(rule) {
+  async checkRule(rule, { ignoreGlobalConfig = false } = {}) {
     const { availability, testCases } = getTestCasesData(rule, this.docPath);
 
     // check if the config type is available for the rule
@@ -31,7 +32,10 @@ class Linter {
 
     // check if the code has expected errors counts
     for (const { code, expectedErrors, title } of testCases) {
-      const result = await this.eslint.lintText(code);
+      const codeWithGlobalConfig = (!ignoreGlobalConfig && this.globalEslintConfig)
+        ? `/* eslint ${this.globalEslintConfig} */\n${code}`
+        : code;
+      const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
         console.log(`[${title}]\n`);
         console.log(result[0]);
