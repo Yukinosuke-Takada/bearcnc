@@ -36,7 +36,7 @@ function getTestCasesData(rule, docPath) {
   if (!availabilityLine) {
     throw new Error(`Availability not found for rule "${rule}"`);
   }
-  let availability = [];
+  const availability = [];
   const formattedAvailabilityLine = availabilityLine.split('(')[0] // ignore what's written in ()
   const availabilityLineBits = formattedAvailabilityLine.split('`');
   for (let i = 1; i < availabilityLineBits.length; i += 2) {
@@ -58,7 +58,7 @@ function getTestCasesData(rule, docPath) {
   }
 
   // extract properties from test cases section
-  let testCases = [];
+  const testCases = [];
   for (const section of testCaseSections) {
     const title = rule + ' case ' + (testCases.length + 1);
 

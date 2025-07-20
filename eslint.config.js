@@ -1,7 +1,9 @@
+import bearcncBase from "./package/eslint-config-bearcnc-base/index.js";
 import { defineConfig } from "eslint/config";
 import markdown from "@eslint/markdown";
 
 export default defineConfig([
+  bearcncBase,
   {
     plugins: {
       markdown,
