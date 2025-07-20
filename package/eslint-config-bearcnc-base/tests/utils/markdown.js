@@ -60,7 +60,7 @@ function getTestCasesData(rule, docPath) {
   // extract properties from test cases section
   const testCases = [];
   for (const section of testCaseSections) {
-    const title = rule + ' case ' + (testCases.length + 1);
+    const title = `${rule} case ${testCases.length + 1}`;
 
     const commentOutBits = section.code.split('[//]: #');
     if (commentOutBits.length === 1) {
@@ -89,7 +89,7 @@ function getTestCasesData(rule, docPath) {
 
     // Prefix eslint config if present
     if (eslintConfig) {
-      code = `/* eslint ${eslintConfig} */\n` + code;
+      code = `/* eslint ${eslintConfig} */\n${code}`;
     }
 
     testCases.push({
