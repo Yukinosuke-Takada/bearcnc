@@ -8,6 +8,7 @@
   - [References](#references)
   - [Objects](#objects)
   - [Arrays](#arrays)
+  - [Destructuring](#destructuring)
 
 ## See also
 
@@ -828,4 +829,108 @@ This doc was created by referencing the following material:
     1,
     2,
   ];
+  ```
+
+
+## Destructuring
+
+- 5.1, 5.2 Use object destructuring when accessing and using multiple properties of an object. eslint: [`prefer-destructuring`](https://eslint.style/rules/prefer-destructuring)
+
+  > Why? Destructuring saves you from creating temporary references for those properties.
+
+  **Availability:** `es6`
+
+  **VariableDeclarator**
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  // Objects
+  const qux = object.qux;
+  const quux = object['quux'];
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Arrays
+  const foo = array[0];
+  const arr = array[someIndex];
+
+  const [ foo2 ] = array;
+
+  // Objects
+  const { baz } = object;
+
+  const obj = object.bar;
+  ```
+
+  **AssignmentExpression**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  // Arrays
+  bar.baz = array[0];
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  // Arrays
+  [foo.baz] = array;
+
+  // Objects
+  let bar;
+  ({ bar } = object);
+
+  let baz;
+  baz = object.bar
+  ```
+
+  **enforceForRenamedProperties**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = object.bar;
+
+  const { bar: baz } = object;
+  ```
+
+- 5.3 Use object destructuring for multiple return values, not array destructuring.
+
+  > Why? You can add new properties over time or change the order of things without breaking call sites.
+
+  Bad:
+
+  ```js
+  function processInput(input) {
+    // then a miracle occurs
+    return [left, right, top, bottom];
+  }
+
+  // the caller needs to think about the order of return data
+  const [left, __, top] = processInput(input);
+  ```
+
+  Good:
+  ```js
+  function processInput(input) {
+    // then a miracle occurs
+    return { left, right, top, bottom };
+  }
+
+  // the caller selects only the data they need
+  const { left, top } = processInput(input);
   ```

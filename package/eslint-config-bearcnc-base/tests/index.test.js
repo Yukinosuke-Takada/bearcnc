@@ -46,4 +46,9 @@ describe("ES6 Rules", () => {
   it("should lint expectedly for 'array-callback-return'", async () => {
     await linter.checkRule("array-callback-return");
   });
+
+  // Destructuring rules
+  it("should lint expectedly for 'prefer-destructuring'", async () => {
+    await linter.checkRule("prefer-destructuring");
+  });
 });
