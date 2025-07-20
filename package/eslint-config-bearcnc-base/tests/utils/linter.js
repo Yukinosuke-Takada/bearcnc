@@ -40,8 +40,15 @@ class Linter {
       const errorCount = result[0].errorCount;
 
       expect(errorCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
+
+      // Additional check: if errors are expected, ensure all errors are for the correct rule
+      if (expectedErrors > 0) {
+        result[0].messages.forEach((msg, i) => {
+          expect(msg.ruleId, `Test case "${title}" error #${i} should be for rule '${rule}' but got '${msg.ruleId}'`).to.equal(rule);
+        });
+      }
     }
-}
+  }
 }
 
 export { Linter };
