@@ -41,9 +41,9 @@ class Linter {
         console.log(result[0]);
         console.log('------------------------------\n');
       }
-      const {errorCount} = result[0];
+      const {errorCount, warningCount} = result[0];
 
-      expect(errorCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
+      expect(errorCount + warningCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
 
       // Additional check: if errors are expected, ensure all errors are for the correct rule
       if (expectedErrors > 0) {

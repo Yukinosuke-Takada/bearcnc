@@ -9,6 +9,9 @@ export default defineConfig({
     // Enforce the consistency of function style
     'func-style': ['off', 'expression'],
 
+    // (7.1.1) Enforce named function expressions instead of function declarations
+    'func-names': 'warn',
+
     // Enforce the consistent wrapping of immediately invoked function expressions (IIFEs)
     '@stylistic/wrap-iife': ['error', 'outside', { functionPrototypeMethods: false }],
   

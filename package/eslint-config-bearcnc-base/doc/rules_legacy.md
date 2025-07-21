@@ -519,6 +519,46 @@ This doc was created by referencing the following material:
   };
   ```
 
+- 7.1.1 eslint: [`func-names`](https://eslint.org/docs/latest/rules/func-names)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
+
+  ```js
+  Foo.prototype.bar = function() {};
+
+  var cat = {
+    meow: function() {}
+  }
+
+  (function() {
+      // ...
+  }())
+
+  module.exports = function() {};
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Foo.prototype.bar = function bar() {};
+
+  var cat = {
+      meow: function meow() {}
+  };
+
+  (function bar() {
+      // ...
+  }())
+
+  module.exports = function foo() {};
+  ```
+
 - 7.2 Wrap immediately invoked function expressions in parentheses. eslint: [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
 
   > Why? An immediately invoked function expression is a single unit - wrapping both it, and its invocation parens, in parens, cleanly expresses this. Note that in a world with modules everywhere, you almost never need an IIFE.

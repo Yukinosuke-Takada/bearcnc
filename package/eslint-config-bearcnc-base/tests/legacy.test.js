@@ -9,7 +9,7 @@ const linter = new Linter({
   configFilePath: path.resolve(__dirname, '../legacy.js'),
   docPath: path.resolve(__dirname, '../doc/rules_legacy.md'),
   configType: 'es5',
-  globalEslintConfig: '@stylistic/quotes: "off"',
+  globalEslintConfig: '@stylistic/quotes: "off", func-names: "off"',
 });
 
 describe('ES5 (legacy) Rules', () => {
@@ -52,6 +52,10 @@ describe('ES5 (legacy) Rules', () => {
   // it("should lint expectedly for 'func-style'", async () => {
   //   await linter.checkRule('func-style');
   // });
+
+  it("should lint expectedly for 'func-names'", async () => {
+    await linter.checkRule('func-names', { ignoreGlobalConfig: true });
+  });
 
   it("should lint expectedly for '@stylistic/wrap-iife'", async () => {
     await linter.checkRule('@stylistic/wrap-iife');
