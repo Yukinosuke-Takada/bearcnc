@@ -53,3 +53,6 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
+
+- Typo(?)
+  - On section 7.1, it was rule [`no-loop-func`](https://eslint.org/docs/latest/rules/no-loop-func) but [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations) makes more sense.
