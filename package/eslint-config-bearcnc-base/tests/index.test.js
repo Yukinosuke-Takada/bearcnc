@@ -77,4 +77,17 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-useless-escape'", async () => {
     await linter.checkRule('no-useless-escape');
   });
+
+  // Functions rules
+  // it("should lint expectedly for 'func-style'", async () => {
+  //   await linter.checkRule('func-style');
+  // });
+
+  it("should lint expectedly for '@stylistic/wrap-iife'", async () => {
+    await linter.checkRule('@stylistic/wrap-iife');
+  });
+
+  it("should lint expectedly for 'no-inner-declarations'", async () => {
+    await linter.checkRule('no-inner-declarations');
+  });
 });

@@ -8,6 +8,7 @@
   - [Objects](#objects)
   - [Arrays](#arrays)
   - [Strings](#strings)
+  - [Functions](#functions)
 
 ## See also
 
@@ -488,3 +489,118 @@ This doc was created by referencing the following material:
   /[a-z-]/;
   ```
 
+## Functions
+
+- 7.1 Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.style/rules/func-style)
+
+  > Why? Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file. This harms readability and maintainability. If you find that a function’s definition is large or complex enough that it is interfering with understanding the rest of the file, then perhaps it’s time to extract it to its own module! Don’t forget to explicitly name the expression, regardless of whether or not the name is inferred from the containing variable (which is often the case in modern browsers or when using compilers such as Babel). This eliminates any assumptions made about the Error’s call stack. ([Discussion](https://github.com/airbnb/javascript/issues/794))
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** The rule is currently disabled.
+
+  Bad:
+
+  ```js
+  function foo() {
+    // ...
+  }
+
+  const foo = function () {
+    // ...
+  };
+  ```
+
+  Good:
+
+  ```js
+  var short = function longUniqueMoreDescriptiveLexicalFoo() {
+    // ...
+  };
+  ```
+
+- 7.2 Wrap immediately invoked function expressions in parentheses. eslint: [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
+
+  > Why? An immediately invoked function expression is a single unit - wrapping both it, and its invocation parens, in parens, cleanly expresses this. Note that in a world with modules everywhere, you almost never need an IIFE.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var x = function () { return { y: 1 };}(); // unwrapped
+  var x = (function () { return { y: 1 };})(); // wrapped function expression
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var x = (function () { return { y: 1 };}()); // wrapped call expression
+  ```
+
+- 7.3 Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears. eslint: [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations)
+
+  **Availability:** `es5`, `es6`
+
+  **Note1** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
+
+  **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  if (test) {
+      function doSomething() { }
+  }
+
+  function doSomethingElse() {
+      if (test) {
+          function doAnotherThing() { }
+      }
+  }
+
+  if (foo) function f(){}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function doSomething() { }
+
+  function doSomethingElse() {
+      function doAnotherThing() { }
+  }
+
+  // unction doSomethingElse() {
+  //     "use strict";
+  // 
+  //     if (test) {
+  //         function doAnotherThing() { }
+  //     }
+  // }
+
+  function C() {}
+
+  C.doSomething = function() {};
+
+  if (test) {
+      asyncCall(id, function (err, data) { });
+  }
+
+  var fn;
+  if (test) {
+      fn = function fnExpression() { };
+  }
+
+  if (foo) var a;
+  ```

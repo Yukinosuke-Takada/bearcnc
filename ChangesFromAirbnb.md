@@ -49,4 +49,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   - [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
   -  [`quotes`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quotes`](https://eslint.style/rules/quote-props)
   - [`template-curly-spacing`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/template-curly-spacing`](https://eslint.style/rules/quote-props)
+-  [`wrap-iife`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/wrap-iife`](https://eslint.style/rules/quote-props)
 
+- Changes to Rules due to new options:
+  - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
