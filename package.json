@@ -16,7 +16,7 @@
     "lint:md": "eslint --ext .md ."
   },
   "devDependencies": {
-    "@eslint/markdown": "^6.6.0",
+    "@eslint/markdown": "^7.0.0",
     "eslint": "^9.29.0",
     "prettier": "^3.6.0"
   }

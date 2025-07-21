@@ -1,11 +1,15 @@
-import { defineConfig } from "eslint/config";
-import objects from "./objects.js";
+import { defineConfig } from 'eslint/config';
+import arraysConfig from './arrays.js';
+import objectsConfig from './objects.js';
+import stringsConfig from './strings.js';
 
-export default defineConfig({
-  languageOptions: {
-    ecmaVersion: 5,
+export default defineConfig([
+  arraysConfig,
+  objectsConfig,
+  stringsConfig,
+  {
+    languageOptions: {
+      ecmaVersion: 5,
+    },
   },
-  rules: {
-    ...objects[0].rules,
-  }
-});
+]);

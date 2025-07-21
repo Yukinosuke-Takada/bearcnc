@@ -1,20 +1,21 @@
-import { ESLint } from "eslint";
-import { getTestCasesData } from "./markdown.js";
-import { expect } from "chai";
+import { ESLint } from 'eslint';
+import { getTestCasesData } from './markdown.js';
+import { expect } from 'chai';
 
-const DEBUG = true; // Set to true to enable debug logging
+const DEBUG = false; // Set to true to enable debug logging
 
 class Linter {
-  constructor(configFilePath, docPath, configType) {
+  constructor({ configFilePath, docPath, configType, globalEslintConfig = '' }) {
     this.configFilePath = configFilePath;
     this.docPath = docPath;
     this.configType = configType;
+    this.globalEslintConfig = globalEslintConfig;
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
     });
   }
 
-  async checkRule(rule) {
+  async checkRule(rule, { ignoreGlobalConfig = false } = {}) {
     const { availability, testCases } = getTestCasesData(rule, this.docPath);
 
     // check if the config type is available for the rule
@@ -31,17 +32,27 @@ class Linter {
 
     // check if the code has expected errors counts
     for (const { code, expectedErrors, title } of testCases) {
-      const result = await this.eslint.lintText(code);
+      const codeWithGlobalConfig = (!ignoreGlobalConfig && this.globalEslintConfig)
+        ? `/* eslint ${this.globalEslintConfig} */\n${code}`
+        : code;
+      const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
         console.log(`[${title}]\n`);
         console.log(result[0]);
-        console.log("------------------------------\n");
+        console.log('------------------------------\n');
       }
-      const errorCount = result[0].errorCount;
+      const {errorCount} = result[0];
 
       expect(errorCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
+
+      // Additional check: if errors are expected, ensure all errors are for the correct rule
+      if (expectedErrors > 0) {
+        result[0].messages.forEach((msg, i) => {
+          expect(msg.ruleId, `Test case "${title}" error #${i} should be for rule '${rule}' but got '${msg.ruleId}'`).to.equal(rule);
+        });
+      }
     }
-}
+  }
 }
 
 export { Linter };

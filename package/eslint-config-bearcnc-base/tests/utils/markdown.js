@@ -26,7 +26,7 @@ function getTestCasesData(rule, docPath) {
     return firstLine.includes(`eslint: [\`${rule}\`]`);
   });
   if (!ruleSection) {
-    throw new Error(`Rule "${rule}" not found in Rules section`);
+    throw new Error(`Rule "${rule}" not found in Rules docs`);
   }
 
   // extract availability from the specific rule
@@ -36,7 +36,7 @@ function getTestCasesData(rule, docPath) {
   if (!availabilityLine) {
     throw new Error(`Availability not found for rule "${rule}"`);
   }
-  let availability = [];
+  const availability = [];
   const formattedAvailabilityLine = availabilityLine.split('(')[0] // ignore what's written in ()
   const availabilityLineBits = formattedAvailabilityLine.split('`');
   for (let i = 1; i < availabilityLineBits.length; i += 2) {
@@ -58,9 +58,9 @@ function getTestCasesData(rule, docPath) {
   }
 
   // extract properties from test cases section
-  let testCases = [];
+  const testCases = [];
   for (const section of testCaseSections) {
-    const title = rule + ' case ' + (testCases.length + 1);
+    const title = `${rule} case ${testCases.length + 1}`;
 
     const commentOutBits = section.code.split('[//]: #');
     if (commentOutBits.length === 1) {
@@ -78,7 +78,7 @@ function getTestCasesData(rule, docPath) {
     let eslintConfig = null;
     const eslintConfigMatch = commentOut.match(/eslint:\s*'([^']+)'/);
     if (eslintConfigMatch) {
-      eslintConfig = eslintConfigMatch[1];
+      [, eslintConfig] = eslintConfigMatch;
     }
 
     const codeSectionSplit = section.code.split('```js')
@@ -89,7 +89,7 @@ function getTestCasesData(rule, docPath) {
 
     // Prefix eslint config if present
     if (eslintConfig) {
-      code = `/* eslint ${eslintConfig} */\n` + code;
+      code = `/* eslint ${eslintConfig} */\n${code}`;
     }
 
     testCases.push({
