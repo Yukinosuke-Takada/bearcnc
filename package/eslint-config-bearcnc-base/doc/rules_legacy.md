@@ -126,7 +126,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf. eslint: [`no-prototype-builtins`](https://eslint.style/rules/no-prototype-builtins)
+- 3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf. eslint: [`no-prototype-builtins`](https://eslint.org/docs/latest/rules/no-prototype-builtins)
 
   > Why? These methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
 
@@ -184,7 +184,7 @@ This doc was created by referencing the following material:
 
 ## Arrays
 
-- 4.1 Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.style/rules/no-array-constructor)
+- 4.1 Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.org/docs/latest/rules/no-array-constructor)
 
   > Why?
 
@@ -234,7 +234,7 @@ This doc was created by referencing the following material:
   someStack.push('abracadabra');
   ```
 
-- 4.6 Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following 8.2. eslint: [`array-callback-return`](https://eslint.style/rules/array-callback-return)
+- 4.6 Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following 8.2. eslint: [`array-callback-return`](https://eslint.org/docs/latest/rules/array-callback-return)
 
   **Availability:** `es5`, `es6`
 
@@ -385,7 +385,7 @@ This doc was created by referencing the following material:
   const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
   ```
 
-- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.style/rules/no-eval)
+- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.org/docs/latest/rules/no-eval)
 
   **Availability:** `es5`, `es6`
 
@@ -449,7 +449,7 @@ This doc was created by referencing the following material:
   A.eval = function() {};
   ```
 
-- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.style/rules/no-useless-escape)
+- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.org/docs/latest/rules/no-useless-escape)
 
   > Why? Backslashes harm readability, thus they should only be present when necessary.
 
@@ -491,7 +491,7 @@ This doc was created by referencing the following material:
 
 ## Functions
 
-- 7.1 Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.style/rules/func-style)
+- 7.1 Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.org/docs/latest/rules/func-style)
 
   > Why? Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file. This harms readability and maintainability. If you find that a function’s definition is large or complex enough that it is interfering with understanding the rest of the file, then perhaps it’s time to extract it to its own module! Don’t forget to explicitly name the expression, regardless of whether or not the name is inferred from the containing variable (which is often the case in modern browsers or when using compilers such as Babel). This eliminates any assumptions made about the Error’s call stack. ([Discussion](https://github.com/airbnb/javascript/issues/794))
 
