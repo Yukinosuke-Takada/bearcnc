@@ -9,7 +9,11 @@ const linter = new Linter({
   configFilePath: path.resolve(__dirname, '../index.js'),
   docPath: path.resolve(__dirname, '../doc/rules.md'),
   configType: 'es6',
-  globalEslintConfig: '@stylistic/quotes: "off", func-names: "off"',
+  globalEslintConfig: [
+    'no-var: "off"',
+    '@stylistic/quotes: "off"',
+    'func-names: "off"',
+  ]
 });
 
 describe('ES6 Rules', () => {
@@ -23,7 +27,7 @@ describe('ES6 Rules', () => {
   });
 
   it("should lint expectedly for 'no-var'", async () => {
-    await linter.checkRule('no-var');
+    await linter.checkRule('no-var', { ignoreGlobalConfig: true });
   });
 
   // Objects rules

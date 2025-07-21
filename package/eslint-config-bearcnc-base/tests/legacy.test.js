@@ -9,7 +9,10 @@ const linter = new Linter({
   configFilePath: path.resolve(__dirname, '../legacy.js'),
   docPath: path.resolve(__dirname, '../doc/rules_legacy.md'),
   configType: 'es5',
-  globalEslintConfig: '@stylistic/quotes: "off", func-names: "off"',
+  globalEslintConfig: [
+    '@stylistic/quotes: "off"',
+    'func-names: "off"',
+  ]
 });
 
 describe('ES5 (legacy) Rules', () => {

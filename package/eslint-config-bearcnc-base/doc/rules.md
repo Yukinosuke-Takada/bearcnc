@@ -62,7 +62,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   // using const.
@@ -267,7 +267,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: '@stylistic/quotes: "off"')
 
   ```js
   var x = "y";
@@ -276,7 +276,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off", @stylistic/quotes: "off"')
 
   ```js
   let x = "y";
@@ -514,7 +514,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 4)
 
   ```js
   var object = {
@@ -527,7 +527,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var object1 = {
@@ -555,7 +555,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -568,7 +568,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -1250,7 +1250,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 2)
 
   ```js
   var x = function () { return { y: 1 };}(); // unwrapped
@@ -1259,7 +1259,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = (function () { return { y: 1 };}()); // wrapped call expression
