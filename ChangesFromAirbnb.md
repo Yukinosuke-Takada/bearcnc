@@ -6,7 +6,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 
 - Supported ESLint version change. (Peer Dependency!)
   Above `7.32.0` or Above `8.2.0` → Above `8.57.0` or Above `9.0.0` 
-  This is due to [Flat config sysytem](https://eslint.org/blog/2022/08/new-config-system-part-2/) added in V9 later backported to V8.57
+  This is due to [Flat config system](https://eslint.org/blog/2022/08/new-config-system-part-2/) added in V9 later backported to V8.57
 - Supported [`eslint-plugin-import`](https://www.npmjs.com/package/eslint-plugin-import) version change. (Peer Dependency!)
   Above `2.25.0` → Above `2.31.0`
   This is due to versions prior to `2.31.0` not supporting ESLint V9.
@@ -47,4 +47,6 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 - Changed Rules due to deprecation:
   - [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
   - [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
+  -  [`quotes`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quotes`](https://eslint.style/rules/quote-props)
+  - [`template-curly-spacing`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/template-curly-spacing`](https://eslint.style/rules/quote-props)
 
