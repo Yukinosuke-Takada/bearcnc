@@ -151,4 +151,8 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/no-confusing-arrow'", async () => {
     await linter.checkRule('@stylistic/no-confusing-arrow');
   });
+
+  it("should lint expectedly for '@stylistic/implicit-arrow-linebreak'", async () => {
+    await linter.checkRule('@stylistic/implicit-arrow-linebreak');
+  });
 });

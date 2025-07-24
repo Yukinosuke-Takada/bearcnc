@@ -12,6 +12,9 @@ export default defineConfig({
     // (8.1.1) Enforce consistent spacing before and after arrow function's arrow
     '@stylistic/arrow-spacing': ['error', { before: true, after: true }],
 
+    // (8.6) Enforce consistent line breaks after the arrow in arrow functions
+    '@stylistic/implicit-arrow-linebreak': ['error', 'beside'],
+
     // (8.5) Disallow arrow functions where they could be confused with comparisons
     '@stylistic/no-confusing-arrow': ['error', {
       allowParens: true,

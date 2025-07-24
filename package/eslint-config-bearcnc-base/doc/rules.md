@@ -2139,3 +2139,58 @@ This doc was created by referencing the following material:
   ([a]) => 1 ? 2 : 3;
   (...a) => 1 ? 2 : 3;
   ```
+
+
+- 8.6 Enforce the location of arrow function bodies with implicit returns. eslint: [`@stylistic/implicit-arrow-linebreak`](https://eslint.style/rules/implicit-arrow-linebreak)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`implicit-arrow-linebreak`](https://eslint.org/docs/latest/rules/implicit-arrow-linebreak) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 5, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  (foo) =>
+      bar;
+
+  (foo) =>
+      (bar);
+
+  (foo) =>
+      bar =>
+          baz;
+
+  (foo) =>
+  (
+    bar()
+  );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  (foo) => bar;
+
+  (foo) => (bar);
+
+  (foo) => bar => baz;
+
+  (foo) => (
+    bar()
+  );
+
+  // functions with block bodies allowed with this rule using any style
+  // to enforce a consistent location for this case, see the rule: `brace-style`
+  (foo) => {
+    return bar();
+  }
+
+  (foo) =>
+  {
+    return bar();
+  }
+  ```
