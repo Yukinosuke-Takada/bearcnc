@@ -240,7 +240,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off"')
 
   ```js
   var indexMap = myArray.reduce(function (memo, item, index) {
@@ -256,7 +256,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
 
   ```js
   var indexMap = myArray.reduce(function (memo, item, index) {
@@ -856,3 +856,88 @@ This doc was created by referencing the following material:
 
   try {} catch (a) {}
   ```
+
+- 7.12 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
+
+  > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  var foo = function (bar) {
+      bar = 13;
+  }
+
+  var foo1 = function (bar) {
+      bar++;
+  }
+
+  var foo2 = function (bar) {
+      for (bar in baz) {}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = function (bar) {
+      var baz = bar;
+  }
+  ```
+
+  **props**
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  var foo = function (bar) {
+      bar.prop = "value";
+  }
+
+  var foo1 = function (bar) {
+      delete bar.aaa;
+  }
+
+  var foo2 = function (bar) {
+      bar.aaa++;
+  }
+
+  var foo3 = function (bar) {
+      for (bar.aaa in baz) {}
+  }
+  ```
+
+  **ignorePropertyModificationsFor**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
+
+  var foo = function (e) {
+      e.prop = "value";
+  }
+
+  var foo1 = function (e) {
+      delete e.aaa;
+  }
+
+  var foo2 = function (e) {
+      e.aaa++;
+  }
+
+  var foo3 = function (e) {
+      for (e.aaa in baz) {}
+  }
+  ```
+

@@ -747,7 +747,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -763,7 +763,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -1622,3 +1622,101 @@ This doc was created by referencing the following material:
 
   try {} catch (a) {}
   ```
+
+
+- 7.12 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
+
+  > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  const foo = function (bar) {
+      bar = 13;
+  }
+
+  const foo1 = function (bar) {
+      bar++;
+  }
+
+  const foo2 = function (bar) {
+      for (bar in baz) {}
+  }
+
+  const foo3 = function (bar) {
+      for (bar of baz) {}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = function (bar) {
+      const baz = bar;
+  }
+  ```
+
+  **props**
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  const foo = function (bar) {
+      bar.prop = "value";
+  }
+
+  const foo1 = function (bar) {
+      delete bar.aaa;
+  }
+
+  const foo2 = function (bar) {
+      bar.aaa++;
+  }
+
+  const foo3 = function (bar) {
+      for (bar.aaa in baz) {}
+  }
+
+  const foo4 = function (bar) {
+      for (bar.aaa of baz) {}
+  }
+  ```
+
+  **ignorePropertyModificationsFor**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
+
+  const foo = function (e) {
+      e.prop = "value";
+  }
+
+  const foo1 = function (e) {
+      delete e.aaa;
+  }
+
+  const foo2 = function (e) {
+      e.aaa++;
+  }
+
+  const foo3 = function (e) {
+      for (e.aaa in baz) {}
+  }
+
+  const foo4 = function (e) {
+      for (e.aaa of baz) {}
+  }
+  ```
+

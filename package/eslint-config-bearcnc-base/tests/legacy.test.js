@@ -79,4 +79,8 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for '@stylistic/space-before-blocks'", async () => {
     await linter.checkRule('@stylistic/space-before-blocks');
   });
+
+  it("should lint expectedly for 'no-param-reassign'", async () => {
+    await linter.checkRule('no-param-reassign');
+  });
 });
