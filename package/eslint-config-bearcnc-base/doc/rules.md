@@ -628,7 +628,7 @@ This doc was created by referencing the following material:
   ```js
   const original = { a: 1, b: 2 };
   const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
-
+  
   const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
   ```
 
@@ -674,7 +674,7 @@ This doc was created by referencing the following material:
 
   ```js
   const someStack = [];
-
+  
   someStack[someStack.length] = 'abracadabra';
   ```
 
@@ -682,7 +682,7 @@ This doc was created by referencing the following material:
 
   ```js
   const someStack = [];
-
+  
   someStack.push('abracadabra');
   ```
 
@@ -801,13 +801,13 @@ This doc was created by referencing the following material:
   const arr = [
     [0, 1], [2, 3], [4, 5],
   ];
-
+  
   const objectInArray = [{
     id: 1,
   }, {
     id: 2,
   }];
-
+  
   const numberInArray = [
     1, 2,
   ];
@@ -817,7 +817,7 @@ This doc was created by referencing the following material:
 
   ```js
   const arr = [[0, 1], [2, 3], [4, 5]];
-
+  
   const objectInArray = [
     {
       id: 1,
@@ -826,7 +826,7 @@ This doc was created by referencing the following material:
       id: 2,
     },
   ];
-
+  
   const numberInArray = [
     1,
     2,
@@ -921,7 +921,7 @@ This doc was created by referencing the following material:
     // then a miracle occurs
     return [left, right, top, bottom];
   }
-
+  
   // the caller needs to think about the order of return data
   const [left, __, top] = processInput(input);
   ```
@@ -932,7 +932,7 @@ This doc was created by referencing the following material:
     // then a miracle occurs
     return { left, right, top, bottom };
   }
-
+  
   // the caller selects only the data they need
   const { left, top } = processInput(input);
   ```
@@ -1037,7 +1037,7 @@ This doc was created by referencing the following material:
   ```js
   `hello, ${ people.name}!`;
   `hello, ${people.name }!`;
-
+  
   `hello, ${ people.name }!`;
   ```
 
@@ -1047,7 +1047,7 @@ This doc was created by referencing the following material:
 
   ```js
   `hello, ${people.name}!`;
-
+  
   `hello, ${
       people.name
   }!`;
@@ -1066,12 +1066,12 @@ This doc was created by referencing the following material:
   const obj = { x: "foo" },
       key = "x",
       value = eval("obj." + key);
-
+  
   (0, eval)("const a = 0");
-
+  
   const foo = eval;
   foo("const a = 0");
-
+  
   // This `this` is the global object.
   this.eval("const a = 0");
   ```
@@ -1082,7 +1082,7 @@ This doc was created by referencing the following material:
 
   ```js
   /*global window*/
-
+  
   window.eval("const a = 0");
   ```
 
@@ -1092,7 +1092,7 @@ This doc was created by referencing the following material:
 
   ```js
   /*global global*/
-
+  
   global.eval("const a = 0");
   ```
 
@@ -1104,21 +1104,21 @@ This doc was created by referencing the following material:
   const obj = { x: "foo" },
       key = "x",
       value = obj[key];
-
+  
   class A {
       foo() {
           // This is a user-defined method.
           this.eval("const a = 0");
       }
-
+  
       eval() {
       }
-
+  
       static {
           // This is a user-defined static method.
           this.eval("const a = 0");
       }
-
+  
       static eval() {
       }
   }
@@ -1440,7 +1440,7 @@ This doc was created by referencing the following material:
 
 - 7.9 Always put default parameters last. eslint: [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last)
 
-  **Availability:** `es5`, `es6`
+  **Availability:** `es6`
 
 	Bad:
 
@@ -1581,15 +1581,15 @@ This doc was created by referencing the following material:
   if (a){
       b();
   }
-
+  
   function a(){}
-
+  
   for (;;){
       b();
   }
-
+  
   try {} catch (a){}
-
+  
   class Foo{
     constructor(){}
   }
@@ -1603,23 +1603,23 @@ This doc was created by referencing the following material:
   if (a) {
       b();
   }
-
+  
   if (a) {
       b();
   } else{ /*no error. this is checked by `keyword-spacing` rule.*/
       c();
   }
-
+  
   class C {
       static{} /*no error. this is checked by `keyword-spacing` rule.*/
   }
-
+  
   function a() {}
-
+  
   for (;;) {
       b();
   }
-
+  
   try {} catch (a) {}
   ```
 
@@ -1775,19 +1775,19 @@ This doc was created by referencing the following material:
   function foo(bar,
     baz
   ) {}
-
+  
   var foobar = function (bar,
     baz
   ) {};
-
+  
   var foobar = (
     bar,
     baz) => {};
-
+  
   foo(
     bar,
     baz);
-
+  
   foo(
       bar, qux,
     baz
@@ -1803,13 +1803,13 @@ This doc was created by referencing the following material:
     bar,
     baz
   ) {}
-
+  
   var qux = function (bar, baz) {};
-
+  
   var qux = (
     bar
   ) => {};
-
+  
   foo(
     function () {
       return baz;

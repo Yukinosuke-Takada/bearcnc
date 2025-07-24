@@ -6,7 +6,7 @@ export default defineConfig({
     '@stylistic': stylistic,
   },
   rules: {
-    // Enforce the consistency of function style
+    // (7.1) Enforce the consistency of function style
     'func-style': ['off', 'expression'],
 
     // (7.1.1) Enforce named function expressions instead of function declarations
@@ -29,10 +29,10 @@ export default defineConfig({
       },
     ],
 
-    // Enforce the consistent wrapping of immediately invoked function expressions (IIFEs)
+    // (7.2) Enforce the consistent wrapping of immediately invoked function expressions (IIFEs)
     '@stylistic/wrap-iife': ['error', 'outside', { functionPrototypeMethods: false }],
 
-    // Disallow declaring functions in nested blocks on non-strict mode. (Pre-ES6)
+    // (7.3) Disallow declaring functions in nested blocks on non-strict mode. (Pre-ES6)
     'no-inner-declarations': ['error', 'functions', { blockScopedFunctions: 'allow' }],
 
     // (7.10) Disallow the use of the Function constructor
