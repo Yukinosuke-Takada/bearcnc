@@ -98,4 +98,8 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-inner-declarations'", async () => {
     await linter.checkRule('no-inner-declarations');
   });
+
+  it("should lint expectedly for 'prefer-rest-params'", async () => {
+    await linter.checkRule('prefer-rest-params');
+  });
 });

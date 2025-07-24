@@ -1305,3 +1305,135 @@ This doc was created by referencing the following material:
   }
   ```
 
+- 7.4 Note: ECMA-262 defines a block as a list of statements. A function declaration is not a statement.
+
+	Bad:
+
+  ```js
+  if (currentUser) {
+    function test() {
+      console.log('Nope.');
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  let test;
+  if (currentUser) {
+    test = () => {
+      console.log('Yup.');
+    };
+  }
+  ```
+
+- 7.5 Never name a parameter arguments. This will take precedence over the arguments object that is given to every function scope.
+
+	Bad:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(name, options, arguments) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(name, options, args) {
+    // ...
+  }
+  ```
+
+- 7.6 Never use arguments, opt to use rest syntax ... instead.  eslint: [`prefer-rest-params`](https://eslint.org/docs/latest/rules/prefer-rest-params)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  function foo() {
+      console.log(arguments);
+  }
+
+  function bar(action) {
+      const args = Array.prototype.slice.call(arguments, 1);
+      action.apply(null, args);
+  }
+
+  function baz(action) {
+      const args = [].slice.call(arguments, 1);
+      action.apply(null, args);
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(...args) {
+      console.log(args);
+  }
+
+  function bar(action, ...args) {
+      action.apply(null, args); // or `action(...args)`, related to the `prefer-spread` rule.
+  }
+  ```
+
+- 7.7 Use default parameter syntax rather than mutating function arguments.
+
+  Very Bad:
+
+  ```js
+  function handleThings(opts) {
+    // No! We shouldn’t mutate function arguments.
+    // Double bad: if opts is falsy it'll be set to an object which may
+    // be what you want but it can introduce subtle bugs.
+    opts = opts || {};
+    // ...
+  }
+  ```
+
+	Bad:
+
+  ```js
+  function handleThings(opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  function handleThings(opts = {}) {
+    // ...
+  }
+  ```
+
+- 7.8 Avoid side effects with default parameters.
+
+  > Why? They are confusing to reason about.
+
+	Bad:
+
+  ```js
+  var b = 1;
+  function count(a = b++) {
+    console.log(a);
+  }
+  count();  // 1
+  count();  // 2
+  count(3); // 3
+  count();  // 3
+  ```
