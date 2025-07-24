@@ -3,7 +3,7 @@ import stylistic from '@stylistic/eslint-plugin';
 
 export default defineConfig({
   plugins: {
-    '@stylistic': stylistic
+    '@stylistic': stylistic,
   },
   rules: {
     // Enforce the consistency of function style
@@ -12,13 +12,27 @@ export default defineConfig({
     // (7.1.1) Enforce named function expressions instead of function declarations
     'func-names': 'warn',
 
+    // (7.11.1) Enforce consistent spacing before blocks
+    '@stylistic/space-before-blocks': 'error',
+
+    // (7.11) Enforce consistent spacing before function parentheses
+    '@stylistic/space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always',
+        catch: 'always',
+      },
+    ],
+
     // Enforce the consistent wrapping of immediately invoked function expressions (IIFEs)
     '@stylistic/wrap-iife': ['error', 'outside', { functionPrototypeMethods: false }],
-  
+
     // Disallow declaring functions in nested blocks on non-strict mode. (Pre-ES6)
     'no-inner-declarations': ['error', 'functions', { blockScopedFunctions: 'allow' }],
 
     // (7.10) Disallow the use of the Function constructor
     'no-new-func': 'error',
-  }
+  },
 });

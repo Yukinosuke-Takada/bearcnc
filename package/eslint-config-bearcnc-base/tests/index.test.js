@@ -110,4 +110,12 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-new-func'", async () => {
     await linter.checkRule('no-new-func');
   });
+
+  it("should lint expectedly for '@stylistic/space-before-function-paren'", async () => {
+    await linter.checkRule('@stylistic/space-before-function-paren');
+  });
+
+  it("should lint expectedly for '@stylistic/space-before-blocks'", async () => {
+    await linter.checkRule('@stylistic/space-before-blocks');
+  });
 });

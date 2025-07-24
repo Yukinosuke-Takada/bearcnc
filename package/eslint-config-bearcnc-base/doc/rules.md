@@ -377,8 +377,8 @@ This doc was created by referencing the following material:
   
   // methods
   const bar = {
-      a: function() {},
-      b: function() {}
+      a: function () {},
+      b: function () {}
   };
   ```
 
@@ -403,9 +403,9 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      w: function() {},
+      w: function () {},
       x: function *() {},
-      [y]: function() {},
+      [y]: function () {},
       z: z
   };
   ```
@@ -451,7 +451,7 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      "bar-baz": function() {},
+      "bar-baz": function () {},
       "qux": qux
   };
   ```
@@ -464,7 +464,7 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      ConstructorFunction: function() {}
+      ConstructorFunction: function () {}
   };
   ```
 
@@ -750,11 +750,11 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  const indexMap = myArray.reduce(function(memo, item, index) {
+  const indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
   }, {});
 
-  const foo = Array.from(nodes, function(node) {
+  const foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
@@ -766,12 +766,12 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  const indexMap = myArray.reduce(function(memo, item, index) {
+  const indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
       return memo;
   }, {});
 
-  const foo = Array.from(nodes, function(node) {
+  const foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
@@ -788,7 +788,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  const undefAllTheThings = myArray.map(function(item) {
+  const undefAllTheThings = myArray.map(function (item) {
       return;
   });
   ```
@@ -1209,17 +1209,17 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
   ```js
-  Foo.prototype.bar = function() {};
+  Foo.prototype.bar = function () {};
 
   const cat = {
-    meow: function() {}
+    meow: function () {}
   }
 
-  (function() {
+  (function () {
       // ...
   }())
 
-  export default function() {}
+  export default function () {}
   ```
 
   Good:
@@ -1489,4 +1489,136 @@ This doc was created by referencing the following material:
   const x = function (a, b) {
       return a + b;
   };
+  ```
+
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  function foo () {
+      // ...
+  }
+
+  var bar = function() {
+      // ...
+  };
+
+  class Foo {
+      constructor () {
+          // ...
+      }
+  }
+
+  var baz = {
+      bar () {
+          // ...
+      }
+  };
+
+  var baz = async(a) => await a
+
+  try {
+      // ...
+  } catch(e) {
+      // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() {
+      // ...
+  }
+
+  var bar = function () {
+      // ...
+  };
+
+  class Foo {
+      constructor() {
+          // ...
+      }
+  }
+
+  var baz = {
+      bar() {
+          // ...
+      }
+  };
+
+  var baz = async (a) => await a
+
+  try {
+      // ...
+  } catch (e) {
+      // ...
+  }
+  ```
+
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  if (a){
+      b();
+  }
+
+  function a(){}
+
+  for (;;){
+      b();
+  }
+
+  try {} catch (a){}
+
+  class Foo{
+    constructor(){}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (a) {
+      b();
+  }
+
+  if (a) {
+      b();
+  } else{ /*no error. this is checked by `keyword-spacing` rule.*/
+      c();
+  }
+
+  class C {
+      static{} /*no error. this is checked by `keyword-spacing` rule.*/
+  }
+
+  function a() {}
+
+  for (;;) {
+      b();
+  }
+
+  try {} catch (a) {}
   ```

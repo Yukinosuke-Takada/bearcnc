@@ -45,11 +45,11 @@ This doc was created by referencing the following material:
   
   var obj = { a: 1, b: 2 };
   
-  var isObject = function(value) {
+  var isObject = function (value) {
     return value === Object(value);
   };
 
-  var createObject = function(ObjectConstructor) {
+  var createObject = function (ObjectConstructor) {
     return new ObjectConstructor();
   };
   ```
@@ -95,7 +95,7 @@ This doc was created by referencing the following material:
   };
 
   var object3 = {
-      foo: function() {
+      foo: function () {
           return;
       }
   };
@@ -213,7 +213,7 @@ This doc was created by referencing the following material:
 
   [0, 1, 2];
 
-  var createArray = function(Array) { return new Array(); };
+  var createArray = function (Array) { return new Array(); };
   ```
 
 - 4.2 Use [Array#push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) instead of direct assignment to add items to an array.
@@ -243,11 +243,11 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  var indexMap = myArray.reduce(function(memo, item, index) {
+  var indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
   }, {});
 
-  var foo = Array.from(nodes, function(node) {
+  var foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
@@ -259,19 +259,19 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var indexMap = myArray.reduce(function(memo, item, index) {
+  var indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
       return memo;
   }, {});
 
-  var foo = Array.from(nodes, function(node) {
+  var foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
       return false;
   });
 
-  var bar = foo.map(function(node) {
+  var bar = foo.map(function (node) {
     return node.getAttribute("id");
   });
   ```
@@ -283,7 +283,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var undefAllTheThings = myArray.map(function(item) {
+  var undefAllTheThings = myArray.map(function (item) {
       return;
   });
   ```
@@ -438,15 +438,15 @@ This doc was created by referencing the following material:
 
   function A() {}
 
-  A.prototype.foo = function() {
+  A.prototype.foo = function () {
       // This is a user-defined method.
       this.eval("const a = 0");
   };
 
-  A.prototype.eval = function() {
+  A.prototype.eval = function () {
   };
 
-  A.eval = function() {};
+  A.eval = function () {};
   ```
 
 - 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.org/docs/latest/rules/no-useless-escape)
@@ -528,17 +528,17 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
   ```js
-  Foo.prototype.bar = function() {};
+  Foo.prototype.bar = function () {};
 
   var cat = {
-    meow: function() {}
+    meow: function () {}
   }
 
-  (function() {
+  (function () {
       // ...
   }())
 
-  module.exports = function() {};
+  module.exports = function () {};
   ```
 
   Good:
@@ -607,7 +607,7 @@ This doc was created by referencing the following material:
       }
   }
 
-  if (foo) function f(){}
+  if (foo) function f() {}
   ```
 
   Good:
@@ -631,7 +631,7 @@ This doc was created by referencing the following material:
 
   function C() {}
 
-  C.doSomething = function() {};
+  C.doSomething = function () {};
 
   if (test) {
       asyncCall(id, function (err, data) { });
@@ -769,3 +769,98 @@ This doc was created by referencing the following material:
   };
   ```
 
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  function foo () {
+      // ...
+  }
+
+  var bar = function() {
+      // ...
+  };
+
+  try {
+      // ...
+  } catch(e) {
+      // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() {
+      // ...
+  }
+
+  var bar = function () {
+      // ...
+  };
+
+  try {
+      // ...
+  } catch (e) {
+      // ...
+  }
+  ```
+
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  if (a){
+      b();
+  }
+
+  function a(){}
+
+  for (;;){
+      b();
+  }
+
+  try {} catch (a){}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (a) {
+      b();
+  }
+
+  if (a) {
+      b();
+  } else{ /*no error. this is checked by `keyword-spacing` rule.*/
+      c();
+  }
+
+  function a() {}
+
+  for (;;) {
+      b();
+  }
+
+  try {} catch (a) {}
+  ```

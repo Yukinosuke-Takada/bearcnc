@@ -52,7 +52,9 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   - [`quote-props`](https://eslint.org/docs/latest/rules/quote-props) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
   -  [`quotes`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quotes`](https://eslint.style/rules/quote-props)
   - [`template-curly-spacing`](https://eslint.org/docs/latest/rules/template-curly-spacing) → [`@stylistic/template-curly-spacing`](https://eslint.style/rules/template-curly-spacing)
--  [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) → [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
+  -  [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) → [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
+  -  [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) → [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
+  -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
