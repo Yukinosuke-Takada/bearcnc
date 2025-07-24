@@ -139,4 +139,8 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/arrow-spacing'", async () => {
     await linter.checkRule('@stylistic/arrow-spacing');
   });
+
+  it("should lint expectedly for '@stylistic/arrow-parens'", async () => {
+    await linter.checkRule('@stylistic/arrow-parens');
+  });
 });

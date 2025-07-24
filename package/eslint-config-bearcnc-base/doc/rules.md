@@ -91,7 +91,7 @@ This doc was created by referencing the following material:
   class C {
       #x;
       static {
-          e = obj => obj.#x;
+          e = (obj) => obj.#x;
       }
   }
   
@@ -323,11 +323,11 @@ This doc was created by referencing the following material:
   
   const obj = { a: 1, b: 2 };
   
-  const isObject = value => value === Object(value);
+  const isObject = (value) => value === Object(value);
   
-  const createObject = Object => new Object();
+  const createObject = (Object) => new Object();
   ```
-  
+
 - 3.2 Use computed property names when creating objects with dynamic property names.
 
   > Why? They allow you to define all the properties of an object in one place.
@@ -666,7 +666,7 @@ This doc was created by referencing the following material:
 
   [0, 1, 2];
 
-  const createArray = Array => new Array();
+  const createArray = (Array) => new Array();
   ```
 
 - 4.2 Use [Array#push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) instead of direct assignment to add items to an array.
@@ -779,7 +779,7 @@ This doc was created by referencing the following material:
       return false;
   });
 
-  const bar = foo.map(node => node.getAttribute("id"));
+  const bar = foo.map((node) => node.getAttribute("id"));
   ```
 
   **allowImplicit**
@@ -1846,7 +1846,7 @@ This doc was created by referencing the following material:
 
   ```js
   // arrow function callback
-  foo(a => a); // OK
+  foo((a) => a); // OK
 
   // generator as callback
   foo(function*() { yield; }); // OK
@@ -1893,7 +1893,7 @@ This doc was created by referencing the following material:
 
 	Bad:
 
-  [//]: # (expectedErrors: 8)
+  [//]: # (expectedErrors: 8, eslint: '@stylistic/arrow-parens: "off"')
 
   ```js
   ()=> {};
@@ -1908,11 +1908,80 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off"')
 
   ```js
   () => {};
   (a) => {};
   a => a;
   () => {'\n'};
+  ```
+
+
+- 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`@stylistic/arrow-parens`](https://eslint.style/rules/arrow-parens)
+
+  > Why? Syntactic sugar. It reads well when multiple functions are chained together.
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  a => {};
+  a => a;
+  a => {'\n'};
+  a.then(foo => {});
+  a.then(foo => a);
+  a(foo => { if (true) {} });
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  () => {};
+  (a) => {};
+  (a) => a;
+  (a) => {'\n'}
+  a.then((foo) => {});
+  a.then((foo) => { if (true) {} });
+  ```
+
+  **If Statements**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  var a = 1;
+  var b = 2;
+  // ...
+  if (a => b) {
+  console.log('bigger');
+  } else {
+  console.log('smaller');
+  }
+  // outputs 'bigger', not smaller as expected
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a = 1;
+  var b = 0;
+  // ...
+  if ((a) => b) {
+  console.log('truthy value returned');
+  } else {
+  console.log('falsy value returned');
+  }
+  // outputs 'truthy value returned'
   ```

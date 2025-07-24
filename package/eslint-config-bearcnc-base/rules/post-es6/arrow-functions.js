@@ -6,6 +6,9 @@ export default defineConfig({
     '@stylistic': stylistic,
   },
   rules: {
+    // (8.3) Enforce consistent use of parentheses in arrow function parameters
+    '@stylistic/arrow-parens': ['error', 'always'],
+
     // (8.2) Enforce consistent spacing before and after arrow function's arrow
     '@stylistic/arrow-spacing': ['error', { before: true, after: true }],
     
