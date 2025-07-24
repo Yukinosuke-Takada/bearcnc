@@ -5,11 +5,13 @@ import { expect } from 'chai';
 const DEBUG = false; // Set to true to enable debug logging
 
 class Linter {
-  constructor({ configFilePath, docPath, configType, globalEslintConfig = '' }) {
+  constructor({ configFilePath, docPath, configType, globalEslintConfig = [] }) {
     this.configFilePath = configFilePath;
     this.docPath = docPath;
     this.configType = configType;
+    // globalEslintConfig is an array of strings
     this.globalEslintConfig = globalEslintConfig;
+    this.globalEslintConfigString = Array.isArray(globalEslintConfig) ? globalEslintConfig.join(', ') : '';
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
     });
@@ -32,8 +34,8 @@ class Linter {
 
     // check if the code has expected errors counts
     for (const { code, expectedErrors, title } of testCases) {
-      const codeWithGlobalConfig = (!ignoreGlobalConfig && this.globalEslintConfig)
-        ? `/* eslint ${this.globalEslintConfig} */\n${code}`
+      const codeWithGlobalConfig = (!ignoreGlobalConfig && this.globalEslintConfigString)
+        ? `/* eslint ${this.globalEslintConfigString} */\n${code}`
         : code;
       const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
@@ -41,9 +43,9 @@ class Linter {
         console.log(result[0]);
         console.log('------------------------------\n');
       }
-      const {errorCount} = result[0];
+      const {errorCount, warningCount} = result[0];
 
-      expect(errorCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
+      expect(errorCount + warningCount, `Test case "${title}" should have ${expectedErrors} errors`).to.equal(expectedErrors);
 
       // Additional check: if errors are expected, ensure all errors are for the correct rule
       if (expectedErrors > 0) {

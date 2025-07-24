@@ -44,9 +44,20 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 
   [original commit](https://github.com/airbnb/javascript/commit/75807b9d5ead326be45f4719d81bda52d2bbb32a)
 
+- Changes to rules inclusion in configs.
+  - [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last): `es5`, `es6` → `es6`. Since default parameters don't exist in es5.
+
 - Changed Rules due to deprecation:
   - [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
-  - [`quote-props`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
+  - [`quote-props`](https://eslint.org/docs/latest/rules/quote-props) → [`@stylistic/quote-props`](https://eslint.style/rules/quote-props)
   -  [`quotes`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/quotes`](https://eslint.style/rules/quote-props)
-  - [`template-curly-spacing`](https://eslint.org/docs/latest/rules/no-new-object) → [`@stylistic/template-curly-spacing`](https://eslint.style/rules/quote-props)
+  - [`template-curly-spacing`](https://eslint.org/docs/latest/rules/template-curly-spacing) → [`@stylistic/template-curly-spacing`](https://eslint.style/rules/template-curly-spacing)
+  -  [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) → [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
+  -  [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) → [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
+  -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
+- Changes to Rules due to new options:
+  - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
+
+- Typo(?)
+  - On section 7.1, it was rule [`no-loop-func`](https://eslint.org/docs/latest/rules/no-loop-func) but [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations) makes more sense.

@@ -10,6 +10,7 @@
   - [Arrays](#arrays)
   - [Destructuring](#destructuring)
   - [Strings](#strings)
+  - [Functions](#functions)
 
 ## See also
 
@@ -61,7 +62,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   // using const.
@@ -266,7 +267,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: '@stylistic/quotes: "off"')
 
   ```js
   var x = "y";
@@ -275,7 +276,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off", @stylistic/quotes: "off"')
 
   ```js
   let x = "y";
@@ -376,8 +377,8 @@ This doc was created by referencing the following material:
   
   // methods
   const bar = {
-      a: function() {},
-      b: function() {}
+      a: function () {},
+      b: function () {}
   };
   ```
 
@@ -402,9 +403,9 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      w: function() {},
+      w: function () {},
       x: function *() {},
-      [y]: function() {},
+      [y]: function () {},
       z: z
   };
   ```
@@ -450,7 +451,7 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      "bar-baz": function() {},
+      "bar-baz": function () {},
       "qux": qux
   };
   ```
@@ -463,7 +464,7 @@ This doc was created by referencing the following material:
 
   ```js
   const foo = {
-      ConstructorFunction: function() {}
+      ConstructorFunction: function () {}
   };
   ```
 
@@ -513,7 +514,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 4)
 
   ```js
   var object = {
@@ -526,7 +527,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var object1 = {
@@ -554,7 +555,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -567,7 +568,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var x = {
@@ -575,7 +576,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf. eslint: [`no-prototype-builtins`](https://eslint.style/rules/no-prototype-builtins)
+- 3.7 Do not call Object.prototype methods directly, such as hasOwnProperty, propertyIsEnumerable, and isPrototypeOf. eslint: [`no-prototype-builtins`](https://eslint.org/docs/latest/rules/no-prototype-builtins)
 
   > Why? These methods may be shadowed by properties on the object in question - consider { hasOwnProperty: false } - or, the object may be a null object (Object.create(null)).
 
@@ -627,13 +628,13 @@ This doc was created by referencing the following material:
   ```js
   const original = { a: 1, b: 2 };
   const copy = { ...original, c: 3 }; // copy => { a: 1, b: 2, c: 3 }
-
+  
   const { a, ...noA } = copy; // noA => { b: 2, c: 3 }
   ```
 
 ## Arrays
 
-- 4.1 Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.style/rules/no-array-constructor)
+- 4.1 Use the literal syntax for array creation. eslint: [`no-array-constructor`](https://eslint.org/docs/latest/rules/no-array-constructor)
 
   > Why?
 
@@ -673,7 +674,7 @@ This doc was created by referencing the following material:
 
   ```js
   const someStack = [];
-
+  
   someStack[someStack.length] = 'abracadabra';
   ```
 
@@ -681,7 +682,7 @@ This doc was created by referencing the following material:
 
   ```js
   const someStack = [];
-
+  
   someStack.push('abracadabra');
   ```
 
@@ -740,20 +741,20 @@ This doc was created by referencing the following material:
   const baz = Array.from(foo, bar);
   ```
 
-- 4.6 Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following 8.2. eslint: [`array-callback-return`](https://eslint.style/rules/array-callback-return)
+- 4.6 Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following 8.2. eslint: [`array-callback-return`](https://eslint.org/docs/latest/rules/array-callback-return)
 
   **Availability:** `es5`, `es6`
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off"')
 
   ```js
-  const indexMap = myArray.reduce(function(memo, item, index) {
+  const indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
   }, {});
 
-  const foo = Array.from(nodes, function(node) {
+  const foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
@@ -762,15 +763,15 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
 
   ```js
-  const indexMap = myArray.reduce(function(memo, item, index) {
+  const indexMap = myArray.reduce(function (memo, item, index) {
       memo[item] = index;
       return memo;
   }, {});
 
-  const foo = Array.from(nodes, function(node) {
+  const foo = Array.from(nodes, function (node) {
       if (node.tagName === "DIV") {
           return true;
       }
@@ -787,7 +788,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  const undefAllTheThings = myArray.map(function(item) {
+  const undefAllTheThings = myArray.map(function (item) {
       return;
   });
   ```
@@ -800,13 +801,13 @@ This doc was created by referencing the following material:
   const arr = [
     [0, 1], [2, 3], [4, 5],
   ];
-
+  
   const objectInArray = [{
     id: 1,
   }, {
     id: 2,
   }];
-
+  
   const numberInArray = [
     1, 2,
   ];
@@ -816,7 +817,7 @@ This doc was created by referencing the following material:
 
   ```js
   const arr = [[0, 1], [2, 3], [4, 5]];
-
+  
   const objectInArray = [
     {
       id: 1,
@@ -825,7 +826,7 @@ This doc was created by referencing the following material:
       id: 2,
     },
   ];
-
+  
   const numberInArray = [
     1,
     2,
@@ -835,7 +836,7 @@ This doc was created by referencing the following material:
 
 ## Destructuring
 
-- 5.1, 5.2 Use object destructuring when accessing and using multiple properties of an object. eslint: [`prefer-destructuring`](https://eslint.style/rules/prefer-destructuring)
+- 5.1, 5.2 Use object destructuring when accessing and using multiple properties of an object. eslint: [`prefer-destructuring`](https://eslint.org/docs/latest/rules/prefer-destructuring)
 
   > Why? Destructuring saves you from creating temporary references for those properties.
 
@@ -920,7 +921,7 @@ This doc was created by referencing the following material:
     // then a miracle occurs
     return [left, right, top, bottom];
   }
-
+  
   // the caller needs to think about the order of return data
   const [left, __, top] = processInput(input);
   ```
@@ -931,7 +932,7 @@ This doc was created by referencing the following material:
     // then a miracle occurs
     return { left, right, top, bottom };
   }
-
+  
   // the caller selects only the data they need
   const { left, top } = processInput(input);
   ```
@@ -995,7 +996,7 @@ This doc was created by referencing the following material:
   const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
   ```
 
-- 6.3 When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](https://eslint.style/rules/prefer-template)
+- 6.3 When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](https://eslint.org/docs/latest/rules/prefer-template)
 
   > Why?
 
@@ -1036,7 +1037,7 @@ This doc was created by referencing the following material:
   ```js
   `hello, ${ people.name}!`;
   `hello, ${people.name }!`;
-
+  
   `hello, ${ people.name }!`;
   ```
 
@@ -1046,14 +1047,14 @@ This doc was created by referencing the following material:
 
   ```js
   `hello, ${people.name}!`;
-
+  
   `hello, ${
       people.name
   }!`;
   ```
 
 
-- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.style/rules/no-eval)
+- 6.4 Never use eval() on a string, it opens too many vulnerabilities. eslint: [`no-eval`](https://eslint.org/docs/latest/rules/no-eval)
 
   **Availability:** `es5`, `es6`
 
@@ -1065,12 +1066,12 @@ This doc was created by referencing the following material:
   const obj = { x: "foo" },
       key = "x",
       value = eval("obj." + key);
-
+  
   (0, eval)("const a = 0");
-
+  
   const foo = eval;
   foo("const a = 0");
-
+  
   // This `this` is the global object.
   this.eval("const a = 0");
   ```
@@ -1081,7 +1082,7 @@ This doc was created by referencing the following material:
 
   ```js
   /*global window*/
-
+  
   window.eval("const a = 0");
   ```
 
@@ -1091,7 +1092,7 @@ This doc was created by referencing the following material:
 
   ```js
   /*global global*/
-
+  
   global.eval("const a = 0");
   ```
 
@@ -1103,28 +1104,28 @@ This doc was created by referencing the following material:
   const obj = { x: "foo" },
       key = "x",
       value = obj[key];
-
+  
   class A {
       foo() {
           // This is a user-defined method.
           this.eval("const a = 0");
       }
-
+  
       eval() {
       }
-
+  
       static {
           // This is a user-defined static method.
           this.eval("const a = 0");
       }
-
+  
       static eval() {
       }
   }
   ```
 
 
-- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.style/rules/no-useless-escape)
+- 6.5 Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](https://eslint.org/docs/latest/rules/no-useless-escape)
 
   > Why? Backslashes harm readability, thus they should only be present when necessary.
 
@@ -1169,3 +1170,649 @@ This doc was created by referencing the following material:
   /[a-z-]/;
   ```
 
+## Functions
+
+- 7.1 Use named function expressions instead of function declarations. eslint: [`func-style`](https://eslint.org/docs/latest/rules/func-style)
+
+  > Why? Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file. This harms readability and maintainability. If you find that a function’s definition is large or complex enough that it is interfering with understanding the rest of the file, then perhaps it’s time to extract it to its own module! Don’t forget to explicitly name the expression, regardless of whether or not the name is inferred from the containing variable (which is often the case in modern browsers or when using compilers such as Babel). This eliminates any assumptions made about the Error’s call stack. ([Discussion](https://github.com/airbnb/javascript/issues/794))
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** The rule is currently disabled.
+
+  Bad:
+
+  ```js
+  function foo() {
+    // ...
+  }
+
+  const foo = function () {
+    // ...
+  };
+  ```
+
+  Good:
+
+  ```js
+  const short = function longUniqueMoreDescriptiveLexicalFoo() {
+    // ...
+  };
+  ```
+
+- 7.1.1 eslint: [`func-names`](https://eslint.org/docs/latest/rules/func-names)
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
+
+  ```js
+  Foo.prototype.bar = function () {};
+
+  const cat = {
+    meow: function () {}
+  }
+
+  (function () {
+      // ...
+  }())
+
+  export default function () {}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Foo.prototype.bar = function bar() {};
+
+  const cat = {
+    meow() {}
+  }
+
+  (function bar() {
+      // ...
+  }())
+
+  export default function foo() {}
+  ```
+
+- 7.2 Wrap immediately invoked function expressions in parentheses. eslint: [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
+
+  > Why? An immediately invoked function expression is a single unit - wrapping both it, and its invocation parens, in parens, cleanly expresses this. Note that in a world with modules everywhere, you almost never need an IIFE.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var x = function () { return { y: 1 };}(); // unwrapped
+  var x = (function () { return { y: 1 };})(); // wrapped function expression
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var x = (function () { return { y: 1 };}()); // wrapped call expression
+  ```
+
+- 7.3 Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears. eslint: [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations)
+
+  **Availability:** `es5`, `es6`
+
+  **Note1** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
+
+  **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
+
+	Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (test) {
+      function doSomething() { }
+  }
+
+  function doSomethingElse() {
+      if (test) {
+          function doAnotherThing() { }
+      }
+  }
+
+  class Some {
+      static {
+          if (test) {
+              function doSomething() { }
+          }
+      }
+  }
+
+  const C = class {
+      static {
+          if (test) {
+              function doSomething() { }
+          }
+      }
+  }
+  ```
+
+- 7.4 Note: ECMA-262 defines a block as a list of statements. A function declaration is not a statement.
+
+	Bad:
+
+  ```js
+  if (currentUser) {
+    function test() {
+      console.log('Nope.');
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  let test;
+  if (currentUser) {
+    test = () => {
+      console.log('Yup.');
+    };
+  }
+  ```
+
+- 7.5 Never name a parameter arguments. This will take precedence over the arguments object that is given to every function scope.
+
+	Bad:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(name, options, arguments) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(name, options, args) {
+    // ...
+  }
+  ```
+
+- 7.6 Never use arguments, opt to use rest syntax ... instead.  eslint: [`prefer-rest-params`](https://eslint.org/docs/latest/rules/prefer-rest-params)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 3, eslint: 'prefer-spread: "off"')
+
+  ```js
+  function foo() {
+      console.log(arguments);
+  }
+
+  function bar(action) {
+      const args = Array.prototype.slice.call(arguments, 1);
+      action.apply(null, args);
+  }
+
+  function baz(action) {
+      const args = [].slice.call(arguments, 1);
+      action.apply(null, args);
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-spread: "off"')
+
+  ```js
+  function foo(...args) {
+      console.log(args);
+  }
+
+  function bar(action, ...args) {
+      action.apply(null, args); // or `action(...args)`, related to the `prefer-spread` rule.
+  }
+  ```
+
+- 7.7 Use default parameter syntax rather than mutating function arguments.
+
+  Very Bad:
+
+  ```js
+  function handleThings(opts) {
+    // No! We shouldn’t mutate function arguments.
+    // Double bad: if opts is falsy it'll be set to an object which may
+    // be what you want but it can introduce subtle bugs.
+    opts = opts || {};
+    // ...
+  }
+  ```
+
+	Bad:
+
+  ```js
+  function handleThings(opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  function handleThings(opts = {}) {
+    // ...
+  }
+  ```
+
+- 7.8 Avoid side effects with default parameters.
+
+  > Why? They are confusing to reason about.
+
+	Bad:
+
+  ```js
+  var b = 1;
+  function count(a = b++) {
+    console.log(a);
+  }
+  count();  // 1
+  count();  // 2
+  count(3); // 3
+  count();  // 3
+  ```
+
+- 7.9 Always put default parameters last. eslint: [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  function f(a = 0, b) {}
+
+  function g(a, b = 0, c) {}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function f(a, b = 0) {}
+
+  function g(a, b = 0, c = 0) {}
+  ```
+
+- 7.10 Never use the Function constructor to create a new function. eslint: [`no-new-func`](https://eslint.org/docs/latest/rules/no-new-func)
+
+  > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  const a = new Function("a", "b", "return a + b");
+  const b = Function("a", "b", "return a + b");
+  const c = Function.call(null, "a", "b", "return a + b");
+  const d = Function.apply(null, ["a", "b", "return a + b"]);
+  const x = Function.bind(null, "a", "b", "return a + b")();
+  const y = Function.bind(null, "a", "b", "return a + b"); // assuming that the result of Function.bind(...) will be eventually called.
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const x = function (a, b) {
+      return a + b;
+  };
+  ```
+
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  function foo () {
+      // ...
+  }
+
+  var bar = function() {
+      // ...
+  };
+
+  class Foo {
+      constructor () {
+          // ...
+      }
+  }
+
+  var baz = {
+      bar () {
+          // ...
+      }
+  };
+
+  var baz = async(a) => await a
+
+  try {
+      // ...
+  } catch(e) {
+      // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() {
+      // ...
+  }
+
+  var bar = function () {
+      // ...
+  };
+
+  class Foo {
+      constructor() {
+          // ...
+      }
+  }
+
+  var baz = {
+      bar() {
+          // ...
+      }
+  };
+
+  var baz = async (a) => await a
+
+  try {
+      // ...
+  } catch (e) {
+      // ...
+  }
+  ```
+
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  if (a){
+      b();
+  }
+  
+  function a(){}
+  
+  for (;;){
+      b();
+  }
+  
+  try {} catch (a){}
+  
+  class Foo{
+    constructor(){}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (a) {
+      b();
+  }
+  
+  if (a) {
+      b();
+  } else{ /*no error. this is checked by `keyword-spacing` rule.*/
+      c();
+  }
+  
+  class C {
+      static{} /*no error. this is checked by `keyword-spacing` rule.*/
+  }
+  
+  function a() {}
+  
+  for (;;) {
+      b();
+  }
+  
+  try {} catch (a) {}
+  ```
+
+
+- 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
+
+  > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+  > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the arguments object. It can also cause optimization issues, especially in V8.
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  const foo = function (bar) {
+      bar = 13;
+  }
+
+  const foo1 = function (bar) {
+      bar++;
+  }
+
+  const foo2 = function (bar) {
+      for (bar in baz) {}
+  }
+
+  const foo3 = function (bar) {
+      for (bar of baz) {}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = function (bar) {
+      const baz = bar;
+  }
+  ```
+
+  **props**
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  const foo = function (bar) {
+      bar.prop = "value";
+  }
+
+  const foo1 = function (bar) {
+      delete bar.aaa;
+  }
+
+  const foo2 = function (bar) {
+      bar.aaa++;
+  }
+
+  const foo3 = function (bar) {
+      for (bar.aaa in baz) {}
+  }
+
+  const foo4 = function (bar) {
+      for (bar.aaa of baz) {}
+  }
+  ```
+
+  **ignorePropertyModificationsFor**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
+
+  const foo = function (e) {
+      e.prop = "value";
+  }
+
+  const foo1 = function (e) {
+      delete e.aaa;
+  }
+
+  const foo2 = function (e) {
+      e.aaa++;
+  }
+
+  const foo3 = function (e) {
+      for (e.aaa in baz) {}
+  }
+
+  const foo4 = function (e) {
+      for (e.aaa of baz) {}
+  }
+  ```
+
+- 7.14 Prefer the use of the spread syntax ... to call variadic functions. eslint: [`prefer-spread`](https://eslint.org/docs/latest/rules/prefer-spread)
+
+  > Why? It’s cleaner, you don’t need to supply a context, and you can not easily compose new with apply.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  foo.apply(undefined, args);
+  foo.apply(null, args);
+  obj.foo.apply(obj, args);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Using spread syntax
+  foo(...args);
+  obj.foo(...args);
+
+  // The `this` binding is different.
+  foo.apply(obj, args);
+  obj.foo.apply(null, args);
+  obj.foo.apply(otherObj, args);
+
+  // The argument list is not variadic.
+  // Those are warned by the `no-useless-call` rule.
+  foo.apply(undefined, [1, 2, 3]);
+  foo.apply(null, [1, 2, 3]);
+  obj.foo.apply(obj, [1, 2, 3]);
+  ```
+
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`function-paren-newline`](https://eslint.org/docs/latest/rules/function-paren-newline) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  function foo(bar,
+    baz
+  ) {}
+  
+  var foobar = function (bar,
+    baz
+  ) {};
+  
+  var foobar = (
+    bar,
+    baz) => {};
+  
+  foo(
+    bar,
+    baz);
+  
+  foo(
+      bar, qux,
+    baz
+  );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(
+    bar,
+    baz
+  ) {}
+  
+  var qux = function (bar, baz) {};
+  
+  var qux = (
+    bar
+  ) => {};
+  
+  foo(
+    function () {
+      return baz;
+    }
+  );
+  ```
