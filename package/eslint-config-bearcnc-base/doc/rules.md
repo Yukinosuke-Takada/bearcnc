@@ -1917,10 +1917,110 @@ This doc was created by referencing the following material:
   () => {'\n'};
   ```
 
-
-- 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`@stylistic/arrow-parens`](https://eslint.style/rules/arrow-parens)
+- 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`arrow-body-style`](https://eslint.org/docs/latest/rules/arrow-body-style)
 
   > Why? Syntactic sugar. It reads well when multiple functions are chained together.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  const foo = () => {
+      return 0;
+  };
+
+  const bar = () => {
+      return {
+        bar: {
+              foo: 1,
+              bar: 2,
+          }
+      };
+  };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
+
+  ```js
+  const foo1 = () => 0;
+
+  const foo2 = (retv, name) => {
+      retv[name] = true;
+      return retv;
+  };
+
+  const foo3 = () => ({
+      bar: {
+          foo: 1,
+          bar: 2,
+      }
+  });
+
+  const foo4 = () => { bar(); };
+  const foo5 = () => {};
+  const foo6 = () => { /* do nothing */ };
+
+  const foo7 = () => {
+      // do nothing.
+  };
+
+  const foo8 = () => ({ bar: 0 });
+  ```
+
+  **requireReturnForObjectLiteral**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  const bar = () => { return { bar: 0 }; };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = () => {};
+
+  const foo2 = () => ({});
+
+  const bar = () => ({ bar: 0 });
+  ```
+
+
+- 8.3 In case the expression spans over multiple lines, wrap it in parentheses for better readability.
+
+  > Why? It shows clearly where the function starts and ends.
+
+	Bad:
+
+  ```js
+  ['get', 'post', 'put'].map((httpMethod) => Object.prototype.hasOwnProperty.call(
+      httpMagicObjectWithAVeryLongName,
+      httpMethod,
+    )
+  );
+  ```
+
+  Good:
+
+  ```js
+  ['get', 'post', 'put'].map((httpMethod) => (
+    Object.prototype.hasOwnProperty.call(
+      httpMagicObjectWithAVeryLongName,
+      httpMethod,
+    )
+  ));
+  ```
+
+- 8.4 eslint: [`@stylistic/arrow-parens`](https://eslint.style/rules/arrow-parens)
 
   **Availability:** `es6`
 
@@ -1984,4 +2084,58 @@ This doc was created by referencing the following material:
   console.log('falsy value returned');
   }
   // outputs 'truthy value returned'
+  ```
+
+- 8.5 Avoid confusing arrow function syntax (=>) with comparison operators (<=, >=). eslint: [`@stylistic/no-confusing-arrow`](https://eslint.style/rules/no-confusing-arrow)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`no-confusing-arrow`](https://eslint.org/docs/latest/rules/no-confusing-arrow) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 2, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  var x = a => 1 ? 2 : 3;
+  var x = (a) => 1 ? 2 : 3;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  var x = a => (1 ? 2 : 3);
+  var x = (a) => (1 ? 2 : 3);
+  var x = (a) => {
+      return 1 ? 2 : 3;
+  };
+  var x = a => { return 1 ? 2 : 3; };
+  ```
+
+  **allowParens**
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  var x = a => (1 ? 2 : 3);
+  var x = (a) => (1 ? 2 : 3);
+  ```
+
+  **onlyOneSimpleParam**
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  () => 1 ? 2 : 3;
+  (a, b) => 1 ? 2 : 3;
+  (a = b) => 1 ? 2 : 3;
+  ({ a }) => 1 ? 2 : 3;
+  ([a]) => 1 ? 2 : 3;
+  (...a) => 1 ? 2 : 3;
   ```
