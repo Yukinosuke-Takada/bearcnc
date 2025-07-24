@@ -83,4 +83,8 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-param-reassign'", async () => {
     await linter.checkRule('no-param-reassign');
   });
+
+  it("should lint expectedly for '@stylistic/function-paren-newline'", async () => {
+    await linter.checkRule('@stylistic/function-paren-newline');
+  });
 });

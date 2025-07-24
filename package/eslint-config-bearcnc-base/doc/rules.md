@@ -1356,7 +1356,7 @@ This doc was created by referencing the following material:
 
 	Bad:
 
-  [//]: # (expectedErrors: 3)
+  [//]: # (expectedErrors: 3, eslint: 'prefer-spread: "off"')
 
   ```js
   function foo() {
@@ -1376,7 +1376,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'prefer-spread: "off"')
 
   ```js
   function foo(...args) {
@@ -1624,9 +1624,11 @@ This doc was created by referencing the following material:
   ```
 
 
-- 7.12 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
+- 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
 
   > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+  > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the arguments object. It can also cause optimization issues, especially in V8.
 
   **Availability:** `es5`, `es6`
 
@@ -1720,3 +1722,97 @@ This doc was created by referencing the following material:
   }
   ```
 
+- 7.14 Prefer the use of the spread syntax ... to call variadic functions. eslint: [`prefer-spread`](https://eslint.org/docs/latest/rules/prefer-spread)
+
+  > Why? It’s cleaner, you don’t need to supply a context, and you can not easily compose new with apply.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  foo.apply(undefined, args);
+  foo.apply(null, args);
+  obj.foo.apply(obj, args);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // Using spread syntax
+  foo(...args);
+  obj.foo(...args);
+
+  // The `this` binding is different.
+  foo.apply(obj, args);
+  obj.foo.apply(null, args);
+  obj.foo.apply(otherObj, args);
+
+  // The argument list is not variadic.
+  // Those are warned by the `no-useless-call` rule.
+  foo.apply(undefined, [1, 2, 3]);
+  foo.apply(null, [1, 2, 3]);
+  obj.foo.apply(obj, [1, 2, 3]);
+  ```
+
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`function-paren-newline`](https://eslint.org/docs/latest/rules/function-paren-newline) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  function foo(bar,
+    baz
+  ) {}
+
+  var foobar = function (bar,
+    baz
+  ) {};
+
+  var foobar = (
+    bar,
+    baz) => {};
+
+  foo(
+    bar,
+    baz);
+
+  foo(
+      bar, qux,
+    baz
+  );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(
+    bar,
+    baz
+  ) {}
+
+  var qux = function (bar, baz) {};
+
+  var qux = (
+    bar
+  ) => {};
+
+  foo(
+    function () {
+      return baz;
+    }
+  );
+  ```

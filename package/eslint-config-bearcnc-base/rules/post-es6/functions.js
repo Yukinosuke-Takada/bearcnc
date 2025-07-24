@@ -11,5 +11,8 @@ export default defineConfig({
 
     // (7.6) Enforce the use of rest parameters instead of arguments
     'prefer-rest-params': 'error',
+
+    // (7.14) Enforce the use of spread syntax instead of .apply()
+    'prefer-spread': 'error',
   }
 });

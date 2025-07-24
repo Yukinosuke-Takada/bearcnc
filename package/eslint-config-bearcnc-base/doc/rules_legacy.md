@@ -857,9 +857,11 @@ This doc was created by referencing the following material:
   try {} catch (a) {}
   ```
 
-- 7.12 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
+- 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
 
   > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
+
+  > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the arguments object. It can also cause optimization issues, especially in V8.
 
   **Availability:** `es5`, `es6`
 
@@ -941,3 +943,52 @@ This doc was created by referencing the following material:
   }
   ```
 
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+
+  > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`function-paren-newline`](https://eslint.org/docs/latest/rules/function-paren-newline) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  function foo(bar,
+    baz
+  ) {}
+
+  var foobar = function (bar,
+    baz
+  ) {};
+
+  foo(
+    bar,
+    baz);
+
+  foo(
+      bar, qux,
+    baz
+  );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo(
+    bar,
+    baz
+  ) {}
+
+  var qux = function (bar, baz) {};
+
+  foo(
+    function () {
+      return baz;
+    }
+  );
+  ```

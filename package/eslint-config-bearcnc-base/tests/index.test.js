@@ -122,4 +122,12 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-param-reassign'", async () => {
     await linter.checkRule('no-param-reassign');
   });
+
+  it("should lint expectedly for 'prefer-spread'", async () => {
+    await linter.checkRule('prefer-spread');
+  });
+
+  it("should lint expectedly for '@stylistic/function-paren-newline'", async () => {
+    await linter.checkRule('@stylistic/function-paren-newline');
+  });
 });

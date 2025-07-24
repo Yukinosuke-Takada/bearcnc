@@ -12,6 +12,9 @@ export default defineConfig({
     // (7.1.1) Enforce named function expressions instead of function declarations
     'func-names': 'warn',
 
+    // (7.15) Enforce consistent line breaks inside function parentheses
+    '@stylistic/function-paren-newline': ['error', 'multiline-arguments'],
+
     // (7.11.1) Enforce consistent spacing before blocks
     '@stylistic/space-before-blocks': 'error',
 
@@ -35,7 +38,7 @@ export default defineConfig({
     // (7.10) Disallow the use of the Function constructor
     'no-new-func': 'error',
 
-    // (7.12) Disallow reassigning function parameters
+    // (7.12, 7.13) Disallow reassigning function parameters
     // Copied config from https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/best-practices.js
     'no-param-reassign': [
       'error',
