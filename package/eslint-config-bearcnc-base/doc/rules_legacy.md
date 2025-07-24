@@ -621,14 +621,6 @@ This doc was created by referencing the following material:
       function doAnotherThing() { }
   }
 
-  // unction doSomethingElse() {
-  //     "use strict";
-  // 
-  //     if (test) {
-  //         function doAnotherThing() { }
-  //     }
-  // }
-
   function C() {}
 
   C.doSomething = function () {};
