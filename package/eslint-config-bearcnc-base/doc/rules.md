@@ -11,6 +11,7 @@
   - [Destructuring](#destructuring)
   - [Strings](#strings)
   - [Functions](#functions)
+  - [Arrow Functions](#arrow-functions)
 
 ## See also
 
@@ -747,7 +748,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off"')
+  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off", prefer-arrow-callback: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -763,7 +764,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off", prefer-arrow-callback: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -785,7 +786,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'prefer-arrow-callback: "off"')
 
   ```js
   const undefAllTheThings = myArray.map(function (item) {
@@ -1491,7 +1492,7 @@ This doc was created by referencing the following material:
   };
   ```
 
-- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -1567,7 +1568,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   **Availability:** `es5`, `es6`
 
@@ -1759,7 +1760,7 @@ This doc was created by referencing the following material:
   obj.foo.apply(obj, [1, 2, 3]);
   ```
 
-- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.style/rules/function-paren-newline)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -1796,7 +1797,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'prefer-arrow-callback: "off"')
 
   ```js
   function foo(
@@ -1815,4 +1816,103 @@ This doc was created by referencing the following material:
       return baz;
     }
   );
+  ```
+
+## Arrow Functions
+
+- 8.1 When you must use an anonymous function (as when passing an inline callback), use arrow function notation. eslint: [`prefer-arrow-callback`](https://eslint.org/docs/latest/rules/prefer-arrow-callback)
+
+  > Why? It creates a version of the function that executes in the context of this, which is usually what you want, and is a more concise syntax.
+
+  > Why not? If you have a fairly complicated function, you might move that logic out into its own named function expression.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  foo(function (a) { return a; }); // ERROR
+  // prefer: foo(a => a)
+
+  foo(function () { return this.a; }.bind(this)); // ERROR
+  // prefer: foo(() => this.a)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // arrow function callback
+  foo(a => a); // OK
+
+  // generator as callback
+  foo(function*() { yield; }); // OK
+
+  // function expression not used as callback or function argument
+  const foo = function foo(a) { return a; }; // OK
+
+  // unbound function expression callback
+  foo(function () { return this.a; }); // OK
+
+  // recursive named function callback
+  foo(function bar(n) { return n && n + bar(n - 1); }); // OK
+  ```
+
+  **allowNamedFunctions**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  foo(function bar() {});
+  ```
+
+  **allowUnboundThis**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  foo(function () { this.a; });
+
+  foo(function () { (() => this); });
+
+  someArray.map(function (item) { return this.doSomething(item); }, someObject);
+  ```
+
+- 8.1.1 eslint: [`@stylistic/arrow-spacing`](https://eslint.style/rules/arrow-spacing)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`arrow-spacing`](https://eslint.org/docs/latest/rules/arrow-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 8)
+
+  ```js
+  ()=> {};
+  () =>{};
+  (a)=> {};
+  (a) =>{};
+  a =>a;
+  a=> a;
+  ()=> {'\n'};
+  () =>{'\n'};
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  () => {};
+  (a) => {};
+  a => a;
+  () => {'\n'};
   ```

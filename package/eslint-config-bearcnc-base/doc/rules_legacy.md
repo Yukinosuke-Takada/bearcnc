@@ -761,7 +761,7 @@ This doc was created by referencing the following material:
   };
   ```
 
-- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -809,7 +809,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   **Availability:** `es5`, `es6`
 
@@ -943,7 +943,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.style/rules/function-paren-newline)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 

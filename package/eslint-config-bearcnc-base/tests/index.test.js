@@ -130,4 +130,13 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/function-paren-newline'", async () => {
     await linter.checkRule('@stylistic/function-paren-newline');
   });
+
+  // Arrow Functions rules
+  it("should lint expectedly for 'prefer-arrow-callback'", async () => {
+    await linter.checkRule('prefer-arrow-callback');
+  });
+
+  it("should lint expectedly for '@stylistic/arrow-spacing'", async () => {
+    await linter.checkRule('@stylistic/arrow-spacing');
+  });
 });
