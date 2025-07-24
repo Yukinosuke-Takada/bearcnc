@@ -739,3 +739,33 @@ This doc was created by referencing the following material:
   count(3); // 3
   count();  // 3
   ```
+
+- 7.10 Never use the Function constructor to create a new function. eslint: [`no-new-func`](https://eslint.org/docs/latest/rules/no-new-func)
+
+  > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  var a = new Function("a", "b", "return a + b");
+  var b = Function("a", "b", "return a + b");
+  var c = Function.call(null, "a", "b", "return a + b");
+  var d = Function.apply(null, ["a", "b", "return a + b"]);
+  var x = Function.bind(null, "a", "b", "return a + b")();
+  var y = Function.bind(null, "a", "b", "return a + b"); // assuming that the result of Function.bind(...) will be eventually called.
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var x = function (a, b) {
+      return a + b;
+  };
+  ```
+

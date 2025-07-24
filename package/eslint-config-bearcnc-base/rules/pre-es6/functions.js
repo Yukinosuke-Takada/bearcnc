@@ -17,5 +17,8 @@ export default defineConfig({
   
     // Disallow declaring functions in nested blocks on non-strict mode. (Pre-ES6)
     'no-inner-declarations': ['error', 'functions', { blockScopedFunctions: 'allow' }],
+
+    // (7.10) Disallow the use of the Function constructor
+    'no-new-func': 'error',
   }
 });

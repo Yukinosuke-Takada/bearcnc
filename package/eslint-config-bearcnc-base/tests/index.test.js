@@ -102,4 +102,12 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'prefer-rest-params'", async () => {
     await linter.checkRule('prefer-rest-params');
   });
+
+  it("should lint expectedly for 'default-param-last'", async () => {
+    await linter.checkRule('default-param-last');
+  });
+
+  it("should lint expectedly for 'no-new-func'", async () => {
+    await linter.checkRule('no-new-func');
+  });
 });

@@ -1437,3 +1437,56 @@ This doc was created by referencing the following material:
   count(3); // 3
   count();  // 3
   ```
+
+- 7.9 Always put default parameters last. eslint: [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last)
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  function f(a = 0, b) {}
+
+  function g(a, b = 0, c) {}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function f(a, b = 0) {}
+
+  function g(a, b = 0, c = 0) {}
+  ```
+
+- 7.10 Never use the Function constructor to create a new function. eslint: [`no-new-func`](https://eslint.org/docs/latest/rules/no-new-func)
+
+  > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
+
+  **Availability:** `es5`, `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  const a = new Function("a", "b", "return a + b");
+  const b = Function("a", "b", "return a + b");
+  const c = Function.call(null, "a", "b", "return a + b");
+  const d = Function.apply(null, ["a", "b", "return a + b"]);
+  const x = Function.bind(null, "a", "b", "return a + b")();
+  const y = Function.bind(null, "a", "b", "return a + b"); // assuming that the result of Function.bind(...) will be eventually called.
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const x = function (a, b) {
+      return a + b;
+  };
+  ```

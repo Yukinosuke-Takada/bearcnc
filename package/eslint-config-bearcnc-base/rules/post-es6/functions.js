@@ -6,6 +6,9 @@ export default defineConfig({
   //   '@stylistic': stylistic
   // },
   rules: {
+    // (7.9) Enforce default parameters to be last
+    'default-param-last': 'error',
+
     // (7.6) Enforce the use of rest parameters instead of arguments
     'prefer-rest-params': 'error',
   }

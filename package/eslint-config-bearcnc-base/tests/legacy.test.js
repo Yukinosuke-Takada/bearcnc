@@ -67,4 +67,8 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-inner-declarations'", async () => {
     await linter.checkRule('no-inner-declarations');
   });
+
+  it("should lint expectedly for 'no-new-func'", async () => {
+    await linter.checkRule('no-new-func');
+  });
 });
