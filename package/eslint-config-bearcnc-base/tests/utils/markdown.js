@@ -7,12 +7,10 @@ function dedent(str) {
   while (lines.length && lines[0].trim() === '') lines.shift();
   while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
   // Find minimum indentation (ignore empty lines)
-  const indents = lines
-    .filter(line => line.trim())
-    .map(line => line.match(/^ */)[0].length);
+  const indents = lines.filter((line) => line.trim()).map((line) => line.match(/^ */)[0].length);
   const minIndent = indents.length ? Math.min(...indents) : 0;
   // Remove minIndent spaces from each line
-  return lines.map(line => line.slice(minIndent)).join('\n');
+  return lines.map((line) => line.slice(minIndent)).join('\n');
 }
 
 function getTestCasesData(rule, docPath) {
@@ -21,7 +19,7 @@ function getTestCasesData(rule, docPath) {
 
   // find the section for the specific rule
   const rulesSection = doc.split('\n- ');
-  const ruleSection = rulesSection.find(item => {
+  const ruleSection = rulesSection.find((item) => {
     const firstLine = item.split('\n')[0]; // only search it in the bullet point line
     return firstLine.includes(`eslint: [\`${rule}\`]`);
   });
@@ -32,7 +30,7 @@ function getTestCasesData(rule, docPath) {
   // extract availability from the specific rule
   // **Availability:** `es5`, `es6` will return ['es5', 'es6']
   const lines = ruleSection.split('\n');
-  const availabilityLine = lines.find(line => line.includes('**Availability:**'));
+  const availabilityLine = lines.find((line) => line.includes('**Availability:**'));
   if (!availabilityLine) {
     throw new Error(`Availability not found for rule "${rule}"`);
   }
