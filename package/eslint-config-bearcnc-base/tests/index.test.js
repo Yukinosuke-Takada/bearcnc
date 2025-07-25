@@ -155,4 +155,17 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/implicit-arrow-linebreak'", async () => {
     await linter.checkRule('@stylistic/implicit-arrow-linebreak');
   });
+
+  // Classes rules
+  it("should lint expectedly for 'no-useless-constructor'", async () => {
+    await linter.checkRule('no-useless-constructor');
+  });
+
+  it("should lint expectedly for 'no-dupe-class-members'", async () => {
+    await linter.checkRule('no-dupe-class-members');
+  });
+
+  it("should lint expectedly for 'class-methods-use-this'", async () => {
+    await linter.checkRule('class-methods-use-this');
+  });
 });

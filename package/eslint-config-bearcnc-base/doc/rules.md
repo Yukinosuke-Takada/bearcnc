@@ -12,6 +12,7 @@
   - [Strings](#strings)
   - [Functions](#functions)
   - [Arrow Functions](#arrow-functions)
+  - [Classes \& Constructors](#classes--constructors)
 
 ## See also
 
@@ -1099,7 +1100,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'class-methods-use-this: "off"')
 
   ```js
   const obj = { x: "foo" },
@@ -1502,7 +1503,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 6)
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
 
   ```js
   function foo () {
@@ -1536,7 +1537,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
 
   ```js
   function foo() {
@@ -1576,7 +1577,7 @@ This doc was created by referencing the following material:
 
 	Bad:
 
-  [//]: # (expectedErrors: 6)
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
 
   ```js
   if (a){
@@ -2192,5 +2193,299 @@ This doc was created by referencing the following material:
   (foo) =>
   {
     return bar();
+  }
+  ```
+
+## Classes & Constructors
+
+- 9.1 Always use class. Avoid manipulating prototype directly.
+
+  > Why? class syntax is more concise and easier to reason about.
+
+	Bad:
+
+  ```js
+  function Queue(contents = []) {
+    this.queue = [...contents];
+  }
+  Queue.prototype.pop = function () {
+    const value = this.queue[0];
+    this.queue.splice(0, 1);
+    return value;
+  };
+  ```
+
+  Good:
+
+  ```js
+  class Queue {
+    constructor(contents = []) {
+      this.queue = [...contents];
+    }
+    pop() {
+      const value = this.queue[0];
+      this.queue.splice(0, 1);
+      return value;
+    }
+  }
+  ```
+
+- 9.2 Use extends for inheritance.
+
+  > Why? It is a built-in way to inherit prototype functionality without breaking instanceof.
+
+	Bad:
+
+  ```js
+  const inherits = require('inherits');
+  function PeekableQueue(contents) {
+    Queue.apply(this, contents);
+  }
+  inherits(PeekableQueue, Queue);
+  PeekableQueue.prototype.peek = function () {
+    return this.queue[0];
+  };
+  ```
+
+  Good:
+
+  ```js
+  class PeekableQueue extends Queue {
+    peek() {
+      return this.queue[0];
+    }
+  }
+  ```
+
+- 9.3 Methods can return this to help with method chaining.
+
+	Bad:
+
+  ```js
+  Jedi.prototype.jump = function () {
+    this.jumping = true;
+    return true;
+  };
+
+  Jedi.prototype.setHeight = function (height) {
+    this.height = height;
+  };
+
+  const luke = new Jedi();
+  luke.jump(); // => true
+  luke.setHeight(20); // => undefined
+  ```
+
+  Good:
+
+  ```js
+  class Jedi {
+    jump() {
+      this.jumping = true;
+      return this;
+    }
+
+    setHeight(height) {
+      this.height = height;
+      return this;
+    }
+  }
+
+  const luke = new Jedi();
+
+  luke.jump()
+    .setHeight(20);
+  ```
+
+- 9.4 It’s okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
+
+  Good:
+
+  ```js
+    class Jedi {
+    constructor(options = {}) {
+      this.name = options.name || 'no name';
+    }
+
+    getName() {
+      return this.name;
+    }
+
+    toString() {
+      return `Jedi - ${this.getName()}`;
+    }
+  }
+  ```
+
+- 9.5 Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. eslint: [`no-useless-constructor`](https://eslint.org/docs/latest/rules/no-useless-constructor)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  class A {
+      constructor() {
+      }
+  }
+
+  class B extends A {
+      constructor(...args) {
+        super(...args);
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  class A { }
+
+  class B {
+      constructor() {
+          doSomething();
+      }
+  }
+
+  class C extends A {
+      constructor() {
+          super('foo');
+      }
+  }
+
+  class D extends A {
+      constructor() {
+          super();
+          doSomething();
+      }
+  }
+  ```
+
+- 9.6 Avoid duplicate class members. eslint: [`no-dupe-class-members`](https://eslint.org/docs/latest/rules/no-dupe-class-members)
+
+  > Why? Duplicate class member declarations will silently prefer the last one - having duplicates is almost certainly a bug.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 5, eslint: 'class-methods-use-this: "off"')
+
+  ```js
+  class A {
+    bar() { }
+    bar() { }
+  }
+
+  class B {
+    bar() { }
+    get bar() { }
+  }
+
+  class C {
+    bar;
+    bar;
+  }
+
+  class D {
+    bar;
+    bar() { }
+  }
+
+  class E {
+    static bar() { }
+    static bar() { }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'class-methods-use-this: "off"')
+
+  ```js
+  class A {
+    bar() { }
+    qux() { }
+  }
+
+  class B {
+    get bar() { }
+    set bar(value) { }
+  }
+
+  class C {
+    bar;
+    qux;
+  }
+
+  class D {
+    bar;
+    qux() { }
+  }
+
+  class E {
+    static bar() { }
+    bar() { }
+  }
+  ```
+
+
+- 9.7 Class methods should use this or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver. eslint: [`class-methods-use-this`](https://eslint.org/docs/latest/rules/class-methods-use-this)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  class A {
+      foo() {
+          console.log("Hello World");     /*error Expected 'this' to be used by class method 'foo'.*/
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
+
+  ```js
+  class A {
+      foo() {
+          this.bar = "Hello World"; // OK, this is used
+      }
+  }
+
+  class B {
+      constructor() {
+          // OK. constructor is exempt
+      }
+  }
+
+  class C {
+      static foo() {
+          // OK. static methods aren't expected to use this.
+      }
+
+      static {
+          // OK. static blocks are exempt.
+      }
+  }
+  ```
+
+  **enforceForClassFields**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  class A {
+      foo = () => {}
   }
   ```
