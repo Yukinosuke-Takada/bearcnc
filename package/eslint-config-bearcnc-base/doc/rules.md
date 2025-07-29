@@ -2489,3 +2489,111 @@ This doc was created by referencing the following material:
       foo = () => {}
   }
   ```
+
+- 10.1 Always use modules (import/export) over a non-standard module system. You can always transpile to your preferred module system. eslint: [`import/no-import-module-exports`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-import-module-exports.md)
+
+  > Why? Modules are the future, let’s start using the future now.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import { stuff } from 'starwars'
+  module.exports = thing
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import * as allThings from 'starwars'
+  exports.bar = thing
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import thing from 'other-thing'
+  exports.foo = bar
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import thing from 'starwars'
+  const baz = module.exports = thing
+  console.log(baz)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import thing from 'other-thing'
+  export default thing
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const thing = require('thing')
+  module.exports = thing
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const thing = require('thing')
+  exports.foo = bar
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import thing from 'otherthing'
+  console.log(thing.module.exports)
+  ```
+
+- 10.1.1 eslint: [`import/no-amd`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-amd.md)
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  define(["a", "b"], (a, b) => { /* ... */ })
+
+  require(["c", "e"], (c, e) => { /* ... */ })
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import a from "a";
+  import b from "b";
+  export default (/* ... */) => {
+  }
+
+  // For the require block (import and use)
+  import c from "c";
+  import e from "e";
+  ```

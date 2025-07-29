@@ -168,4 +168,13 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'class-methods-use-this'", async () => {
     await linter.checkRule('class-methods-use-this');
   });
+
+  // Modules
+  it("should lint expectedly for 'import/no-import-module-exports'", async () => {
+    await linter.checkRule('import/no-import-module-exports');
+  });
+
+  it("should lint expectedly for 'import/no-amd'", async () => {
+    await linter.checkRule('import/no-amd');
+  });
 });
