@@ -177,4 +177,12 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'import/no-amd'", async () => {
     await linter.checkRule('import/no-amd');
   });
+
+  // it("should lint expectedly for 'import/no-namespace'", async () => {
+  //   await linter.checkRule('import/no-namespace');
+  // });
+
+  it("should lint expectedly for 'import/no-duplicates'", async () => {
+    await linter.checkRule('import/no-duplicates');
+  });
 });

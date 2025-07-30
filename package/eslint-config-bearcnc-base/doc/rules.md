@@ -13,6 +13,7 @@
   - [Functions](#functions)
   - [Arrow Functions](#arrow-functions)
   - [Classes \& Constructors](#classes--constructors)
+  - [Modules](#modules)
 
 ## See also
 
@@ -2490,6 +2491,8 @@ This doc was created by referencing the following material:
   }
   ```
 
+## Modules
+
 - 10.1 Always use modules (import/export) over a non-standard module system. You can always transpile to your preferred module system. eslint: [`import/no-import-module-exports`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-import-module-exports.md)
 
   > Why? Modules are the future, let’s start using the future now.
@@ -2596,4 +2599,83 @@ This doc was created by referencing the following material:
   // For the require block (import and use)
   import c from "c";
   import e from "e";
+  ```
+
+- 10.2 Do not use wildcard imports. eslint: [`import/no-namespace`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-namespace.md)
+
+  > Why? This makes sure you have a single default export.
+
+  **Availability:** `es6`
+
+  **Note:** The rule is currently disabled.
+
+	Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import AirbnbStyleGuide from './AirbnbStyleGuide';
+  ```
+
+- 10.3 And do not export directly from an import.
+
+  > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  export { es6 as default } from './AirbnbStyleGuide';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import { es6 } from './AirbnbStyleGuide';
+  export default es6;
+  ```
+
+- 10.4 Only import from a path in one place. eslint: [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)
+
+  > Why? Having multiple lines that import from the same path can make code harder to maintain.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  import SomeDefaultClass from './mod'
+
+  // oops, some other import separated these lines
+  import foo from './some-other-mod'
+
+  import { something } from './mod'
+
+  // will catch this too, assuming it is the same target module
+  import { something2 } from './mod.js'
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import SomeDefaultClass, { something, something2 } from './mod'
+
+  import foo from './some-other-mod'
   ```
