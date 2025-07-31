@@ -55,9 +55,12 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`wrap-iife`](https://eslint.org/docs/latest/rules/wrap-iife) → [`@stylistic/wrap-iife`](https://eslint.style/rules/wrap-iife)
   -  [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) → [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
   -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
+  -  [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) → [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
 
 - Typo(?)
   - On section 7.1, it was rule [`no-loop-func`](https://eslint.org/docs/latest/rules/no-loop-func) but [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations) makes more sense.
+  - On Section 8.2, removed rule [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens). It wasn't relevant additionally it is explained in 8.4.
+  - On Section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.

@@ -11,6 +11,9 @@
   - [Destructuring](#destructuring)
   - [Strings](#strings)
   - [Functions](#functions)
+  - [Arrow Functions](#arrow-functions)
+  - [Classes \& Constructors](#classes--constructors)
+  - [Modules](#modules)
 
 ## See also
 
@@ -19,6 +22,7 @@ This doc was created by referencing the following material:
 - Structure, Explanation: [Airbnb JS style guide](https://airbnb.io/javascript/#the-javascript-style-guide-guide), [Airbnb JS style guide (github)](https://github.com/airbnb/javascript)
 - Sample Code (ESLint): [ESLint docs](https://eslint.org/docs/latest/rules)
 - Sample Code (ESLint Stylistic): [ESLint Stylistic docs](https://eslint.style/rules)
+- Sample Code (eslint-plugin-import): [eslint-plugin-import (github)](https://github.com/import-js/eslint-plugin-import/tree/main)
 
 ## References
 
@@ -90,7 +94,7 @@ This doc was created by referencing the following material:
   class C {
       #x;
       static {
-          e = obj => obj.#x;
+          e = (obj) => obj.#x;
       }
   }
   
@@ -322,11 +326,11 @@ This doc was created by referencing the following material:
   
   const obj = { a: 1, b: 2 };
   
-  const isObject = value => value === Object(value);
+  const isObject = (value) => value === Object(value);
   
-  const createObject = Object => new Object();
+  const createObject = (Object) => new Object();
   ```
-  
+
 - 3.2 Use computed property names when creating objects with dynamic property names.
 
   > Why? They allow you to define all the properties of an object in one place.
@@ -665,7 +669,7 @@ This doc was created by referencing the following material:
 
   [0, 1, 2];
 
-  const createArray = Array => new Array();
+  const createArray = (Array) => new Array();
   ```
 
 - 4.2 Use [Array#push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) instead of direct assignment to add items to an array.
@@ -747,7 +751,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off"')
+  [//]: # (expectedErrors: 2, eslint: 'no-param-reassign: "off", prefer-arrow-callback: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -763,7 +767,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off", prefer-arrow-callback: "off"')
 
   ```js
   const indexMap = myArray.reduce(function (memo, item, index) {
@@ -778,14 +782,14 @@ This doc was created by referencing the following material:
       return false;
   });
 
-  const bar = foo.map(node => node.getAttribute("id"));
+  const bar = foo.map((node) => node.getAttribute("id"));
   ```
 
   **allowImplicit**
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'prefer-arrow-callback: "off"')
 
   ```js
   const undefAllTheThings = myArray.map(function (item) {
@@ -1098,7 +1102,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'class-methods-use-this: "off"')
 
   ```js
   const obj = { x: "foo" },
@@ -1204,7 +1208,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
@@ -1273,7 +1277,7 @@ This doc was created by referencing the following material:
 
   **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
 
-	Good:
+  Good:
 
   [//]: # (expectedErrors: 0)
 
@@ -1307,7 +1311,7 @@ This doc was created by referencing the following material:
 
 - 7.4 Note: ECMA-262 defines a block as a list of statements. A function declaration is not a statement.
 
-	Bad:
+  Bad:
 
   ```js
   if (currentUser) {
@@ -1330,7 +1334,7 @@ This doc was created by referencing the following material:
 
 - 7.5 Never name a parameter arguments. This will take precedence over the arguments object that is given to every function scope.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 0)
 
@@ -1354,7 +1358,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3, eslint: 'prefer-spread: "off"')
 
@@ -1402,7 +1406,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-	Bad:
+  Bad:
 
   ```js
   function handleThings(opts) {
@@ -1425,7 +1429,7 @@ This doc was created by referencing the following material:
 
   > Why? They are confusing to reason about.
 
-	Bad:
+  Bad:
 
   ```js
   var b = 1;
@@ -1442,7 +1446,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -1468,7 +1472,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 6)
 
@@ -1491,7 +1495,7 @@ This doc was created by referencing the following material:
   };
   ```
 
-- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.org/docs/latest/rules/@stylistic/space-before-function-paren)
+- 7.11 Spacing in a function signature. eslint: [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -1501,7 +1505,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 6)
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
 
   ```js
   function foo () {
@@ -1535,7 +1539,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
 
   ```js
   function foo() {
@@ -1567,15 +1571,15 @@ This doc was created by referencing the following material:
   }
   ```
 
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.org/docs/latest/rules/@stylistic/space-before-blocks)
+- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   **Availability:** `es5`, `es6`
 
   **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
-  [//]: # (expectedErrors: 6)
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
 
   ```js
   if (a){
@@ -1632,7 +1636,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4)
 
@@ -1728,7 +1732,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3)
 
@@ -1759,7 +1763,7 @@ This doc was created by referencing the following material:
   obj.foo.apply(obj, [1, 2, 3]);
   ```
 
-- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.org/docs/latest/rules/@stylistic/function-paren-newline)
+- 7.15 Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item. eslint: [`@stylistic/function-paren-newline`](https://eslint.style/rules/function-paren-newline)
 
   > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -1796,7 +1800,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'prefer-arrow-callback: "off"')
 
   ```js
   function foo(
@@ -1815,4 +1819,1109 @@ This doc was created by referencing the following material:
       return baz;
     }
   );
+  ```
+
+## Arrow Functions
+
+- 8.1 When you must use an anonymous function (as when passing an inline callback), use arrow function notation. eslint: [`prefer-arrow-callback`](https://eslint.org/docs/latest/rules/prefer-arrow-callback)
+
+  > Why? It creates a version of the function that executes in the context of this, which is usually what you want, and is a more concise syntax.
+
+  > Why not? If you have a fairly complicated function, you might move that logic out into its own named function expression.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  foo(function (a) { return a; }); // ERROR
+  // prefer: foo(a => a)
+
+  foo(function () { return this.a; }.bind(this)); // ERROR
+  // prefer: foo(() => this.a)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // arrow function callback
+  foo((a) => a); // OK
+
+  // generator as callback
+  foo(function*() { yield; }); // OK
+
+  // function expression not used as callback or function argument
+  const foo = function foo(a) { return a; }; // OK
+
+  // unbound function expression callback
+  foo(function () { return this.a; }); // OK
+
+  // recursive named function callback
+  foo(function bar(n) { return n && n + bar(n - 1); }); // OK
+  ```
+
+  **allowNamedFunctions**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  foo(function bar() {});
+  ```
+
+  **allowUnboundThis**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  foo(function () { this.a; });
+
+  foo(function () { (() => this); });
+
+  someArray.map(function (item) { return this.doSomething(item); }, someObject);
+  ```
+
+- 8.1.1 eslint: [`@stylistic/arrow-spacing`](https://eslint.style/rules/arrow-spacing)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`arrow-spacing`](https://eslint.org/docs/latest/rules/arrow-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 8, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  ()=> {};
+  () =>{};
+  (a)=> {};
+  (a) =>{};
+  a =>a;
+  a=> a;
+  ()=> {'\n'};
+  () =>{'\n'};
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  () => {};
+  (a) => {};
+  a => a;
+  () => {'\n'};
+  ```
+
+- 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`arrow-body-style`](https://eslint.org/docs/latest/rules/arrow-body-style)
+
+  > Why? Syntactic sugar. It reads well when multiple functions are chained together.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  const foo = () => {
+      return 0;
+  };
+
+  const bar = () => {
+      return {
+        bar: {
+              foo: 1,
+              bar: 2,
+          }
+      };
+  };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-param-reassign: "off"')
+
+  ```js
+  const foo1 = () => 0;
+
+  const foo2 = (retv, name) => {
+      retv[name] = true;
+      return retv;
+  };
+
+  const foo3 = () => ({
+      bar: {
+          foo: 1,
+          bar: 2,
+      }
+  });
+
+  const foo4 = () => { bar(); };
+  const foo5 = () => {};
+  const foo6 = () => { /* do nothing */ };
+
+  const foo7 = () => {
+      // do nothing.
+  };
+
+  const foo8 = () => ({ bar: 0 });
+  ```
+
+  **requireReturnForObjectLiteral**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  const bar = () => { return { bar: 0 }; };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = () => {};
+
+  const foo2 = () => ({});
+
+  const bar = () => ({ bar: 0 });
+  ```
+
+
+- 8.3 In case the expression spans over multiple lines, wrap it in parentheses for better readability.
+
+  > Why? It shows clearly where the function starts and ends.
+
+  Bad:
+
+  ```js
+  ['get', 'post', 'put'].map((httpMethod) => Object.prototype.hasOwnProperty.call(
+      httpMagicObjectWithAVeryLongName,
+      httpMethod,
+    )
+  );
+  ```
+
+  Good:
+
+  ```js
+  ['get', 'post', 'put'].map((httpMethod) => (
+    Object.prototype.hasOwnProperty.call(
+      httpMagicObjectWithAVeryLongName,
+      httpMethod,
+    )
+  ));
+  ```
+
+- 8.4 eslint: [`@stylistic/arrow-parens`](https://eslint.style/rules/arrow-parens)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6)
+
+  ```js
+  a => {};
+  a => a;
+  a => {'\n'};
+  a.then(foo => {});
+  a.then(foo => a);
+  a(foo => { if (true) {} });
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  () => {};
+  (a) => {};
+  (a) => a;
+  (a) => {'\n'}
+  a.then((foo) => {});
+  a.then((foo) => { if (true) {} });
+  ```
+
+  **If Statements**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  var a = 1;
+  var b = 2;
+  // ...
+  if (a => b) {
+  console.log('bigger');
+  } else {
+  console.log('smaller');
+  }
+  // outputs 'bigger', not smaller as expected
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a = 1;
+  var b = 0;
+  // ...
+  if ((a) => b) {
+  console.log('truthy value returned');
+  } else {
+  console.log('falsy value returned');
+  }
+  // outputs 'truthy value returned'
+  ```
+
+- 8.5 Avoid confusing arrow function syntax (=>) with comparison operators (<=, >=). eslint: [`@stylistic/no-confusing-arrow`](https://eslint.style/rules/no-confusing-arrow)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`no-confusing-arrow`](https://eslint.org/docs/latest/rules/no-confusing-arrow) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  var x = a => 1 ? 2 : 3;
+  var x = (a) => 1 ? 2 : 3;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  var x = a => (1 ? 2 : 3);
+  var x = (a) => (1 ? 2 : 3);
+  var x = (a) => {
+      return 1 ? 2 : 3;
+  };
+  var x = a => { return 1 ? 2 : 3; };
+  ```
+
+  **allowParens**
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  var x = a => (1 ? 2 : 3);
+  var x = (a) => (1 ? 2 : 3);
+  ```
+
+  **onlyOneSimpleParam**
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  () => 1 ? 2 : 3;
+  (a, b) => 1 ? 2 : 3;
+  (a = b) => 1 ? 2 : 3;
+  ({ a }) => 1 ? 2 : 3;
+  ([a]) => 1 ? 2 : 3;
+  (...a) => 1 ? 2 : 3;
+  ```
+
+
+- 8.6 Enforce the location of arrow function bodies with implicit returns. eslint: [`@stylistic/implicit-arrow-linebreak`](https://eslint.style/rules/implicit-arrow-linebreak)
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`implicit-arrow-linebreak`](https://eslint.org/docs/latest/rules/implicit-arrow-linebreak) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5, eslint: '@stylistic/arrow-parens: "off"')
+
+  ```js
+  (foo) =>
+      bar;
+
+  (foo) =>
+      (bar);
+
+  (foo) =>
+      bar =>
+          baz;
+
+  (foo) =>
+  (
+    bar()
+  );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+
+  ```js
+  (foo) => bar;
+
+  (foo) => (bar);
+
+  (foo) => bar => baz;
+
+  (foo) => (
+    bar()
+  );
+
+  // functions with block bodies allowed with this rule using any style
+  // to enforce a consistent location for this case, see the rule: `brace-style`
+  (foo) => {
+    return bar();
+  }
+
+  (foo) =>
+  {
+    return bar();
+  }
+  ```
+
+## Classes & Constructors
+
+- 9.1 Always use class. Avoid manipulating prototype directly.
+
+  > Why? class syntax is more concise and easier to reason about.
+
+  Bad:
+
+  ```js
+  function Queue(contents = []) {
+    this.queue = [...contents];
+  }
+  Queue.prototype.pop = function () {
+    const value = this.queue[0];
+    this.queue.splice(0, 1);
+    return value;
+  };
+  ```
+
+  Good:
+
+  ```js
+  class Queue {
+    constructor(contents = []) {
+      this.queue = [...contents];
+    }
+    pop() {
+      const value = this.queue[0];
+      this.queue.splice(0, 1);
+      return value;
+    }
+  }
+  ```
+
+- 9.2 Use extends for inheritance.
+
+  > Why? It is a built-in way to inherit prototype functionality without breaking instanceof.
+
+  Bad:
+
+  ```js
+  const inherits = require('inherits');
+  function PeekableQueue(contents) {
+    Queue.apply(this, contents);
+  }
+  inherits(PeekableQueue, Queue);
+  PeekableQueue.prototype.peek = function () {
+    return this.queue[0];
+  };
+  ```
+
+  Good:
+
+  ```js
+  class PeekableQueue extends Queue {
+    peek() {
+      return this.queue[0];
+    }
+  }
+  ```
+
+- 9.3 Methods can return this to help with method chaining.
+
+  Bad:
+
+  ```js
+  Jedi.prototype.jump = function () {
+    this.jumping = true;
+    return true;
+  };
+
+  Jedi.prototype.setHeight = function (height) {
+    this.height = height;
+  };
+
+  const luke = new Jedi();
+  luke.jump(); // => true
+  luke.setHeight(20); // => undefined
+  ```
+
+  Good:
+
+  ```js
+  class Jedi {
+    jump() {
+      this.jumping = true;
+      return this;
+    }
+
+    setHeight(height) {
+      this.height = height;
+      return this;
+    }
+  }
+
+  const luke = new Jedi();
+
+  luke.jump()
+    .setHeight(20);
+  ```
+
+- 9.4 It’s okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
+
+  Good:
+
+  ```js
+    class Jedi {
+    constructor(options = {}) {
+      this.name = options.name || 'no name';
+    }
+
+    getName() {
+      return this.name;
+    }
+
+    toString() {
+      return `Jedi - ${this.getName()}`;
+    }
+  }
+  ```
+
+- 9.5 Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. eslint: [`no-useless-constructor`](https://eslint.org/docs/latest/rules/no-useless-constructor)
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  class A {
+      constructor() {
+      }
+  }
+
+  class B extends A {
+      constructor(...args) {
+        super(...args);
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  class A { }
+
+  class B {
+      constructor() {
+          doSomething();
+      }
+  }
+
+  class C extends A {
+      constructor() {
+          super('foo');
+      }
+  }
+
+  class D extends A {
+      constructor() {
+          super();
+          doSomething();
+      }
+  }
+  ```
+
+- 9.6 Avoid duplicate class members. eslint: [`no-dupe-class-members`](https://eslint.org/docs/latest/rules/no-dupe-class-members)
+
+  > Why? Duplicate class member declarations will silently prefer the last one - having duplicates is almost certainly a bug.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 5, eslint: 'class-methods-use-this: "off"')
+
+  ```js
+  class A {
+    bar() { }
+    bar() { }
+  }
+
+  class B {
+    bar() { }
+    get bar() { }
+  }
+
+  class C {
+    bar;
+    bar;
+  }
+
+  class D {
+    bar;
+    bar() { }
+  }
+
+  class E {
+    static bar() { }
+    static bar() { }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'class-methods-use-this: "off"')
+
+  ```js
+  class A {
+    bar() { }
+    qux() { }
+  }
+
+  class B {
+    get bar() { }
+    set bar(value) { }
+  }
+
+  class C {
+    bar;
+    qux;
+  }
+
+  class D {
+    bar;
+    qux() { }
+  }
+
+  class E {
+    static bar() { }
+    bar() { }
+  }
+  ```
+
+
+- 9.7 Class methods should use this or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver. eslint: [`class-methods-use-this`](https://eslint.org/docs/latest/rules/class-methods-use-this)
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  class A {
+      foo() {
+          console.log("Hello World");     /*error Expected 'this' to be used by class method 'foo'.*/
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
+
+  ```js
+  class A {
+      foo() {
+          this.bar = "Hello World"; // OK, this is used
+      }
+  }
+
+  class B {
+      constructor() {
+          // OK. constructor is exempt
+      }
+  }
+
+  class C {
+      static foo() {
+          // OK. static methods aren't expected to use this.
+      }
+
+      static {
+          // OK. static blocks are exempt.
+      }
+  }
+  ```
+
+  **enforceForClassFields**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  class A {
+      foo = () => {}
+  }
+  ```
+
+## Modules
+
+- 10.1 Always use modules (import/export) over a non-standard module system. You can always transpile to your preferred module system. eslint: [`import/no-import-module-exports`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-import-module-exports.md)
+
+  > Why? Modules are the future, let’s start using the future now.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import { stuff } from 'starwars'
+  module.exports = thing
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import * as allThings from 'starwars'
+  exports.bar = thing
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import thing from 'other-thing'
+  exports.foo = bar
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import thing from 'starwars'
+  const baz = module.exports = thing
+  console.log(baz)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import thing from 'other-thing'
+  export default thing
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const thing = require('thing')
+  module.exports = thing
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const thing = require('thing')
+  exports.foo = bar
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import thing from 'otherthing'
+  console.log(thing.module.exports)
+  ```
+
+- 10.1.1 eslint: [`import/no-amd`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-amd.md)
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  define(["a", "b"], (a, b) => { /* ... */ })
+
+  require(["c", "e"], (c, e) => { /* ... */ })
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/first: "off"')
+
+  ```js
+  import a from "a";
+  import b from "b";
+  export default (/* ... */) => {
+  }
+
+  // For the require block (import and use)
+  import c from "c";
+  import e from "e";
+  ```
+
+- 10.2 Do not use wildcard imports. eslint: [`import/no-namespace`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-namespace.md)
+
+  > Why? This makes sure you have a single default export.
+
+  **Availability:** `es6`
+
+  **Note:** The rule is currently disabled.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import AirbnbStyleGuide from './AirbnbStyleGuide';
+  ```
+
+- 10.3 And do not export directly from an import.
+
+  > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  export { es6 as default } from './AirbnbStyleGuide';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import { es6 } from './AirbnbStyleGuide';
+  export default es6;
+  ```
+
+- 10.4 Only import from a path in one place. eslint: [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)
+
+  > Why? Having multiple lines that import from the same path can make code harder to maintain.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2, eslint: 'import/extensions: "off"')
+
+  ```js
+  import SomeDefaultClass from './mod'
+
+  // oops, some other import separated these lines
+  import foo from './some-other-mod'
+
+  import { something } from './mod'
+
+  // will catch this too, assuming it is the same target module
+  import { something2 } from './mod.js'
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0 eslint: 'import/extensions: "off"')
+
+  ```js
+  import SomeDefaultClass, { something, something2 } from './mod'
+
+  import foo from './some-other-mod'
+  ```
+
+- 10.5 Do not export mutable bindings. eslint: [`import/no-mutable-exports`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-mutable-exports.md)
+
+  > Why? Mutation should be avoided in general, but in particular when exporting mutable bindings. While this technique may be needed for some special cases, in general, only constant references should be exported.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3, eslint: 'prefer-const: "off"')
+
+  ```js
+  export let count = 2
+  export var count2 = 3
+
+  let count3 = 4
+  export { count3 } // reported here
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  export const count = 1
+  export function getCount() {}
+  export class Counter {}
+  ```
+
+
+- 10.6 In modules with a single export, prefer default export over named export. eslint: [`import/prefer-default-export`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md)
+
+  > Why? To encourage more files that only ever export one thing, which is better for readability and maintainability.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  export const foo = 'foo';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is a default export.
+  export const foo = 'foo';
+  const bar = 'bar';
+  export default bar;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is more than one named export in the module.
+  export const foo = 'foo';
+  export const bar = 'bar';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is more than one named export in the module
+  const foo = 'foo';
+  const bar = 'bar';
+  export { foo, bar }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is a default export.
+  const foo = 'foo';
+  export { foo as default }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  // Any batch export will disable this rule. The remote module is not inspected.
+  export * from './other-module'
+  ```
+
+- 10.7 Put all imports above non-import statements. eslint: [`import/first`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)
+
+  > Why? Since imports are hoisted, keeping them all at the top prevents surprising behavior.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1, eslint: 'import/extensions: "off"')
+
+  ```js
+  import foo from './foo'
+
+  // some module-level initializer
+  initWith(foo)
+
+  import bar from './bar' // <- reported
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  import foo from './foo'
+  import bar from './bar'
+
+  // some module-level initializer
+  initWith(foo)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  'use super-mega-strict'
+
+  import { suchFoo } from 'lame-fake-module-name'  // no report here
+  ```
+
+- 10.8 Multiline imports should be indented just like multiline array and object literals. eslint: [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
+
+  > Why? The curly braces follow the same indentation rules as every other curly brace block in the style guide, as do the trailing commas.
+
+  **Availability:** `es6`
+
+  **Note:** This rule also applies to other curly brace block linting.
+
+  **Note:** Originally it was eslint: [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'import/extensions: "off"')
+
+  ```js
+  import { qux1, qux2, qux3, qux4 } from './qux'
+
+  export { qux1, qux2, qux3, qux4 }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  // Indent is optional for 3 elements or less
+  import { foo } from './foo'
+  import { bar1, bar2 } from './bar'
+  import { baz1, baz2, baz3 } from './baz'
+  // Must indent after 4 elements
+  import {
+    qux1,
+    qux2,
+    qux3,
+    qux4
+  } from './qux'
+
+  // Indent is optional for 3 elements or less
+  export { foo }
+  export { bar1, bar2 }
+  export { baz1, baz2, baz3 }
+  // Must indent after 4 elements
+  export {
+    qux1,
+    qux2,
+    qux3,
+    qux4
+  }
+  ```
+
+- 10.9 Disallow Webpack loader syntax in module import statements. eslint: [`import/no-webpack-loader-syntax`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-webpack-loader-syntax.md)
+
+  > Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in webpack.config.js.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  import myModule from 'my-loader!my-module';
+  import theme from 'style!css!./theme.css';
+
+  var myModule2 = require('my-loader!./my-module');
+  var theme2 = require('style!css!./theme.css');
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import myModule from 'my-module';
+  import theme from './theme.css';
+
+  var myModule2 = require('my-module');
+  var theme2 = require('./theme.css');
+  ```
+
+- 10.10 Do not include JavaScript filename extensions. eslint: [`import/extensions`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/extensions.md)
+
+  > Why? Including extensions inhibits refactoring, and inappropriately hardcodes implementation details of the module you're importing in every consumer.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  // .js, .mjs, .jsx is disallowed
+  import foo from './foo.js';
+
+  import Component from './Component.jsx';
+
+  import express from 'express/index.js';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // other extension than .js, .mjs, .jsx is allowed
+  import bar from './bar.json';
+
+  import express from 'express';
   ```
