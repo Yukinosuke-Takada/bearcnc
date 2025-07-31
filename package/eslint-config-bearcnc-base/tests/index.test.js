@@ -169,7 +169,7 @@ describe('ES6 Rules', () => {
     await linter.checkRule('class-methods-use-this');
   });
 
-  // Modules
+  // Modules rules
   it("should lint expectedly for 'import/no-import-module-exports'", async () => {
     await linter.checkRule('import/no-import-module-exports');
   });
@@ -208,5 +208,14 @@ describe('ES6 Rules', () => {
 
   it("should lint expectedly for 'import/extensions'", async () => {
     await linter.checkRule('import/extensions');
+  });
+
+  // Iterators and Generators rules
+  it("should lint expectedly for 'no-restricted-syntax'", async () => {
+    await linter.checkRule('no-restricted-syntax');
+  });
+
+  it("should lint expectedly for '@stylistic/generator-star-spacing'", async () => {
+    await linter.checkRule('@stylistic/generator-star-spacing');
   });
 });

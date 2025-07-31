@@ -9,6 +9,7 @@
   - [Arrays](#arrays)
   - [Strings](#strings)
   - [Functions](#functions)
+  - [Iterators and Generators](#iterators-and-generators)
 
 ## See also
 
@@ -867,7 +868,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 3)
+  [//]: # (expectedErrors: 3, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   var foo = function (bar) {
@@ -897,7 +898,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4)
+  [//]: # (expectedErrors: 4, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   var foo = function (bar) {
@@ -921,7 +922,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
@@ -992,3 +993,58 @@ This doc was created by referencing the following material:
     }
   );
   ```
+
+## Iterators and Generators
+
+- 11.1 Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like for-in or for-of. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
+
+  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects. Use map() / every() / filter() / find() / findIndex() / reduce() / some() / ... to iterate over arrays, and Object.keys() / Object.values() / Object.entries() to produce arrays so you can iterate over objects.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  for (var key in object) {
+    result += key + ': ' + object[key] + ', ';
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Object.keys(object).forEach(function (key) {
+    result += key + ': ' + object[key] + ', ';
+  });
+  ```
+
+- 11.1.1
+
+  Bad:
+
+  ```js
+  for (let i = 0; i < numbers.length; i++) {
+    increasedByOne.push(numbers[i] + 1);
+  }
+  ```
+
+  Good:
+
+  ```js
+  numbers.forEach(function (num) {
+    increasedByOne.push(num + 1);
+  });
+  ```
+
+  Best:
+
+  ```js
+  var increasedByOne = numbers.map(function (num) {
+    return num + 1;
+  });
+  ```
+

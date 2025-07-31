@@ -42,12 +42,12 @@ function getTestCasesData(rule, docPath) {
   }
 
   // extract test case sections from the specific rule
-  const markerRegex = /\n\s*(Good:|Bad:)\s*([\s\S]*?)(?=\n\s*(Good:|Bad:)|$)/g;
+  const markerRegex = /\n\s*(Good:|Bad:|Best:)\s*([\s\S]*?)(?=\n\s*(Good:|Bad:|Best:)|$)/g;
   const testCaseSections = [];
   let markerMatch;
   while ((markerMatch = markerRegex.exec(ruleSection)) !== null) {
     testCaseSections.push({
-      isGood: markerMatch[1] === 'Good:',
+      isGood: markerMatch[1] === 'Good:' || markerMatch[1] === 'Best:',
       code: markerMatch[2].trim(),
     });
   }

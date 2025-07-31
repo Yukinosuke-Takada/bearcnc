@@ -3,6 +3,7 @@ import arrowFunctionsConfig from './arrow-functions.js';
 import classesConfig from './classes.js';
 import destructuring from './destructuring.js';
 import functionsConfig from './functions.js';
+import iteratorsGeneratorsConfig from './iterators-generators.js';
 import modulesConfig from './modules.js';
 import referencesConfig from './references.js';
 import objectsConfig from './objects.js';
@@ -13,6 +14,7 @@ export default defineConfig([
   classesConfig,
   destructuring,
   functionsConfig,
+  iteratorsGeneratorsConfig,
   modulesConfig,
   referencesConfig,
   objectsConfig,

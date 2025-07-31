@@ -14,6 +14,7 @@
   - [Arrow Functions](#arrow-functions)
   - [Classes \& Constructors](#classes--constructors)
   - [Modules](#modules)
+  - [Iterators and Generators](#iterators-and-generators)
 
 ## See also
 
@@ -34,7 +35,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 5)
+  [//]: # (expectedErrors: 5, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   // it's initialized and never reassigned.
@@ -66,7 +67,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   // using const.
@@ -247,7 +248,7 @@ This doc was created by referencing the following material:
   
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   for (const a in [1, 2, 3]) { // `a` is re-defined (not modified) on each loop step.
@@ -257,7 +258,7 @@ This doc was created by referencing the following material:
   
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   for (const a of [1, 2, 3]) { // `a` is re-defined (not modified) on each loop step.
@@ -408,7 +409,7 @@ This doc was created by referencing the following material:
   ```js
   const foo = {
       w: function () {},
-      x: function *() {},
+      x: function* () {},
       [y]: function () {},
       z: z
   };
@@ -421,7 +422,7 @@ This doc was created by referencing the following material:
   ```js
   const foo = {
       w() {},
-      *x() {},
+      * x() {},
       [y]() {},
       z
   };
@@ -1638,7 +1639,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4)
+  [//]: # (expectedErrors: 4, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   const foo = function (bar) {
@@ -1672,7 +1673,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 5)
+  [//]: # (expectedErrors: 5, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   const foo = function (bar) {
@@ -1700,7 +1701,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
@@ -1852,7 +1853,7 @@ This doc was created by referencing the following material:
   foo((a) => a); // OK
 
   // generator as callback
-  foo(function*() { yield; }); // OK
+  foo(function* () { yield; }); // OK
 
   // function expression not used as callback or function argument
   const foo = function foo(a) { return a; }; // OK
@@ -2924,4 +2925,134 @@ This doc was created by referencing the following material:
   import bar from './bar.json';
 
   import express from 'express';
+  ```
+
+## Iterators and Generators
+
+- 11.1 Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like for-in or for-of. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
+
+  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects. Use map() / every() / filter() / find() / findIndex() / reduce() / some() / ... to iterate over arrays, and Object.keys() / Object.values() / Object.entries() to produce arrays so you can iterate over objects.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  for (const num of numbers) {
+    sum += num;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  numbers.forEach((num) => {
+    sum += num;
+  });
+  ```
+
+  Best:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  numbers.reduce((total, num) => total + num, 0);
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  for (const key in object) {
+    result += `${key}: ${object[key]}, `;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Object.keys(object).forEach((key) => {
+    result += `${key}: ${object[key]}, `;
+  });
+  ```
+
+- 11.1.1
+
+  Bad:
+
+  ```js
+  for (let i = 0; i < numbers.length; i++) {
+    increasedByOne.push(numbers[i] + 1);
+  }
+  ```
+
+  Good:
+
+  ```js
+  numbers.forEach((num) => {
+    increasedByOne.push(num + 1);
+  });
+  ```
+
+  Best:
+
+  ```js
+  const increasedByOne = numbers.map((num) => num + 1);
+  ```
+
+- 11.2 Don’t use generators for now.
+
+  > Why? They don’t transpile well to ES5.
+
+  Bad:
+
+  ```js
+  function* numberGenerator() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  ```
+
+- 11.3 If you must use generators, or if you disregard our advice, make sure their function signature is spaced properly. eslint: [`@stylistic/generator-star-spacing`](https://eslint.style/rules/generator-star-spacing)
+
+  > Why? function and * are part of the same conceptual keyword - * is not a modifier for function, function* is a unique construct, different from function.
+
+  **Availability:** `es6`
+
+  **Note:** Originally it was eslint: [`generator-star-spacing`](https://eslint.org/docs/latest/rules/generator-star-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 9)
+
+  ```js
+  function*generator1() {}
+  function *generator2() {}
+  function * generator3() {}
+
+  var anonymous1 = function*() {};
+  var anonymous2 = function *() {};
+  var anonymous3 = function * () {};
+
+  var shorthand = { *generator4() {} };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function* generator() {}
+
+  var anonymous = function* () {};
+
+  var shorthand = { * generator() {} };
   ```

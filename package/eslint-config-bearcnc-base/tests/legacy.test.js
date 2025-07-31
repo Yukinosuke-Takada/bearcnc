@@ -87,4 +87,9 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for '@stylistic/function-paren-newline'", async () => {
     await linter.checkRule('@stylistic/function-paren-newline');
   });
+
+  // Iterators and Generators rules
+  it("should lint expectedly for 'no-restricted-syntax'", async () => {
+    await linter.checkRule('no-restricted-syntax');
+  });
 });
