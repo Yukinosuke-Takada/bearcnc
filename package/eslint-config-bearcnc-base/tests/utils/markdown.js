@@ -35,7 +35,7 @@ function getTestCasesData(rule, docPath) {
     throw new Error(`Availability not found for rule "${rule}"`);
   }
   const availability = [];
-  const formattedAvailabilityLine = availabilityLine.split('(')[0] // ignore what's written in ()
+  const formattedAvailabilityLine = availabilityLine.split('(')[0]; // ignore what's written in ()
   const availabilityLineBits = formattedAvailabilityLine.split('`');
   for (let i = 1; i < availabilityLineBits.length; i += 2) {
     availability.push(availabilityLineBits[i]);
@@ -79,7 +79,7 @@ function getTestCasesData(rule, docPath) {
       [, eslintConfig] = eslintConfigMatch;
     }
 
-    const codeSectionSplit = section.code.split('```js')
+    const codeSectionSplit = section.code.split('```js');
     if (codeSectionSplit.length === 1) {
       throw new Error(`Code section not found in test case for "${title}"`);
     }
@@ -102,6 +102,6 @@ function getTestCasesData(rule, docPath) {
     availability,
     testCases,
   };
-};
+}
 
-export { getTestCasesData };
+export default getTestCasesData;

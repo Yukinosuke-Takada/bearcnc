@@ -19,5 +19,8 @@
     "@eslint/markdown": "^7.0.0",
     "eslint": "^9.29.0",
     "prettier": "^3.6.0"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^10.1.8"
   }
 }
