@@ -92,4 +92,9 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-restricted-syntax'", async () => {
     await linter.checkRule('no-restricted-syntax');
   });
+
+  // Properties rules
+  it("should lint expectedly for 'dot-notation'", async () => {
+    await linter.checkRule('dot-notation');
+  });
 });

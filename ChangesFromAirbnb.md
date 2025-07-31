@@ -46,6 +46,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 
 - Changes to rules inclusion in configs.
   - [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last): `es5`, `es6` → `es6`. Since default parameters don't exist in es5.
+  - [`prefer-exponentiation-operator`](https://eslint.org/docs/latest/rules/prefer-exponentiation-operator): `es5`, `es6` → `es6`. Since exponentiation operator does not exist in ES5.
 
 - Changed Rules due to deprecation:
   - [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)

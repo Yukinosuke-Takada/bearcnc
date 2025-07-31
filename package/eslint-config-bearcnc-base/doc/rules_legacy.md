@@ -10,6 +10,7 @@
   - [Strings](#strings)
   - [Functions](#functions)
   - [Iterators and Generators](#iterators-and-generators)
+  - [Properties](#properties)
 
 ## See also
 
@@ -1048,3 +1049,43 @@ This doc was created by referencing the following material:
   });
   ```
 
+## Properties
+
+- 12.1 Use dot notation when accessing properties. eslint: [`dot-notation`](https://eslint.org/docs/latest/rules/dot-notation)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  var x = foo["bar"];
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var x = foo.bar;
+
+  var y = foo[bar];    // Property name is a variable, square-bracket notation required
+  ```
+
+- 12.2 Use bracket notation [] when accessing properties with a variable.
+
+  Good:
+
+  ```js
+    var luke = {
+    jedi: true,
+    age: 28
+  };
+
+  function getProp(prop) {
+    return luke[prop];
+  }
+
+  var isJedi = getProp('jedi');
+  ```

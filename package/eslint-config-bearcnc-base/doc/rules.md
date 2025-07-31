@@ -15,6 +15,7 @@
   - [Classes \& Constructors](#classes--constructors)
   - [Modules](#modules)
   - [Iterators and Generators](#iterators-and-generators)
+  - [Properties](#properties)
 
 ## See also
 
@@ -851,7 +852,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'dot-notation: "off"')
 
   ```js
   // Objects
@@ -3055,4 +3056,77 @@ This doc was created by referencing the following material:
   var anonymous = function* () {};
 
   var shorthand = { * generator() {} };
+  ```
+
+## Properties
+
+- 12.1 Use dot notation when accessing properties. eslint: [`dot-notation`](https://eslint.org/docs/latest/rules/dot-notation)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  const x = foo["bar"];
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const x = foo.bar;
+
+  const y = foo[bar];    // Property name is a variable, square-bracket notation required
+  ```
+
+- 12.2 Use bracket notation [] when accessing properties with a variable.
+
+  Good:
+
+  ```js
+  const luke = {
+    jedi: true,
+    age: 28,
+  };
+
+  function getProp(prop) {
+    return luke[prop];
+  }
+
+  const isJedi = getProp('jedi');
+  ```
+
+- 12.3 Use exponentiation operator ** when calculating exponentiations. eslint: [`prefer-exponentiation-operator`](https://eslint.org/docs/latest/rules/prefer-exponentiation-operator)
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'prefer-const: "off"')
+
+  ```js
+  const foo = Math.pow(2, 8);
+
+  const bar = Math.pow(a, b);
+
+  let baz = Math.pow(a + b, c + d);
+
+  let quux = Math.pow(-1, n);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  const foo = 2 ** 8;
+
+  const bar = a ** b;
+
+  let baz = (a + b) ** (c + d);
+
+  let quux = (-1) ** n;
   ```

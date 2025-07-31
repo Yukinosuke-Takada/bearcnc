@@ -7,6 +7,7 @@ import iteratorsGeneratorsConfig from './iterators-generators.js';
 import modulesConfig from './modules.js';
 import referencesConfig from './references.js';
 import objectsConfig from './objects.js';
+import propertiesConfig from './properties.js';
 import stringsConfig from './strings.js';
 
 export default defineConfig([
@@ -18,6 +19,7 @@ export default defineConfig([
   modulesConfig,
   referencesConfig,
   objectsConfig,
+  propertiesConfig,
   stringsConfig,
   {
     languageOptions: {

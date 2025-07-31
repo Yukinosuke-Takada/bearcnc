@@ -2,6 +2,7 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig({
   rules: {
+    // (11.1) disallow the using of `for...in`, `for...of`, `with`, and labels.
     'no-restricted-syntax': [
       'error',
       {

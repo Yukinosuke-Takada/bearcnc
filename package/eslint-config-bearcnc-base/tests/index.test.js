@@ -218,4 +218,13 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/generator-star-spacing'", async () => {
     await linter.checkRule('@stylistic/generator-star-spacing');
   });
+
+  // Properties rules
+  it("should lint expectedly for 'dot-notation'", async () => {
+    await linter.checkRule('dot-notation');
+  });
+
+  it("should lint expectedly for 'prefer-exponentiation-operator'", async () => {
+    await linter.checkRule('prefer-exponentiation-operator');
+  });
 });
