@@ -185,4 +185,28 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'import/no-duplicates'", async () => {
     await linter.checkRule('import/no-duplicates');
   });
+
+  it("should lint expectedly for 'import/no-mutable-exports'", async () => {
+    await linter.checkRule('import/no-mutable-exports');
+  });
+
+  it("should lint expectedly for 'import/prefer-default-export'", async () => {
+    await linter.checkRule('import/prefer-default-export');
+  });
+
+  it("should lint expectedly for 'import/first'", async () => {
+    await linter.checkRule('import/first');
+  });
+
+  it("should lint expectedly for '@stylistic/object-curly-newline'", async () => {
+    await linter.checkRule('@stylistic/object-curly-newline');
+  });
+
+  it("should lint expectedly for 'import/no-webpack-loader-syntax'", async () => {
+    await linter.checkRule('import/no-webpack-loader-syntax');
+  });
+
+  it("should lint expectedly for 'import/extensions'", async () => {
+    await linter.checkRule('import/extensions');
+  });
 });

@@ -5,6 +5,13 @@ import markdown from '@eslint/markdown';
 export default defineConfig([
   bearcncBase,
   {
+    files: ['**/*.js'],
+    rules: {
+      'import/extensions': 'off',
+    },
+  },
+  {
+    files: ['**/*.md'],
     plugins: {
       markdown,
     },

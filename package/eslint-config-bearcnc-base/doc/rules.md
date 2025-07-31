@@ -22,6 +22,7 @@ This doc was created by referencing the following material:
 - Structure, Explanation: [Airbnb JS style guide](https://airbnb.io/javascript/#the-javascript-style-guide-guide), [Airbnb JS style guide (github)](https://github.com/airbnb/javascript)
 - Sample Code (ESLint): [ESLint docs](https://eslint.org/docs/latest/rules)
 - Sample Code (ESLint Stylistic): [ESLint Stylistic docs](https://eslint.style/rules)
+- Sample Code (eslint-plugin-import): [eslint-plugin-import (github)](https://github.com/import-js/eslint-plugin-import/tree/main)
 
 ## References
 
@@ -2588,7 +2589,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'import/first: "off"')
 
   ```js
   import a from "a";
@@ -2656,7 +2657,7 @@ This doc was created by referencing the following material:
 
 	Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'import/extensions: "off"')
 
   ```js
   import SomeDefaultClass from './mod'
@@ -2672,10 +2673,255 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0 eslint: 'import/extensions: "off"')
 
   ```js
   import SomeDefaultClass, { something, something2 } from './mod'
 
   import foo from './some-other-mod'
+  ```
+
+- 10.5 Do not export mutable bindings. eslint: [`import/no-mutable-exports`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-mutable-exports.md)
+
+  > Why? Mutation should be avoided in general, but in particular when exporting mutable bindings. While this technique may be needed for some special cases, in general, only constant references should be exported.
+
+  **Availability:** `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3, eslint: 'prefer-const: "off"')
+
+  ```js
+  export let count = 2
+  export var count2 = 3
+
+  let count3 = 4
+  export { count3 } // reported here
+  ```
+
+	Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  export const count = 1
+  export function getCount() {}
+  export class Counter {}
+  ```
+
+
+- 10.6 In modules with a single export, prefer default export over named export. eslint: [`import/prefer-default-export`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md)
+
+  > Why? To encourage more files that only ever export one thing, which is better for readability and maintainability.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  export const foo = 'foo';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is a default export.
+  export const foo = 'foo';
+  const bar = 'bar';
+  export default bar;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is more than one named export in the module.
+  export const foo = 'foo';
+  export const bar = 'bar';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is more than one named export in the module
+  const foo = 'foo';
+  const bar = 'bar';
+  export { foo, bar }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // There is a default export.
+  const foo = 'foo';
+  export { foo as default }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  // Any batch export will disable this rule. The remote module is not inspected.
+  export * from './other-module'
+  ```
+
+- 10.7 Put all imports above non-import statements. eslint: [`import/first`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)
+
+  > Why? Since imports are hoisted, keeping them all at the top prevents surprising behavior.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 1, eslint: 'import/extensions: "off"')
+
+  ```js
+  import foo from './foo'
+
+  // some module-level initializer
+  initWith(foo)
+
+  import bar from './bar' // <- reported
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  import foo from './foo'
+  import bar from './bar'
+
+  // some module-level initializer
+  initWith(foo)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  'use super-mega-strict'
+
+  import { suchFoo } from 'lame-fake-module-name'  // no report here
+  ```
+
+- 10.8 Multiline imports should be indented just like multiline array and object literals. eslint: [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
+
+  > Why? The curly braces follow the same indentation rules as every other curly brace block in the style guide, as do the trailing commas.
+
+  **Availability:** `es6`
+
+  **Note:** This rule also applies to other curly brace block linting.
+
+  **Note:** Originally it was eslint: [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) but was deprecated as of V8.53.0 so it was replaced.
+
+	Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'import/extensions: "off"')
+
+  ```js
+  import { qux1, qux2, qux3, qux4 } from './qux'
+
+  export { qux1, qux2, qux3, qux4 }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'import/extensions: "off"')
+
+  ```js
+  // Indent is optional for 3 elements or less
+  import { foo } from './foo'
+  import { bar1, bar2 } from './bar'
+  import { baz1, baz2, baz3 } from './baz'
+  // Must indent after 4 elements
+  import {
+    qux1,
+    qux2,
+    qux3,
+    qux4
+  } from './qux'
+
+  // Indent is optional for 3 elements or less
+  export { foo }
+  export { bar1, bar2 }
+  export { baz1, baz2, baz3 }
+  // Must indent after 4 elements
+  export {
+    qux1,
+    qux2,
+    qux3,
+    qux4
+  }
+  ```
+
+- 10.9 Disallow Webpack loader syntax in module import statements. eslint: [`import/no-webpack-loader-syntax`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-webpack-loader-syntax.md)
+
+  > Why? Since using Webpack syntax in the imports couples the code to a module bundler. Prefer using the loader syntax in webpack.config.js.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  import myModule from 'my-loader!my-module';
+  import theme from 'style!css!./theme.css';
+
+  var myModule2 = require('my-loader!./my-module');
+  var theme2 = require('style!css!./theme.css');
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  import myModule from 'my-module';
+  import theme from './theme.css';
+
+  var myModule2 = require('my-module');
+  var theme2 = require('./theme.css');
+  ```
+
+- 10.10 Do not include JavaScript filename extensions. eslint: [`import/extensions`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/extensions.md)
+
+  > Why? Including extensions inhibits refactoring, and inappropriately hardcodes implementation details of the module you're importing in every consumer.
+
+  **Availability:** `es6`
+
+	Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  // .js, .mjs, .jsx is disallowed
+  import foo from './foo.js';
+
+  import Component from './Component.jsx';
+
+  import express from 'express/index.js';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // other extension than .js, .mjs, .jsx is allowed
+  import bar from './bar.json';
+
+  import express from 'express';
   ```
