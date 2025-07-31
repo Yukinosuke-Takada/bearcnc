@@ -696,7 +696,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-	Bad:
+  Bad:
 
   ```js
   function handleThings(opts) {
@@ -719,7 +719,7 @@ This doc was created by referencing the following material:
 
   > Why? They are confusing to reason about.
 
-	Bad:
+  Bad:
 
   ```js
   var b = 1;
@@ -769,7 +769,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3)
 

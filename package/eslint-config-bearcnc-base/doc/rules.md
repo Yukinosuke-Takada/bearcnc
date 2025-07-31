@@ -1208,7 +1208,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
@@ -1277,7 +1277,7 @@ This doc was created by referencing the following material:
 
   **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
 
-	Good:
+  Good:
 
   [//]: # (expectedErrors: 0)
 
@@ -1311,7 +1311,7 @@ This doc was created by referencing the following material:
 
 - 7.4 Note: ECMA-262 defines a block as a list of statements. A function declaration is not a statement.
 
-	Bad:
+  Bad:
 
   ```js
   if (currentUser) {
@@ -1334,7 +1334,7 @@ This doc was created by referencing the following material:
 
 - 7.5 Never name a parameter arguments. This will take precedence over the arguments object that is given to every function scope.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 0)
 
@@ -1358,7 +1358,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3, eslint: 'prefer-spread: "off"')
 
@@ -1406,7 +1406,7 @@ This doc was created by referencing the following material:
   }
   ```
 
-	Bad:
+  Bad:
 
   ```js
   function handleThings(opts) {
@@ -1429,7 +1429,7 @@ This doc was created by referencing the following material:
 
   > Why? They are confusing to reason about.
 
-	Bad:
+  Bad:
 
   ```js
   var b = 1;
@@ -1446,7 +1446,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -1472,7 +1472,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 6)
 
@@ -1577,7 +1577,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
 
@@ -1636,7 +1636,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4)
 
@@ -1732,7 +1732,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3)
 
@@ -1831,7 +1831,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -1894,7 +1894,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`arrow-spacing`](https://eslint.org/docs/latest/rules/arrow-spacing) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 8, eslint: '@stylistic/arrow-parens: "off"')
 
@@ -1926,7 +1926,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -2002,7 +2002,7 @@ This doc was created by referencing the following material:
 
   > Why? It shows clearly where the function starts and ends.
 
-	Bad:
+  Bad:
 
   ```js
   ['get', 'post', 'put'].map((httpMethod) => Object.prototype.hasOwnProperty.call(
@@ -2029,7 +2029,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 6)
 
@@ -2095,7 +2095,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`no-confusing-arrow`](https://eslint.org/docs/latest/rules/no-confusing-arrow) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2, eslint: '@stylistic/arrow-parens: "off"')
 
@@ -2150,7 +2150,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`implicit-arrow-linebreak`](https://eslint.org/docs/latest/rules/implicit-arrow-linebreak) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 5, eslint: '@stylistic/arrow-parens: "off"')
 
@@ -2204,7 +2204,7 @@ This doc was created by referencing the following material:
 
   > Why? class syntax is more concise and easier to reason about.
 
-	Bad:
+  Bad:
 
   ```js
   function Queue(contents = []) {
@@ -2236,7 +2236,7 @@ This doc was created by referencing the following material:
 
   > Why? It is a built-in way to inherit prototype functionality without breaking instanceof.
 
-	Bad:
+  Bad:
 
   ```js
   const inherits = require('inherits');
@@ -2261,7 +2261,7 @@ This doc was created by referencing the following material:
 
 - 9.3 Methods can return this to help with method chaining.
 
-	Bad:
+  Bad:
 
   ```js
   Jedi.prototype.jump = function () {
@@ -2323,7 +2323,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -2373,7 +2373,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 5, eslint: 'class-methods-use-this: "off"')
 
@@ -2440,7 +2440,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 1)
 
@@ -2500,7 +2500,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 1)
 
@@ -2577,7 +2577,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2)
 
@@ -2610,7 +2610,7 @@ This doc was created by referencing the following material:
 
   **Note:** The rule is currently disabled.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 1)
 
@@ -2632,7 +2632,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 0)
 
@@ -2655,7 +2655,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 2, eslint: 'import/extensions: "off"')
 
@@ -2699,7 +2699,7 @@ This doc was created by referencing the following material:
   export { count3 } // reported here
   ```
 
-	Good:
+  Good:
 
   [//]: # (expectedErrors: 0)
 
@@ -2716,7 +2716,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 1)
 
@@ -2781,7 +2781,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 1, eslint: 'import/extensions: "off"')
 
@@ -2826,7 +2826,7 @@ This doc was created by referencing the following material:
 
   **Note:** Originally it was eslint: [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) but was deprecated as of V8.53.0 so it was replaced.
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4, eslint: 'import/extensions: "off"')
 
@@ -2872,7 +2872,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 4)
 
@@ -2902,7 +2902,7 @@ This doc was created by referencing the following material:
 
   **Availability:** `es6`
 
-	Bad:
+  Bad:
 
   [//]: # (expectedErrors: 3)
 
