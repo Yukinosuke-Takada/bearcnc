@@ -233,4 +233,12 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-undef'", async () => {
     await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
   });
+
+  it("should lint expectedly for 'one-var'", async () => {
+    await linter.checkRule('one-var');
+  });
+
+  it("should lint expectedly for 'no-multi-assign'", async () => {
+    await linter.checkRule('no-multi-assign');
+  });
 });

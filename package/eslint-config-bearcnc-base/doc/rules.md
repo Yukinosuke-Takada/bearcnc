@@ -1070,9 +1070,9 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 3, eslint: 'prefer-template: "off"')
 
   ```js
-  const obj = { x: "foo" },
-      key = "x",
-      value = eval("obj." + key);
+  const obj = { x: "foo" };
+  const key = "x";
+  const value = eval("obj." + key);
   
   (0, eval)("const a = 0");
   
@@ -1108,9 +1108,9 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0, eslint: 'class-methods-use-this: "off"')
 
   ```js
-  const obj = { x: "foo" },
-      key = "x",
-      value = obj[key];
+  const obj = { x: "foo" };
+  const key = "x";
+  const value = obj[key];
   
   class A {
       foo() {
@@ -2532,7 +2532,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1)
+  [//]: # (expectedErrors: 1, eslint: 'no-multi-assign: "off"')
 
   ```js
   import thing from 'starwars'
@@ -3172,4 +3172,209 @@ This doc was created by referencing the following material:
 
   const foo = someFunction();
   const bar = a + 1;
+  ```
+
+- 13.2 Use one const or let declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/latest/rules/one-var)
+
+  > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a ; for a , or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: 'prefer-const: "off"')
+
+  ```js
+  function foo1() {
+      var bar,
+          baz;
+      const qux = true,
+          foobar = false;
+  }
+
+  function foo2() {
+      var bar,
+          qux;
+
+      if (baz) {
+          qux = true;
+      }
+  }
+
+  function foo3() {
+      let bar = true,
+          baz = false;
+  }
+
+  class C {
+      static {
+          var foo, bar;
+          let baz, qux;
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  function foo1() {
+      var bar;
+      var baz;
+  }
+
+  function foo2() {
+      var bar;
+
+      if (baz) {
+          var qux = true;
+      }
+  }
+
+  function foo3() {
+      let bar;
+
+      if (baz) {
+          let qux = true;
+      }
+  }
+
+  class C {
+      static {
+          var foo;
+          var bar;
+          let baz;
+          let qux;
+      }
+  }
+
+  // declarations with multiple variables are allowed in for-loop initializers
+  for (var i = 0, len = arr.length; i < len; i++) {
+      doSomething(arr[i]);
+  }
+  ```
+
+- 13.3 Group all your consts and then group all your lets.
+
+  > Why? This is helpful when later on you might need to assign a variable depending on one of the previously assigned variables.
+
+  Bad:
+
+  ```js
+  let i, len, dragonball,
+      items = getItems(),
+      goSportsTeam = true;
+  ```
+
+  Bad:
+
+  ```js
+  let i;
+  const items = getItems();
+  let dragonball;
+  const goSportsTeam = true;
+  let len;
+  ```
+
+  Good:
+
+  ```js
+  const goSportsTeam = true;
+  const items = getItems();
+  let dragonball;
+  let i;
+  let length;
+  ```
+
+- 13.4 Assign variables where you need them, but place them in a reasonable place.
+
+  > Why? let and const are block scoped and not function scoped.
+
+  Bad:
+
+  ```js
+  function checkName(hasName) {
+    const name = getName();
+
+    if (hasName === 'test') {
+      return false;
+    }
+
+    if (name === 'test') {
+      this.setName('');
+      return false;
+    }
+
+    return name;
+  }
+  ```
+
+  Good:
+
+  ```js
+  function checkName(hasName) {
+    if (hasName === 'test') {
+      return false;
+    }
+
+    const name = getName();
+
+    if (name === 'test') {
+      this.setName('');
+      return false;
+    }
+
+    return name;
+  }
+  ```
+
+- 13.5 Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/latest/rules/no-multi-assign)
+
+  > Why? Chaining variable assignments creates implicit global variables.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: 'prefer-const: "off"')
+
+  ```js
+  let a = b = c = 5;
+
+  const foo = bar = "baz";
+
+  let d =
+      e =
+      c;
+
+  class Foo {
+      a = b = 10;
+  }
+
+  a = b = "quux";
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  let a = 5;
+  let b = 5;
+  const c = 5;
+
+  const foo = "baz";
+  const bar = "baz";
+
+  let d = c;
+  let e = c;
+
+  class Foo {
+      a = 10;
+      b = 10;
+  }
+
+  a = "quux";
+  b = "quux";
   ```
