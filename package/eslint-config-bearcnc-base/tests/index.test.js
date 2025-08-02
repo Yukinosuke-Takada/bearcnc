@@ -13,6 +13,7 @@ const linter = new Linter({
     'no-var: "off"',
     '@stylistic/quotes: "off"',
     'func-names: "off"',
+    'no-undef: "off"',
   ]
 });
 
@@ -226,5 +227,10 @@ describe('ES6 Rules', () => {
 
   it("should lint expectedly for 'prefer-exponentiation-operator'", async () => {
     await linter.checkRule('prefer-exponentiation-operator');
+  });
+
+  // Variables rules
+  it("should lint expectedly for 'no-undef'", async () => {
+    await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
   });
 });

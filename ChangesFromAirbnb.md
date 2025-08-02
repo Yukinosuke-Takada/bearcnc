@@ -66,3 +66,4 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   - On section 8.2, removed rule [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens). It wasn't relevant additionally it is explained in 8.4.
   - On section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.
   - On section 11.1, removed [`no-iterator`](https://eslint.org/docs/latest/rules/no-iterator) because the explanation does not match the rule.
+  - On section 13.1, removed [`prefer-const`](https://eslint.org/docs/latest/rules/prefer-const) since it isn't relevant.

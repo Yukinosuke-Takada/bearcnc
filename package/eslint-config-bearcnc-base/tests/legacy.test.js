@@ -12,6 +12,7 @@ const linter = new Linter({
   globalEslintConfig: [
     '@stylistic/quotes: "off"',
     'func-names: "off"',
+    'no-undef: "off"',
   ]
 });
 
@@ -96,5 +97,10 @@ describe('ES5 (legacy) Rules', () => {
   // Properties rules
   it("should lint expectedly for 'dot-notation'", async () => {
     await linter.checkRule('dot-notation');
+  });
+
+  // Variables rules
+  it("should lint expectedly for 'no-undef'", async () => {
+    await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
   });
 });

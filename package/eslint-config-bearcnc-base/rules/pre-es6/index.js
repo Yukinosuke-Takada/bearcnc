@@ -5,6 +5,7 @@ import iteratorsGeneratorsConfig from './iterators-generators.js';
 import objectsConfig from './objects.js';
 import propertiesConfig from './properties.js';
 import stringsConfig from './strings.js';
+import variablesConfig from './variables.js';
 
 export default defineConfig([
   arraysConfig,
@@ -13,6 +14,7 @@ export default defineConfig([
   objectsConfig,
   propertiesConfig,
   stringsConfig,
+  variablesConfig,
   {
     languageOptions: {
       ecmaVersion: 5,

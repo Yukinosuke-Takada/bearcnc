@@ -12,6 +12,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['**/tests/**/*.js'],
+    languageOptions: {
+      env: { mocha: true },
+    },
+  },
+  {
     files: ['**/*.md'],
     plugins: {
       markdown,

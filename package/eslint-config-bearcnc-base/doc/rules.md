@@ -16,6 +16,7 @@
   - [Modules](#modules)
   - [Iterators and Generators](#iterators-and-generators)
   - [Properties](#properties)
+  - [Variables](#variables)
 
 ## See also
 
@@ -962,7 +963,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-undef: "off"')
 
   ```js
   var single = 'single';
@@ -1212,7 +1213,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off"')
 
   ```js
   Foo.prototype.bar = function () {};
@@ -1230,7 +1231,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off"')
 
   ```js
   Foo.prototype.bar = function bar() {};
@@ -3129,4 +3130,46 @@ This doc was created by referencing the following material:
   let baz = (a + b) ** (c + d);
 
   let quux = (-1) ** n;
+  ```
+
+## Variables
+
+- 13.1 Always use const or let to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that. eslint: [`no-undef`](https://eslint.org/docs/latest/rules/no-undef)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  foo = 'foo';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  const foo = 'foo';
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  const foo = someFunction();
+  const bar = a + 1;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  /*global someFunction, a*/
+
+  const foo = someFunction();
+  const bar = a + 1;
   ```
