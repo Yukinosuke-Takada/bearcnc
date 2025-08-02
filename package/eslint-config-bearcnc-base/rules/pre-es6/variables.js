@@ -5,6 +5,9 @@ export default defineConfig({
     // (13.5) disallow chained variable assignments
     'no-multi-assign': ['error'],
 
+    // (13.6) disallow the use of unary operators, ++ and --
+    'no-plusplus': 'error',
+
     // (13.1) disallow the use of undeclared variables
     'no-undef': 'error',
 

@@ -111,4 +111,8 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-multi-assign'", async () => {
     await linter.checkRule('no-multi-assign');
   });
+
+  it("should lint expectedly for 'no-plusplus'", async () => {
+    await linter.checkRule('no-plusplus');
+  });
 });

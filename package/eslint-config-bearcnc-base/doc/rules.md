@@ -117,7 +117,7 @@ This doc was created by referencing the following material:
   }
   
   // `end` is never reassigned, but we cannot separate the declarations without modifying the scope.
-  for (let i = 0, end = 10; i < end; ++i) {
+  for (let i = 0, end = 10; i < end; i += 1) {
       console.log(i);
   }
   
@@ -200,7 +200,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1)
+  [//]: # (expectedErrors: 1, eslint: 'no-plusplus: "off"')
 
   ```js
   const a = 0;
@@ -1649,7 +1649,7 @@ This doc was created by referencing the following material:
   }
 
   const foo1 = function (bar) {
-      bar++;
+      bar += 1;
   }
 
   const foo2 = function (bar) {
@@ -1687,7 +1687,7 @@ This doc was created by referencing the following material:
   }
 
   const foo2 = function (bar) {
-      bar.aaa++;
+      bar.aaa += 1;
   }
 
   const foo3 = function (bar) {
@@ -1717,7 +1717,7 @@ This doc was created by referencing the following material:
   }
 
   const foo2 = function (e) {
-      e.aaa++;
+      e.aaa += 1;
   }
 
   const foo3 = function (e) {
@@ -3250,7 +3250,7 @@ This doc was created by referencing the following material:
   }
 
   // declarations with multiple variables are allowed in for-loop initializers
-  for (var i = 0, len = arr.length; i < len; i++) {
+  for (var i = 0, len = arr.length; i < len; i += 1) {
       doSomething(arr[i]);
   }
   ```
@@ -3377,4 +3377,42 @@ This doc was created by referencing the following material:
 
   a = "quux";
   b = "quux";
+  ```
+
+- 13.6 Avoid using unary increments and decrements (++, --). eslint: [`no-plusplus`](https://eslint.org/docs/latest/rules/no-plusplus)
+
+  > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like num += 1 instead of num++ or num ++. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  var foo = 0;
+  foo++;
+
+  var bar = 42;
+  bar--;
+
+  for (let i = 0; i < l; i++) {
+      doSomething(i);
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = 0;
+  foo += 1;
+
+  var bar = 42;
+  bar -= 1;
+
+  for (let i = 0; i < l; i += 1) {
+      doSomething(i);
+  }
   ```
