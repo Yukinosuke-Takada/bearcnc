@@ -120,4 +120,9 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-unused-vars'", async () => {
     await linter.checkRule('no-unused-vars', { ignoreGlobalConfig: true });
   });
+
+  // Hoisting rules
+  it("should lint expectedly for 'no-use-before-define'", async () => {
+    await linter.checkRule('no-use-before-define');
+  });
 });
