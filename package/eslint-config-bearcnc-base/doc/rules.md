@@ -274,7 +274,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: '@stylistic/quotes: "off"')
+  [//]: # (expectedErrors: 2, eslint: '@stylistic/quotes: "off", no-unused-vars: "off"')
 
   ```js
   var x = "y";
@@ -283,7 +283,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off", @stylistic/quotes: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off", @stylistic/quotes: "off", no-unused-vars: "off"')
 
   ```js
   let x = "y";
@@ -954,7 +954,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 2, eslint: 'no-var: "off", no-unused-vars: "off"')
 
   ```js
   var double = "double";
@@ -963,7 +963,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-undef: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-undef: "off", no-unused-vars: "off"')
 
   ```js
   var single = 'single';
@@ -974,7 +974,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-unused-vars: "off"')
 
   ```js
   var double = "a string containing 'single' quotes";
@@ -1213,7 +1213,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off"')
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off", no-unused-vars: "off"')
 
   ```js
   Foo.prototype.bar = function () {};
@@ -1231,7 +1231,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off", no-unused-vars: "off"')
 
   ```js
   Foo.prototype.bar = function bar() {};
@@ -3140,7 +3140,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1)
+  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
 
   ```js
   foo = 'foo';
@@ -3148,7 +3148,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
 
   ```js
   const foo = 'foo';
@@ -3156,7 +3156,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2)
+  [//]: # (expectedErrors: 2, eslint: 'no-unused-vars: "off"')
 
   ```js
   const foo = someFunction();
@@ -3165,7 +3165,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
 
   ```js
   /*global someFunction, a*/
@@ -3415,4 +3415,102 @@ This doc was created by referencing the following material:
   for (let i = 0; i < l; i += 1) {
       doSomething(i);
   }
+  ```
+
+- 13.7 Avoid linebreaks before or after = in an assignment. If your assignment violates max-len, surround the value in parens.
+
+  > Why? Linebreaks surrounding = can obfuscate the value of an assignment.
+
+  Bad:
+
+  ```js
+  const foo =
+  superLongLongLongLongLongLongLongLongFunctionName();
+
+  const bar
+    = 'superLongLongLongLongLongLongLongLongString';
+  ```
+
+  Good:
+
+  ```js
+  const foo = (
+    superLongLongLongLongLongLongLongLongFunctionName()
+  );
+
+  const bar = 'superLongLongLongLongLongLongLongLongString';
+  ```
+
+- 13.8 Disallow unused variables. eslint: [`no-unused-vars`](https://eslint.org/docs/latest/rules/no-unused-vars)
+
+  > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 7, eslint: 'func-names: "off"')
+
+  ```js
+  /*global some_unused_var*/
+
+  // It checks variables you have defined as global
+  some_unused_var = 42;
+
+  let x;
+
+  // Write-only variables are not considered as used.
+  let y = 10;
+  y = 5;
+
+  // A read for a modification of itself is not considered as used.
+  let z = 0;
+  z = z + 1;
+
+  // By default, unused arguments cause warnings.
+  (function (foo) {
+      return 5;
+  }());
+
+  // Unused recursive functions also cause warnings.
+  function fact(n) {
+      if (n < 2) return 1;
+      return n * fact(n - 1);
+  }
+
+  // When a function definition destructures an array, unused entries from the array also cause warnings.
+  function getY([x, y]) {
+      return y;
+  }
+  getY(['a', 'b']);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'func-names: "off", no-var: "off", no-undef: "off", prefer-arrow-callback: "off"')
+
+  ```js
+  const x = 10;
+  alert(x);
+
+  // foo is considered used here
+  myFunc(function () {
+      // ...
+  }.bind(this));
+
+  (function (foo) {
+      return foo;
+  }());
+
+  var myFunc;
+  myFunc = setTimeout(() => {
+      // myFunc is considered used
+      myFunc();
+  }, 50);
+
+  // Only the second argument from the destructured array is used.
+  function getY([, y]) {
+      return y;
+  }
+  getY(['a', 'b']);
   ```

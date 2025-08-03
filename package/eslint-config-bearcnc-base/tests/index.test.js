@@ -14,6 +14,7 @@ const linter = new Linter({
     '@stylistic/quotes: "off"',
     'func-names: "off"',
     'no-undef: "off"',
+    'no-unused-vars: "off"',
   ]
 });
 
@@ -244,5 +245,9 @@ describe('ES6 Rules', () => {
 
   it("should lint expectedly for 'no-plusplus'", async () => {
     await linter.checkRule('no-plusplus');
+  });
+
+  it("should lint expectedly for 'no-unused-vars'", async () => {
+    await linter.checkRule('no-unused-vars', { ignoreGlobalConfig: true });
   });
 });

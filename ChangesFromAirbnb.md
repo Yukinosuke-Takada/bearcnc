@@ -61,9 +61,10 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
 
-- Typo(?) Documentation changes.
+- Typo(?) & Documentation changes.
   - On section 7.1, it was rule [`no-loop-func`](https://eslint.org/docs/latest/rules/no-loop-func) but [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations) makes more sense.
   - On section 8.2, removed rule [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens). It wasn't relevant additionally it is explained in 8.4.
   - On section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.
   - On section 11.1, removed [`no-iterator`](https://eslint.org/docs/latest/rules/no-iterator) because the explanation does not match the rule.
   - On section 13.1, removed [`prefer-const`](https://eslint.org/docs/latest/rules/prefer-const) since it isn't relevant.
+  - On section 13.7, removed rule [`operator-linebreak`](https://eslint.org/docs/latest/rules/operator-linebreak). It wasn't relevant 
