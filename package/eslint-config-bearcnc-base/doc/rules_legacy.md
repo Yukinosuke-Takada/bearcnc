@@ -1644,3 +1644,100 @@ This doc was created by referencing the following material:
           break;
   }
   ```
+
+- 15.6 Ternaries should not be nested and generally be single line expressions. eslint: [`no-nested-ternary`](https://eslint.org/docs/latest/rules/no-nested-ternary)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var thing = foo ? bar : baz === qux ? quxx : foobar;
+
+  foo ? baz === qux ? quxx() : foobar() : bar();
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var thing = foo ? bar : foobar;
+
+  var otherThing;
+
+  if (foo) {
+    otherThing = bar;
+  } else if (baz === qux) {
+    otherThing = quxx;
+  } else {
+    otherThing = foobar;
+  }
+  ```
+
+- 15.7 Avoid unneeded ternary statements. eslint: [`no-unneeded-ternary`](https://eslint.org/docs/latest/rules/no-unneeded-ternary)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var a = x === 2 ? true : false;
+
+  var b = x ? true : false;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a = x === 2 ? "Yes" : "No";
+
+  var b = x !== false;
+
+  var c = x ? "Yes" : "No";
+
+  var d = x ? y : x;
+  ```
+
+- 15.8 When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: +, -, and ** since their precedence is broadly understood. We recommend enclosing / and * in parentheses because their precedence can be ambiguous when they are mixed. eslint: [`no-mixed-operators`](https://eslint.org/docs/latest/rules/no-mixed-operators)
+
+  > Why? This improves readability and clarifies the developer’s intention.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 26, eslint: 'eqeqeq: "off"')
+
+  ```js
+  var foo2 = a % b + c;
+  var foo3 = a % b - c;
+  var foo4 = a % b * c;
+  var foo5 = a % b / c;
+  var foo6 = a / b * c;
+  var foo7 = a & b | c << d >> e >>> f;
+  var foo8 = a == b != c === d !== e;
+  var foo9 = a && b || c;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo2 = (a % b) + c;
+  var foo3 = (a % b) - c;
+  var foo4 = (a % b) * c;
+  var foo5 = (a % b) / c;
+  var foo6 = (a / b) * c;
+  var foo7 = (a & b) | (((c << d) >> e) >>> f);
+  var foo8 = (((a === b) !== c) === d) !== e;
+  var foo9 = (a && b) || c;
+  ```
+

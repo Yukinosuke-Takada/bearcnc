@@ -264,4 +264,16 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for 'no-case-declarations'", async () => {
     await linter.checkRule('no-case-declarations');
   });
+
+  it("should lint expectedly for 'no-nested-ternary'", async () => {
+    await linter.checkRule('no-nested-ternary');
+  });
+
+  it("should lint expectedly for 'no-unneeded-ternary'", async () => {
+    await linter.checkRule('no-unneeded-ternary');
+  });
+
+  it("should lint expectedly for 'no-mixed-operators'", async () => {
+    await linter.checkRule('no-mixed-operators');
+  });
 });
