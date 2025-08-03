@@ -125,4 +125,13 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-use-before-define'", async () => {
     await linter.checkRule('no-use-before-define');
   });
+
+  // Comparison Operators & Equality rules
+  it("should lint expectedly for 'eqeqeq'", async () => {
+    await linter.checkRule('eqeqeq');
+  });
+
+  it("should lint expectedly for 'no-case-declarations'", async () => {
+    await linter.checkRule('no-case-declarations');
+  });
 });

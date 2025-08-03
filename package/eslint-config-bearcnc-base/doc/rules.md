@@ -18,6 +18,7 @@
   - [Properties](#properties)
   - [Variables](#variables)
   - [Hoisting](#hoisting)
+  - [Comparison Operators \& Equality](#comparison-operators--equality)
 
 ## See also
 
@@ -3714,3 +3715,170 @@ This doc was created by referencing the following material:
   const foo = 1;
   export { foo };
   ```
+
+## Comparison Operators & Equality
+
+- 15.1 Use === and !== over == and !=. eslint: [`eqeqeq`](https://eslint.org/docs/latest/rules/foo)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 8)
+
+  ```js
+  a == b
+  foo == true
+  bananas != 1
+  value == undefined
+  typeof foo == 'undefined'
+  'hello' != 'world'
+  0 == 0
+  true == true
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  a === b
+  foo === true
+  bananas !== 1
+  value === undefined
+  typeof foo === 'undefined'
+  'hello' !== 'world'
+  0 === 0
+  true === true
+
+  // allow `==` when comparing `null`
+  foo == null
+  foo === null
+  ```
+
+- 15.2 Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+
+  - Objects evaluate to true
+  - Undefined evaluates to false
+  - Null evaluates to false
+  - Booleans evaluate to the value of the boolean
+  - Numbers evaluate to false if +0, -0, or NaN, otherwise true
+  - Strings evaluate to false if an empty string '', otherwise true
+
+  ```js
+  if ([0] && []) {
+    // true
+    // an array (even an empty one) is an object, objects will evaluate to true
+  }
+  ```
+
+- 15.3 Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+
+  Bad:
+
+  ```js
+  if (isValid === true) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (isValid) {
+    // ...
+  }
+  ```
+
+  Bad:
+
+  ```js
+  if (name) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (name !== '') {
+    // ...
+  }
+  ```
+
+  Bad:
+
+  ```js
+  if (collection.length) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (collection.length > 0) {
+    // ...
+  }
+  ```
+
+- 15.4 For more information see [Truth, Equality, and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+
+- 15.5 Use braces to create blocks in case and default clauses that contain lexical declarations (e.g. `let`, `const`, `function`, and `class`). eslint: [`no-case-declarations`](https://eslint.org/docs/latest/rules/no-case-declarations)
+
+  > Why? Lexical declarations are visible in the entire switch block but only get initialized when assigned, which only happens when its case is reached. This causes problems when multiple case clauses attempt to define the same thing.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'prefer-const: "off"')
+
+  ```js
+  switch (foo) {
+      case 1:
+          let x = 1;
+          break;
+      case 2:
+          const y = 2;
+          break;
+      case 3:
+          function f() {}
+          break;
+      default:
+          class C {}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  // Declarations outside switch-statements are valid
+  const a = 0;
+
+  switch (foo) {
+      // The following case clauses are wrapped into blocks using brackets
+      case 1: {
+          let x = 1;
+          break;
+      }
+      case 2: {
+          const y = 2;
+          break;
+      }
+      case 3: {
+          function f() {}
+          break;
+      }
+      case 4:
+          // Declarations using var without brackets are valid due to function-scope hoisting
+          var z = 4;
+          break;
+      default: {
+          class C {}
+      }
+  }
+  ```
+
