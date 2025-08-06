@@ -19,6 +19,7 @@
   - [Variables](#variables)
   - [Hoisting](#hoisting)
   - [Comparison Operators \& Equality](#comparison-operators--equality)
+  - [Blocks](#blocks)
 
 ## See also
 
@@ -4007,3 +4008,6 @@ This doc was created by referencing the following material:
   const age = user.age ?? 18;
   // returns 18
   ```
+
+## Blocks
+

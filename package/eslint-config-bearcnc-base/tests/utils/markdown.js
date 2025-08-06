@@ -57,7 +57,8 @@ function getTestCasesData(rule, docPath) {
 
   // extract properties from test cases section
   const testCases = [];
-  for (const section of testCaseSections) {
+  for (let i = 0; i < testCaseSections.length; i += 1) {
+    const section = testCaseSections[i];
     const title = `${rule} case ${testCases.length + 1}`;
 
     const commentOutBits = section.code.split('[//]: #');

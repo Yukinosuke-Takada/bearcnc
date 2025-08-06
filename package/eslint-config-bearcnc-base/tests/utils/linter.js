@@ -35,7 +35,8 @@ class Linter {
     });
 
     // check if the code has expected errors counts
-    for (const { code, expectedErrors, title } of testCases) {
+    for (let i = 0; i < testCases.length; i += 1) {
+      const { code, expectedErrors, title } = testCases[i];
       const codeWithGlobalConfig =
         !ignoreGlobalConfig && this.globalEslintConfigString
           ? `/* eslint ${this.globalEslintConfigString} */\n${code}`
