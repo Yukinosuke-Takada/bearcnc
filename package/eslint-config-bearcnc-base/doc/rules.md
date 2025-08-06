@@ -20,6 +20,7 @@
   - [Hoisting](#hoisting)
   - [Comparison Operators \& Equality](#comparison-operators--equality)
   - [Blocks](#blocks)
+  - [Control Statements](#control-statements)
 
 ## See also
 
@@ -4288,5 +4289,75 @@ This doc was created by referencing the following material:
       if (loading) {
           return "It's still loading";
       }
+  }
+  ```
+
+## Control Statements
+
+- 17.1 In case your control statement (if, while etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
+
+  > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
+
+  Bad:
+
+  ```js
+  if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
+    thing1();
+  }
+
+  if (foo === 123 &&
+    bar === 'abc') {
+    thing1();
+  }
+
+  if (foo === 123
+    && bar === 'abc') {
+    thing1();
+  }
+
+  if (
+    foo === 123 &&
+    bar === 'abc'
+  ) {
+    thing1();
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (
+    foo === 123
+    && bar === 'abc'
+  ) {
+    thing1();
+  }
+
+  if (
+    (foo === 123 || bar === 'abc')
+    && doesItLookGoodWhenItBecomesThatLong()
+    && isThisReallyHappening()
+  ) {
+    thing1();
+  }
+
+  if (foo === 123 && bar === 'abc') {
+    thing1();
+  }
+  ```
+
+- 17.2 Don't use selection operators in place of control statements.
+
+  Bad:
+
+  ```js
+  !isRunning && startRunning();
+  ```
+
+  Good:
+
+  ```js
+  if (!isRunning) {
+    startRunning();
   }
   ```
