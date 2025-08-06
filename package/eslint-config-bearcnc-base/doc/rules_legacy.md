@@ -2198,3 +2198,61 @@ This doc was created by referencing the following material:
   */
   ```
 
+
+- 18.4 Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are FIXME: -- need to figure this out or TODO: -- need to implement.
+
+- 18.5 Use // FIXME: to annotate problems.
+
+  Bad:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // shouldn’t use a global here
+      total = 0;
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // FIXME: shouldn’t use a global here
+      total = 0;
+    }
+  }
+  ```
+
+- 18.6 Use // TODO: to annotate solutions to problems.
+
+  Bad:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // total should be configurable by an options param
+      this.total = 0;
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // TODO: total should be configurable by an options param
+      this.total = 0;
+    }
+  }
+  ```
