@@ -1,6 +1,7 @@
 import { defineConfig } from 'eslint/config';
 import arraysConfig from './arrays.js';
 import blocksConfig from './blocks.js';
+import commentsConfig from './comments.js';
 import comparisonsConfig from './comparisons.js';
 import functionsConfig from './functions.js';
 import hoistingConfig from './hoisting.js';
@@ -13,6 +14,7 @@ import variablesConfig from './variables.js';
 export default defineConfig([
   arraysConfig,
   blocksConfig,
+  commentsConfig,
   comparisonsConfig,
   functionsConfig,
   hoistingConfig,

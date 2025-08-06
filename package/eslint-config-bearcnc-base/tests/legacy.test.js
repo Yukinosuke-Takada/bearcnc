@@ -159,4 +159,9 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-else-return'", async () => {
     await linter.checkRule('no-else-return');
   });
+
+  // Comments rules
+  it("should lint expectedly for '@stylistic/spaced-comment'", async () => {
+    await linter.checkRule('@stylistic/spaced-comment');
+  });
 });

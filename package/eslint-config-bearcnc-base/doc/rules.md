@@ -21,6 +21,7 @@
   - [Comparison Operators \& Equality](#comparison-operators--equality)
   - [Blocks](#blocks)
   - [Control Statements](#control-statements)
+  - [Comments](#comments)
 
 ## See also
 
@@ -146,7 +147,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  let {a, b} = obj;    /*error 'b' is never reassigned, use 'const' instead.*/
+  let {a, b} = obj;    /* error 'b' is never reassigned, use 'const' instead. */
   a = a + 1;
   ```
 
@@ -1092,7 +1093,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  /*global window*/
+  /* global window */
   
   window.eval("const a = 0");
   ```
@@ -1102,7 +1103,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  /*global global*/
+  /* global global */
   
   global.eval("const a = 0");
   ```
@@ -1619,12 +1620,12 @@ This doc was created by referencing the following material:
   
   if (a) {
       b();
-  } else{ /*no error. this is checked by `keyword-spacing` rule.*/
+  } else{ /* no error. this is checked by `keyword-spacing` rule. */
       c();
   }
   
   class C {
-      static{} /*no error. this is checked by `keyword-spacing` rule.*/
+      static{} /* no error. this is checked by `keyword-spacing` rule. */
   }
 
   for (;;) {
@@ -2454,7 +2455,7 @@ This doc was created by referencing the following material:
   ```js
   class A {
       foo() {
-          console.log("Hello World");     /*error Expected 'this' to be used by class method 'foo'.*/
+          console.log("Hello World");     /* error Expected 'this' to be used by class method 'foo'. */
       }
   }
   ```
@@ -3172,7 +3173,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
 
   ```js
-  /*global someFunction, a*/
+  /* global someFunction, a */
 
   const foo = someFunction();
   const bar = a + 1;
@@ -3456,7 +3457,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 7, eslint: 'func-names: "off"')
 
   ```js
-  /*global some_unused_var*/
+  /* global some_unused_var */
 
   // It checks variables you have defined as global
   some_unused_var = 42;
@@ -4361,3 +4362,126 @@ This doc was created by referencing the following material:
     startRunning();
   }
   ```
+
+## Comments
+
+- 18.1 Use /** ... */ for multiline comments.
+
+  Bad:
+
+  ```js
+  // make() returns a new element
+  // based on the passed in tag name
+  //
+  // @param {String} tag
+  // @return {Element} element
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+  ```
+
+  Good:
+
+  ```js
+  /**
+  * make() returns a new element
+  * based on the passed-in tag name
+  */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+  ```
+
+- 18.2 Use // for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+
+  Bad:
+
+  ```js
+  const active = true;  // is current tab
+  ```
+
+  Good:
+
+  ```js
+  // is current tab
+  const active = true;
+  ```
+
+  Bad:
+
+  ```js
+  function getType() {
+    console.log('fetching type...');
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+  ```
+
+  Good:
+
+  ```js
+  function getType() {
+    console.log('fetching type...');
+
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+
+  // also good
+  function getType2() {
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+  ```
+
+- 18.3 Start all comments with a space to make it easier to read. eslint: [`@stylistic/spaced-comment`](https://eslint.style/rules/spaced-comment)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`spaced-comment`](https://eslint.org/docs/latest/rules/spaced-comment) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  //This is a comment with no whitespace at the beginning
+
+  /*This is a comment with no whitespace at the beginning */
+  /* This is a comment with whitespace at the beginning but not the end*/
+
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // This is a comment with a whitespace at the beginning
+
+  /* This is a comment with a whitespace at the beginning */
+
+  /*
+   * This is a comment with a whitespace at the beginning
+   */
+
+  /** This comment has a newline
+  */
+
+  /**
+  * I am jsdoc
+  */
+  ```
+
