@@ -3979,3 +3979,31 @@ This doc was created by referencing the following material:
   const foo8 = (((a === b) !== c) === d) !== e;
   const foo9 = (a && b) || c;
   ```
+
+- 15.9 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined. Otherwise, it returns the left-hand side operand.
+
+  > Why? It provides precision by distinguishing null/undefined from other falsy values, enhancing code clarity and predictability.
+
+  Bad:
+
+  ```js
+  const value = 0 ?? 'default';
+  // returns 0, not 'default'
+
+  const value = '' ?? 'default';
+  // returns '', not 'default'
+  ```
+
+  Good:
+
+  ```js
+  const value = null ?? 'default';
+  // returns 'default'
+
+  const user = {
+    name: 'John',
+    age: null
+  };
+  const age = user.age ?? 18;
+  // returns 18
+  ```
