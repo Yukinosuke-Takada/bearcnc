@@ -2179,7 +2179,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off"')
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/arrow-parens: "off", arrow-body-style: "off", @stylistic/brace-style: "off"')
 
   ```js
   (foo) => bar;
@@ -4011,3 +4011,282 @@ This doc was created by referencing the following material:
 
 ## Blocks
 
+- 16.1 Use braces with all multiline blocks. eslint: [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  if (foo)
+      bar();
+  else
+      baz();
+
+  while (foo)
+      bar();
+
+  for (let i = 1; i < foo; i += 1)
+      bar();
+
+  do
+      bar();
+  while (foo)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (foo) bar();
+  else baz();
+
+  while (foo) bar();
+
+  for (let i = 1; i < foo; i += 1) bar();
+
+  do bar(); while (foo)
+
+  if (foo) { // block statements are always allowed with this rule
+    bar();
+  } else {
+    baz();
+  }
+  ```
+
+
+- 16.2 If you’re using multiline blocks with `if` and `else`, put `else` on the same line as your `if` block’s closing brace. eslint: [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 7)
+
+  ```js
+  function foo()
+  {
+    return true;
+  }
+
+  if (foo)
+  {
+    bar();
+  }
+
+  try
+  {
+    somethingRisky();
+  } catch (e)
+  {
+    handleError();
+  }
+
+  if (foo) {
+    bar();
+  }
+  else {
+    baz();
+  }
+
+  class C
+  {
+      static
+          {
+          foo();
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() {
+    return true;
+  }
+
+  if (foo) {
+    bar();
+  }
+
+  if (foo) {
+    bar();
+  } else {
+    baz();
+  }
+
+  try {
+    somethingRisky();
+  } catch (e) {
+    handleError();
+  }
+
+  class C {
+      static {
+          foo();
+      }
+  }
+
+  // when there are no braces, there are no problems
+  if (foo) bar();
+  else if (baz) boom();
+  ```
+
+  **allowSingleLine**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function nop() { return; }
+
+  if (foo) { bar(); }
+
+  if (foo) { bar(); } else { baz(); }
+
+  try { somethingRisky(); } catch (e) { handleError(); }
+
+  if (foo) { baz(); } else {
+    boom();
+  }
+
+  if (foo) { baz(); } else if (bar) {
+    boom();
+  }
+
+  if (foo) { baz(); } else
+  if (bar) {
+    boom();
+  }
+
+  if (foo) { baz(); } else if (bar) {
+    boom();
+  }
+
+  try { somethingRisky(); } catch (e) {
+    handleError();
+  }
+
+  class C {
+      static { foo(); }
+  }
+
+  class D { static { foo(); } }
+  ```
+
+- 16.3 If an `if` block always executes a `return` statement, the subsequent else block is unnecessary. A `return` in an else `if` block following an `if` block that contains a `return` can be separated into multiple `if` blocks. eslint: [`no-else-return`](https://eslint.org/docs/latest/rules/no-else-return)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  function foo1() {
+      if (x) {
+          return y;
+      } else {
+          return z;
+      }
+  }
+
+  function foo2() {
+      if (x) {
+          return y;
+      } else {
+          const t = "foo";
+      }
+
+      return t;
+  }
+
+  // Two warnings for nested occurrences
+  function foo3() {
+      if (x) {
+          if (y) {
+              return y;
+          } else {
+              return x;
+          }
+      } else {
+          return z;
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+      if (x) {
+          return y;
+      }
+
+      return z;
+  }
+
+  function foo2() {
+      if (x) {
+          if (z) {
+              return y;
+          }
+      } else {
+          return z;
+      }
+  }
+
+  function foo3() {
+      if (x) {
+          if (y) {
+              return y;
+          }
+          return x;
+      } 
+      return z;
+  }
+  ```
+
+  **allowElseIf**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function foo() {
+      if (error) {
+          return 'It failed';
+      } else if (loading) {
+          return "It's still loading";
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+    function foo() {
+      if (error) {
+          return 'It failed';
+      }
+
+      if (loading) {
+          return "It's still loading";
+      }
+  }
+  ```

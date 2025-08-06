@@ -57,6 +57,8 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) → [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
   -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
   -  [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) → [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
+  -  [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) → [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
+  -  [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) → [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`

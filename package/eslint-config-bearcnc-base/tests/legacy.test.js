@@ -146,4 +146,17 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for 'no-mixed-operators'", async () => {
     await linter.checkRule('no-mixed-operators');
   });
+
+  // Blocks rules
+  it("should lint expectedly for '@stylistic/nonblock-statement-body-position'", async () => {
+    await linter.checkRule('@stylistic/nonblock-statement-body-position');
+  });
+
+  it("should lint expectedly for '@stylistic/brace-style'", async () => {
+    await linter.checkRule('@stylistic/brace-style');
+  });
+
+  it("should lint expectedly for 'no-else-return'", async () => {
+    await linter.checkRule('no-else-return');
+  });
 });
