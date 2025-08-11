@@ -10,6 +10,7 @@ const linter = new Linter({
   docPath: path.resolve(__dirname, '../doc/rules_legacy.md'),
   configType: 'es5',
   globalEslintConfig: [
+    '@stylistic/eol-last: "off"',
     '@stylistic/indent: "off"',
     '@stylistic/quotes: "off"',
     'func-names: "off"',
@@ -169,5 +170,17 @@ describe('ES5 (legacy) Rules', () => {
 
   it("should lint expectedly for '@stylistic/space-before-blocks'", async () => {
     await linter.checkRule('@stylistic/space-before-blocks');
+  });
+
+  it("should lint expectedly for '@stylistic/keyword-spacing'", async () => {
+    await linter.checkRule('@stylistic/keyword-spacing');
+  });
+
+  it("should lint expectedly for '@stylistic/space-infix-ops'", async () => {
+    await linter.checkRule('@stylistic/space-infix-ops');
+  });
+
+  it("should lint expectedly for '@stylistic/eol-last'", async () => {
+    await linter.checkRule('@stylistic/eol-last');
   });
 });

@@ -3,9 +3,8 @@ import fs from 'fs';
 // helper function to remove common leading indentation
 function dedent(str) {
   const lines = str.split('\n');
-  // Ignore empty lines at start/end
+  // Ignore empty lines at start
   while (lines.length && lines[0].trim() === '') lines.shift();
-  while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
   // Find minimum indentation (ignore empty lines)
   const indents = lines.filter((line) => line.trim()).map((line) => line.match(/^ */)[0].length);
   const minIndent = indents.length ? Math.min(...indents) : 0;
@@ -80,11 +79,12 @@ function getTestCasesData(rule, docPath) {
       [, eslintConfig] = eslintConfigMatch;
     }
 
-    const codeSectionSplit = section.code.split('```js');
-    if (codeSectionSplit.length === 1) {
+    const codeSectionParts = section.code.split('```js');
+    if (codeSectionParts.length === 1) {
       throw new Error(`Code section not found in test case for "${title}"`);
     }
-    let code = dedent(codeSectionSplit[1].split('```')[0]);
+    const codeRaw = codeSectionParts[1].split('```')[0];
+    let code = dedent(codeRaw.substring(0, codeRaw.lastIndexOf('\n')));
 
     // Prefix eslint config if present
     if (eslintConfig) {

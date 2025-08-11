@@ -6,6 +6,9 @@ export default defineConfig({
     '@stylistic': stylistic,
   },
   rules: {
+    // (19.5) Enforce newline at the end of files
+    '@stylistic/eol-last': 'error',
+
     // (19.1) Enforce consistent indentation
     '@stylistic/indent': [
       'error',
@@ -34,7 +37,13 @@ export default defineConfig({
       },
     ],
 
+    // (19.3) Enforce consistent spacing before and after keywords
+    '@stylistic/keyword-spacing': 'error',
+
     // (19.2) Enforce consistent spacing before blocks
     '@stylistic/space-before-blocks': 'error',
+
+    // (19.4) Enforce consistent spacing around infix operators
+    '@stylistic/space-infix-ops': 'error',
   },
 });

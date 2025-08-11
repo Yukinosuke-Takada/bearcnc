@@ -4573,3 +4573,108 @@ This doc was created by referencing the following material:
     constructor() {}
   }
   ```
+
+- 19.3 Place 1 space before the opening parenthesis in control statements (if, while etc.). Place no space between the argument list and the function name in function calls and declarations. eslint: [`@stylistic/keyword-spacing`](https://eslint.style/rules/keyword-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`keyword-spacing`](https://eslint.org/docs/latest/rules/keyword-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  if (foo) {
+      // ...
+  }else if (bar) {
+      // ...
+  }else{
+      // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (foo) {
+      // ...
+  } else if (bar) {
+      // ...
+  } else {
+      // ...
+  }
+  ```
+
+- 19.4 Set off operators with spaces. eslint: [`@stylistic/space-infix-ops`](https://eslint.style/rules/space-infix-ops)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-infix-ops`](https://eslint.org/docs/latest/rules/space-infix-ops) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 9)
+
+  ```js
+  a+b
+
+  a+ b
+
+  a +b
+
+  a?b:c
+
+  const d={b:1};
+
+  var {e=0}=bar;
+
+  function foo(a=0) { }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  a + b
+
+  a       + b
+
+  a ? b : c
+
+  const d = {b:1};
+
+  var {e = 0} = bar;
+
+  function foo(a = 0) { }
+  ```
+
+- 19.5 End files with a single newline character.  eslint: [`@stylistic/eol-last`](https://eslint.style/rules/eol-last)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`eol-last`](https://eslint.org/docs/latest/rules/eol-last) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function doSomething() {
+    var foo = 2;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function doSomething() {
+    var foo = 2;
+  }
+
+  ```
