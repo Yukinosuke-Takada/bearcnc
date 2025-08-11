@@ -2,6 +2,7 @@ import bearcncBase from './package/eslint-config-bearcnc-base/index.js';
 import { defineConfig } from 'eslint/config';
 import markdown from '@eslint/markdown';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import globals from 'globals';
 
 export default defineConfig([
   bearcncBase,
@@ -9,6 +10,16 @@ export default defineConfig([
     files: ['**/*.js'],
     rules: {
       'import/extensions': 'off',
+    },
+  },
+  {
+    files: ['**/tests/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        describe: 'readonly',
+        it: 'readonly',
+      }
     },
   },
   {

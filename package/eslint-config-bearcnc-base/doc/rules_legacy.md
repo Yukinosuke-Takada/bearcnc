@@ -9,6 +9,14 @@
   - [Arrays](#arrays)
   - [Strings](#strings)
   - [Functions](#functions)
+  - [Iterators and Generators](#iterators-and-generators)
+  - [Properties](#properties)
+  - [Variables](#variables)
+  - [Hoisting](#hoisting)
+  - [Comparison Operators \& Equality](#comparison-operators--equality)
+  - [Blocks](#blocks)
+  - [Control Statements](#control-statements)
+  - [Comments](#comments)
 
 ## See also
 
@@ -338,7 +346,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1)
+  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
 
   ```js
   var double = "double";
@@ -346,7 +354,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
 
   ```js
   var single = 'single';
@@ -356,7 +364,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
 
   ```js
   var double = "a string containing 'single' quotes";
@@ -394,9 +402,9 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 4, eslint: 'prefer-template: "off"')
 
   ```js
-  var obj = { x: "foo" },
-      key = "x",
-      value = eval("obj." + key);
+  var obj = { x: "foo" };
+  var key = "x";
+  var value = eval("obj." + key);
 
   (0, eval)("var a = 0");
 
@@ -412,7 +420,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  /*global window*/
+  /* global window */
 
   window.eval("const a = 0");
   ```
@@ -422,7 +430,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  /*global global*/
+  /* global global */
 
   global.eval("const a = 0");
   ```
@@ -432,9 +440,9 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var obj = { x: "foo" },
-      key = "x",
-      value = obj[key];
+  var obj = { x: "foo" };
+  var key = "x";
+  var value = obj[key];
 
   function A() {}
 
@@ -525,7 +533,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off", no-unused-vars: "off"')
 
   ```js
   Foo.prototype.bar = function () {};
@@ -543,7 +551,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off", no-unused-vars: "off"')
 
   ```js
   Foo.prototype.bar = function bar() {};
@@ -820,11 +828,11 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 4)
 
   ```js
+  function a(){}
+
   if (a){
       b();
   }
-
-  function a(){}
 
   for (;;){
       b();
@@ -838,17 +846,17 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
+  function a() {}
+
   if (a) {
       b();
   }
 
   if (a) {
       b();
-  } else{ /*no error. this is checked by `keyword-spacing` rule.*/
+  } else{ /* no error. this is checked by `keyword-spacing` rule. */
       c();
   }
-
-  function a() {}
 
   for (;;) {
       b();
@@ -867,7 +875,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 3)
+  [//]: # (expectedErrors: 3, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   var foo = function (bar) {
@@ -875,7 +883,7 @@ This doc was created by referencing the following material:
   }
 
   var foo1 = function (bar) {
-      bar++;
+      bar += 1;
   }
 
   var foo2 = function (bar) {
@@ -897,7 +905,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4)
+  [//]: # (expectedErrors: 4, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   var foo = function (bar) {
@@ -909,7 +917,7 @@ This doc was created by referencing the following material:
   }
 
   var foo2 = function (bar) {
-      bar.aaa++;
+      bar.aaa += 1;
   }
 
   var foo3 = function (bar) {
@@ -921,7 +929,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
   // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
@@ -935,7 +943,7 @@ This doc was created by referencing the following material:
   }
 
   var foo2 = function (e) {
-      e.aaa++;
+      e.aaa += 1;
   }
 
   var foo3 = function (e) {
@@ -991,4 +999,1260 @@ This doc was created by referencing the following material:
       return baz;
     }
   );
+  ```
+
+## Iterators and Generators
+
+- 11.1 Don’t use iterators. Prefer JavaScript’s higher-order functions instead of loops like for-in or for-of. eslint: [`no-restricted-syntax`](https://eslint.org/docs/latest/rules/no-restricted-syntax)
+
+  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side effects. Use map() / every() / filter() / find() / findIndex() / reduce() / some() / ... to iterate over arrays, and Object.keys() / Object.values() / Object.entries() to produce arrays so you can iterate over objects.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  for (var key in object) {
+    result += key + ': ' + object[key] + ', ';
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  Object.keys(object).forEach(function (key) {
+    result += key + ': ' + object[key] + ', ';
+  });
+  ```
+
+- 11.1.1
+
+  Bad:
+
+  ```js
+  for (let i = 0; i < numbers.length; i++) {
+    increasedByOne.push(numbers[i] + 1);
+  }
+  ```
+
+  Good:
+
+  ```js
+  numbers.forEach(function (num) {
+    increasedByOne.push(num + 1);
+  });
+  ```
+
+  Best:
+
+  ```js
+  var increasedByOne = numbers.map(function (num) {
+    return num + 1;
+  });
+  ```
+
+## Properties
+
+- 12.1 Use dot notation when accessing properties. eslint: [`dot-notation`](https://eslint.org/docs/latest/rules/dot-notation)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  var x = foo["bar"];
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var x = foo.bar;
+
+  var y = foo[bar];    // Property name is a variable, square-bracket notation required
+  ```
+
+- 12.2 Use bracket notation [] when accessing properties with a variable.
+
+  Good:
+
+  ```js
+    var luke = {
+    jedi: true,
+    age: 28
+  };
+
+  function getProp(prop) {
+    return luke[prop];
+  }
+
+  var isJedi = getProp('jedi');
+  ```
+
+## Variables
+
+- 13.1 Always use const or let to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace. Captain Planet warned us of that. eslint: [`no-undef`](https://eslint.org/docs/latest/rules/no-undef)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
+
+  ```js
+  foo = 'foo';
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+
+  ```js
+  var foo = 'foo';
+  ```
+
+  Bad:
+
+  [//]: # (expectedErrors: 2, eslint: 'no-unused-vars: "off"')
+
+  ```js
+  var foo = someFunction();
+  var bar = a + 1;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+
+  ```js
+  /* global someFunction, a */
+
+  var foo = someFunction();
+  var bar = a + 1;
+  ```
+
+- 13.2 Use one const or let declaration per variable or assignment. eslint: [`one-var`](https://eslint.org/docs/latest/rules/one-var)
+
+  > Why? It’s easier to add new variable declarations this way, and you never have to worry about swapping out a ; for a , or introducing punctuation-only diffs. You can also step through each declaration with the debugger, instead of jumping through all of them at once.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  function foo1() {
+      var bar,
+          baz;
+  }
+
+  function foo2() {
+      var bar,
+          qux;
+
+      if (baz) {
+          qux = true;
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
+
+  ```js
+  function foo1() {
+      var bar;
+      var baz;
+  }
+
+  function foo2() {
+      var bar;
+
+      if (baz) {
+          var qux = true;
+      }
+  }
+
+  // declarations with multiple variables are allowed in for-loop initializers
+  for (var i = 0, len = arr.length; i < len; i += 1) {
+      doSomething(arr[i]);
+  }
+  ```
+
+- 13.5 Don’t chain variable assignments. eslint: [`no-multi-assign`](https://eslint.org/docs/latest/rules/no-multi-assign)
+
+  > Why? Chaining variable assignments creates implicit global variables.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  var a = b = c = 5;
+
+  var d =
+      e =
+      c;
+
+  a = b = "quux";
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a = 5;
+  var b = 5;
+  var c = 5;
+
+  var d = c;
+  var e = c;
+
+  a = "quux";
+  b = "quux";
+  ```
+
+- 13.6 Avoid using unary increments and decrements (++, --). eslint: [`no-plusplus`](https://eslint.org/docs/latest/rules/no-plusplus)
+
+  > Why? Per the eslint documentation, unary increment and decrement statements are subject to automatic semicolon insertion and can cause silent errors with incrementing or decrementing values within an application. It is also more expressive to mutate your values with statements like num += 1 instead of num++ or num ++. Disallowing unary increment and decrement statements also prevents you from pre-incrementing/pre-decrementing values unintentionally which can also cause unexpected behavior in your programs.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  var foo = 0;
+  foo++;
+
+  var bar = 42;
+  bar--;
+
+  for (var i = 0; i < l; i++) {
+      doSomething(i);
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = 0;
+  foo += 1;
+
+  var bar = 42;
+  bar -= 1;
+
+  for (var i = 0; i < l; i += 1) {
+      doSomething(i);
+  }
+  ```
+
+- 13.7 Avoid linebreaks before or after = in an assignment. If your assignment violates max-len, surround the value in parens.
+
+  > Why? Linebreaks surrounding = can obfuscate the value of an assignment.
+
+  Bad:
+
+  ```js
+  var foo =
+  superLongLongLongLongLongLongLongLongFunctionName();
+
+  var bar
+    = 'superLongLongLongLongLongLongLongLongString';
+  ```
+
+  Good:
+
+  ```js
+  var foo = (
+    superLongLongLongLongLongLongLongLongFunctionName()
+  );
+
+  var bar = 'superLongLongLongLongLongLongLongLongString';
+  ```
+
+- 13.8 Disallow unused variables. eslint: [`no-unused-vars`](https://eslint.org/docs/latest/rules/no-unused-vars)
+
+  > Why? Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: 'func-names: "off"')
+
+  ```js
+  /* global some_unused_var */
+
+  // It checks variables you have defined as global
+  some_unused_var = 42;
+
+  var x;
+
+  // Write-only variables are not considered as used.
+  var y = 10;
+  y = 5;
+
+  // A read for a modification of itself is not considered as used.
+  var z = 0;
+  z = z + 1;
+
+  // By default, unused arguments cause warnings.
+  (function (foo) {
+      return 5;
+  }());
+
+  // Unused recursive functions also cause warnings.
+  function fact(n) {
+      if (n < 2) return 1;
+      return n * fact(n - 1);
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'func-names: "off", no-var: "off", no-undef: "off", no-use-before-define: "off"')
+
+  ```js
+  var x = 10;
+  alert(x);
+
+  // foo is considered used here
+  myFunc(function () {
+      // ...
+  }.bind(this));
+
+  (function (foo) {
+      return foo;
+  }());
+
+  var myFunc;
+  myFunc = setTimeout(function () {
+    // myFunc is considered used
+    myFunc();
+  }, 50);
+  ```
+
+## Hoisting
+
+- 14.1 var declarations get hoisted to the top of their closest enclosing function scope, their assignment does not. const and let declarations are blessed with a new concept called [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz). It’s important to know why [typeof is no longer safe](https://web.archive.org/web/20200121061528/http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
+
+  ```js
+  // we know this wouldn’t work (assuming there
+  // is no notDefined global variable)
+  function example() {
+    console.log(notDefined); // => throws a ReferenceError
+  }
+
+  // creating a variable declaration after you
+  // reference the variable will work due to
+  // variable hoisting. Note: the assignment
+  // value of `true` is not hoisted.
+  function example() {
+    console.log(declaredButNotAssigned); // => undefined
+    var declaredButNotAssigned = true;
+  }
+
+  // the interpreter is hoisting the variable
+  // declaration to the top of the scope,
+  // which means our example could be rewritten as:
+  function example() {
+    let declaredButNotAssigned;
+    console.log(declaredButNotAssigned); // => undefined
+    declaredButNotAssigned = true;
+  }
+
+  // using const and let
+  function example() {
+    console.log(declaredButNotAssigned); // => throws a ReferenceError
+    console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+    const declaredButNotAssigned = true;
+  }
+  ```
+
+- 14.2 Anonymous function expressions hoist their variable name, but not the function assignment.
+
+  ```js
+  function example() {
+    console.log(anonymous); // => undefined
+
+    anonymous(); // => TypeError anonymous is not a function
+
+    var anonymous = function () {
+      console.log('anonymous function expression');
+    };
+  }
+  ```
+
+- 14.3 Named function expressions hoist the variable name, not the function name or the function body.
+
+  ```js
+  function example() {
+    console.log(named); // => undefined
+
+    named(); // => TypeError named is not a function
+
+    superPower(); // => ReferenceError superPower is not defined
+
+    var named = function superPower() {
+      console.log('Flying');
+    };
+  }
+
+  // the same is true when the function name
+  // is the same as the variable name.
+  function example() {
+    console.log(named); // => undefined
+
+    named(); // => TypeError named is not a function
+
+    var named = function named() {
+      console.log('named');
+    };
+  }
+  ```
+
+- 14.4 Function declarations hoist their name and the function body.
+
+  ```js
+  function example() {
+    superPower(); // => Flying
+
+    function superPower() {
+      console.log('Flying');
+    }
+  }
+  ```
+
+- 14.5 Variables, classes, and functions should be defined before they can be used. eslint: [`no-use-before-define`](https://eslint.org/docs/latest/rules/no-use-before-define)
+
+  > Why? When variables, classes, or functions are declared after being used, it can harm readability since a reader won't know what a thing that's referenced is. It's much clearer for a reader to first encounter the source of a thing (whether imported from another module, or defined in the file) before encountering a use of the thing.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  alert(a);
+  var a = 10;
+
+  f();
+  function f() {}
+
+  function g() {
+      return b;
+  }
+  var b = 1;
+
+  {
+      alert(c);
+      var c = 1;
+  }
+
+  module.exports = { foo: foo };
+  var foo = 1;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a;
+  a = 10;
+  alert(a);
+
+  function f() {}
+  f(1);
+
+  var b = 1;
+  function g() {
+      return b;
+  }
+
+  {
+      var c;
+      alert(c);
+  }
+
+  var foo = 1;
+  module.exports = { foo: foo };
+  ```
+
+
+## Comparison Operators & Equality
+
+- 15.1 Use === and !== over == and !=. eslint: [`eqeqeq`](https://eslint.org/docs/latest/rules/foo)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 8)
+
+  ```js
+  a == b
+  foo == true
+  bananas != 1
+  value == undefined
+  typeof foo == 'undefined'
+  'hello' != 'world'
+  0 == 0
+  true == true
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  a === b
+  foo === true
+  bananas !== 1
+  value === undefined
+  typeof foo === 'undefined'
+  'hello' !== 'world'
+  0 === 0
+  true === true
+
+  // allow `==` when comparing `null`
+  foo == null
+  foo === null
+  ```
+
+- 15.2 Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+
+  - Objects evaluate to true
+  - Undefined evaluates to false
+  - Null evaluates to false
+  - Booleans evaluate to the value of the boolean
+  - Numbers evaluate to false if +0, -0, or NaN, otherwise true
+  - Strings evaluate to false if an empty string '', otherwise true
+
+  ```js
+  if ([0] && []) {
+    // true
+    // an array (even an empty one) is an object, objects will evaluate to true
+  }
+  ```
+
+- 15.3 Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+
+  Bad:
+
+  ```js
+  if (isValid === true) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (isValid) {
+    // ...
+  }
+  ```
+
+  Bad:
+
+  ```js
+  if (name) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (name !== '') {
+    // ...
+  }
+  ```
+
+  Bad:
+
+  ```js
+  if (collection.length) {
+    // ...
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (collection.length > 0) {
+    // ...
+  }
+  ```
+
+- 15.4 For more information see [Truth, Equality, and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+
+- 15.5 Use braces to create blocks in case and default clauses that contain lexical declarations (e.g. `let`, `const`, `function`, and `class`). eslint: [`no-case-declarations`](https://eslint.org/docs/latest/rules/no-case-declarations)
+
+  > Why? Lexical declarations are visible in the entire switch block but only get initialized when assigned, which only happens when its case is reached. This causes problems when multiple case clauses attempt to define the same thing.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 1, eslint: 'no-inner-declarations: "off"')
+
+  ```js
+  switch (foo) {
+      case 3:
+          function f() {}
+          break;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-inner-declarations: "off"')
+
+  ```js
+  // Declarations outside switch-statements are valid
+  var a = 0;
+
+  switch (foo) {
+      // The following case clauses are wrapped into blocks using brackets
+      case 1: {
+          var x = 1;
+          break;
+      }
+      case 3: {
+          function f() {}
+          break;
+      }
+      case 4:
+          // Declarations using var without brackets are valid due to function-scope hoisting
+          var z = 4;
+          break;
+  }
+  ```
+
+- 15.6 Ternaries should not be nested and generally be single line expressions. eslint: [`no-nested-ternary`](https://eslint.org/docs/latest/rules/no-nested-ternary)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var thing = foo ? bar : baz === qux ? quxx : foobar;
+
+  foo ? baz === qux ? quxx() : foobar() : bar();
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var thing = foo ? bar : foobar;
+
+  var otherThing;
+
+  if (foo) {
+    otherThing = bar;
+  } else if (baz === qux) {
+    otherThing = quxx;
+  } else {
+    otherThing = foobar;
+  }
+  ```
+
+- 15.7 Avoid unneeded ternary statements. eslint: [`no-unneeded-ternary`](https://eslint.org/docs/latest/rules/no-unneeded-ternary)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var a = x === 2 ? true : false;
+
+  var b = x ? true : false;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var a = x === 2 ? "Yes" : "No";
+
+  var b = x !== false;
+
+  var c = x ? "Yes" : "No";
+
+  var d = x ? y : x;
+  ```
+
+- 15.8 When mixing operators, enclose them in parentheses. The only exception is the standard arithmetic operators: +, -, and ** since their precedence is broadly understood. We recommend enclosing / and * in parentheses because their precedence can be ambiguous when they are mixed. eslint: [`no-mixed-operators`](https://eslint.org/docs/latest/rules/no-mixed-operators)
+
+  > Why? This improves readability and clarifies the developer’s intention.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 26, eslint: 'eqeqeq: "off"')
+
+  ```js
+  var foo2 = a % b + c;
+  var foo3 = a % b - c;
+  var foo4 = a % b * c;
+  var foo5 = a % b / c;
+  var foo6 = a / b * c;
+  var foo7 = a & b | c << d >> e >>> f;
+  var foo8 = a == b != c === d !== e;
+  var foo9 = a && b || c;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo2 = (a % b) + c;
+  var foo3 = (a % b) - c;
+  var foo4 = (a % b) * c;
+  var foo5 = (a % b) / c;
+  var foo6 = (a / b) * c;
+  var foo7 = (a & b) | (((c << d) >> e) >>> f);
+  var foo8 = (((a === b) !== c) === d) !== e;
+  var foo9 = (a && b) || c;
+  ```
+
+## Blocks
+
+- 16.1 Use braces with all multiline blocks. eslint: [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  if (foo)
+      bar();
+  else
+      baz();
+
+  while (foo)
+      bar();
+
+  for (var i = 1; i < foo; i += 1)
+      bar();
+
+  do
+      bar();
+  while (foo)
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (foo) bar();
+  else baz();
+
+  while (foo) bar();
+
+  for (var i = 1; i < foo; i += 1) bar();
+
+  do bar(); while (foo)
+
+  if (foo) { // block statements are always allowed with this rule
+    bar();
+  } else {
+    baz();
+  }
+  ```
+
+
+- 16.2 If you’re using multiline blocks with `if` and `else`, put `else` on the same line as your `if` block’s closing brace. eslint: [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 5)
+
+  ```js
+  function foo()
+  {
+    return true;
+  }
+
+  if (foo)
+  {
+    bar();
+  }
+
+  try
+  {
+    somethingRisky();
+  } catch (e)
+  {
+    handleError();
+  }
+
+  if (foo) {
+    bar();
+  }
+  else {
+    baz();
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() {
+    return true;
+  }
+
+  if (foo) {
+    bar();
+  }
+
+  if (foo) {
+    bar();
+  } else {
+    baz();
+  }
+
+  try {
+    somethingRisky();
+  } catch (e) {
+    handleError();
+  }
+
+  // when there are no braces, there are no problems
+  if (foo) bar();
+  else if (baz) boom();
+  ```
+
+  **allowSingleLine**
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function nop() { return; }
+
+  if (foo) { bar(); }
+
+  if (foo) { bar(); } else { baz(); }
+
+  try { somethingRisky(); } catch (e) { handleError(); }
+
+  if (foo) { baz(); } else {
+    boom();
+  }
+
+  if (foo) { baz(); } else if (bar) {
+    boom();
+  }
+
+  if (foo) { baz(); } else
+  if (bar) {
+    boom();
+  }
+
+  if (foo) { baz(); } else if (bar) {
+    boom();
+  }
+
+  try { somethingRisky(); } catch (e) {
+    handleError();
+  }
+  ```
+
+- 16.3 If an `if` block always executes a `return` statement, the subsequent else block is unnecessary. A `return` in an else `if` block following an `if` block that contains a `return` can be separated into multiple `if` blocks. eslint: [`no-else-return`](https://eslint.org/docs/latest/rules/no-else-return)
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  function foo1() {
+      if (x) {
+          return y;
+      } else {
+          return z;
+      }
+  }
+
+  function foo2() {
+      if (x) {
+          return y;
+      } else {
+          var t = "foo";
+      }
+
+      return t;
+  }
+
+  // Two warnings for nested occurrences
+  function foo3() {
+      if (x) {
+          if (y) {
+              return y;
+          } else {
+              return x;
+          }
+      } else {
+          return z;
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+      if (x) {
+          return y;
+      }
+
+      return z;
+  }
+
+  function foo2() {
+      if (x) {
+          if (z) {
+              return y;
+          }
+      } else {
+          return z;
+      }
+  }
+
+  function foo3() {
+      if (x) {
+          if (y) {
+              return y;
+          }
+          return x;
+      } 
+      return z;
+  }
+  ```
+
+  **allowElseIf**
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function foo() {
+      if (error) {
+          return 'It failed';
+      } else if (loading) {
+          return "It's still loading";
+      }
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+    function foo() {
+      if (error) {
+          return 'It failed';
+      }
+
+      if (loading) {
+          return "It's still loading";
+      }
+  }
+  ```
+
+## Control Statements
+
+- 17.1 In case your control statement (if, while etc.) gets too long or exceeds the maximum line length, each (grouped) condition could be put into a new line. The logical operator should begin the line.
+
+  > Why? Requiring operators at the beginning of the line keeps the operators aligned and follows a pattern similar to method chaining. This also improves readability by making it easier to visually follow complex logic.
+
+  Bad:
+
+  ```js
+  if ((foo === 123 || bar === 'abc') && doesItLookGoodWhenItBecomesThatLong() && isThisReallyHappening()) {
+    thing1();
+  }
+
+  if (foo === 123 &&
+    bar === 'abc') {
+    thing1();
+  }
+
+  if (foo === 123
+    && bar === 'abc') {
+    thing1();
+  }
+
+  if (
+    foo === 123 &&
+    bar === 'abc'
+  ) {
+    thing1();
+  }
+  ```
+
+  Good:
+
+  ```js
+  if (
+    foo === 123
+    && bar === 'abc'
+  ) {
+    thing1();
+  }
+
+  if (
+    (foo === 123 || bar === 'abc')
+    && doesItLookGoodWhenItBecomesThatLong()
+    && isThisReallyHappening()
+  ) {
+    thing1();
+  }
+
+  if (foo === 123 && bar === 'abc') {
+    thing1();
+  }
+  ```
+
+- 17.2 Don't use selection operators in place of control statements.
+
+  Bad:
+
+  ```js
+  !isRunning && startRunning();
+  ```
+
+  Good:
+
+  ```js
+  if (!isRunning) {
+    startRunning();
+  }
+  ```
+
+## Comments
+
+- 18.1 Use /** ... */ for multiline comments.
+
+  Bad:
+
+  ```js
+  // make() returns a new element
+  // based on the passed in tag name
+  //
+  // @param {String} tag
+  // @return {Element} element
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+  ```
+
+  Good:
+
+  ```js
+  /**
+  * make() returns a new element
+  * based on the passed-in tag name
+  */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+  ```
+
+- 18.2 Use // for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it’s on the first line of a block.
+
+  Bad:
+
+  ```js
+  const active = true;  // is current tab
+  ```
+
+  Good:
+
+  ```js
+  // is current tab
+  const active = true;
+  ```
+
+  Bad:
+
+  ```js
+  function getType() {
+    console.log('fetching type...');
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+  ```
+
+  Good:
+
+  ```js
+  function getType() {
+    console.log('fetching type...');
+
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+
+  // also good
+  function getType2() {
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+  ```
+
+- 18.3 Start all comments with a space to make it easier to read. eslint: [`@stylistic/spaced-comment`](https://eslint.style/rules/spaced-comment)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`spaced-comment`](https://eslint.org/docs/latest/rules/spaced-comment) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  //This is a comment with no whitespace at the beginning
+
+  /*This is a comment with no whitespace at the beginning */
+  /* This is a comment with whitespace at the beginning but not the end*/
+
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // This is a comment with a whitespace at the beginning
+
+  /* This is a comment with a whitespace at the beginning */
+
+  /*
+   * This is a comment with a whitespace at the beginning
+   */
+
+  /** This comment has a newline
+  */
+
+  /**
+  * I am jsdoc
+  */
+  ```
+
+
+- 18.4 Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are FIXME: -- need to figure this out or TODO: -- need to implement.
+
+- 18.5 Use // FIXME: to annotate problems.
+
+  Bad:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // shouldn’t use a global here
+      total = 0;
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // FIXME: shouldn’t use a global here
+      total = 0;
+    }
+  }
+  ```
+
+- 18.6 Use // TODO: to annotate solutions to problems.
+
+  Bad:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // total should be configurable by an options param
+      this.total = 0;
+    }
+  }
+  ```
+
+  Good:
+
+  ```js
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // TODO: total should be configurable by an options param
+      this.total = 0;
+    }
+  }
   ```

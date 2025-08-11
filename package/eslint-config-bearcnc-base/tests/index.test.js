@@ -13,6 +13,8 @@ const linter = new Linter({
     'no-var: "off"',
     '@stylistic/quotes: "off"',
     'func-names: "off"',
+    'no-undef: "off"',
+    'no-unused-vars: "off"',
   ]
 });
 
@@ -169,7 +171,7 @@ describe('ES6 Rules', () => {
     await linter.checkRule('class-methods-use-this');
   });
 
-  // Modules
+  // Modules rules
   it("should lint expectedly for 'import/no-import-module-exports'", async () => {
     await linter.checkRule('import/no-import-module-exports');
   });
@@ -208,5 +210,88 @@ describe('ES6 Rules', () => {
 
   it("should lint expectedly for 'import/extensions'", async () => {
     await linter.checkRule('import/extensions');
+  });
+
+  // Iterators and Generators rules
+  it("should lint expectedly for 'no-restricted-syntax'", async () => {
+    await linter.checkRule('no-restricted-syntax');
+  });
+
+  it("should lint expectedly for '@stylistic/generator-star-spacing'", async () => {
+    await linter.checkRule('@stylistic/generator-star-spacing');
+  });
+
+  // Properties rules
+  it("should lint expectedly for 'dot-notation'", async () => {
+    await linter.checkRule('dot-notation');
+  });
+
+  it("should lint expectedly for 'prefer-exponentiation-operator'", async () => {
+    await linter.checkRule('prefer-exponentiation-operator');
+  });
+
+  // Variables rules
+  it("should lint expectedly for 'no-undef'", async () => {
+    await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
+  });
+
+  it("should lint expectedly for 'one-var'", async () => {
+    await linter.checkRule('one-var');
+  });
+
+  it("should lint expectedly for 'no-multi-assign'", async () => {
+    await linter.checkRule('no-multi-assign');
+  });
+
+  it("should lint expectedly for 'no-plusplus'", async () => {
+    await linter.checkRule('no-plusplus');
+  });
+
+  it("should lint expectedly for 'no-unused-vars'", async () => {
+    await linter.checkRule('no-unused-vars', { ignoreGlobalConfig: true });
+  });
+
+  // Hoisting rules
+  it("should lint expectedly for 'no-use-before-define'", async () => {
+    await linter.checkRule('no-use-before-define');
+  });
+
+  // Comparison Operators & Equality rules
+  it("should lint expectedly for 'eqeqeq'", async () => {
+    await linter.checkRule('eqeqeq');
+  });
+
+  it("should lint expectedly for 'no-case-declarations'", async () => {
+    await linter.checkRule('no-case-declarations');
+  });
+
+  it("should lint expectedly for 'no-nested-ternary'", async () => {
+    await linter.checkRule('no-nested-ternary');
+  });
+
+  it("should lint expectedly for 'no-unneeded-ternary'", async () => {
+    await linter.checkRule('no-unneeded-ternary');
+  });
+
+  it("should lint expectedly for 'no-mixed-operators'", async () => {
+    await linter.checkRule('no-mixed-operators');
+  });
+
+  // Blocks rules
+  it("should lint expectedly for '@stylistic/nonblock-statement-body-position'", async () => {
+    await linter.checkRule('@stylistic/nonblock-statement-body-position');
+  });
+
+  it("should lint expectedly for '@stylistic/brace-style'", async () => {
+    await linter.checkRule('@stylistic/brace-style');
+  });
+
+  it("should lint expectedly for 'no-else-return'", async () => {
+    await linter.checkRule('no-else-return');
+  });
+
+  // Comments rules
+  it("should lint expectedly for '@stylistic/spaced-comment'", async () => {
+    await linter.checkRule('@stylistic/spaced-comment');
   });
 });

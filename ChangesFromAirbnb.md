@@ -46,6 +46,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
 
 - Changes to rules inclusion in configs.
   - [`default-param-last`](https://eslint.org/docs/latest/rules/default-param-last): `es5`, `es6` → `es6`. Since default parameters don't exist in es5.
+  - [`prefer-exponentiation-operator`](https://eslint.org/docs/latest/rules/prefer-exponentiation-operator): `es5`, `es6` → `es6`. Since exponentiation operator does not exist in ES5.
 
 - Changed Rules due to deprecation:
   - [`no-new-object`](https://eslint.org/docs/latest/rules/no-new-object) → [`no-object-constructor`](https://eslint.org/docs/latest/rules/no-object-constructor)
@@ -56,11 +57,16 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) → [`@stylistic/space-before-function-paren`](https://eslint.style/rules/space-before-function-paren)
   -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
   -  [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) → [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
+  -  [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) → [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
+  -  [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) → [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
 
-- Typo(?)
+- Typo(?) & Documentation changes.
   - On section 7.1, it was rule [`no-loop-func`](https://eslint.org/docs/latest/rules/no-loop-func) but [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations) makes more sense.
-  - On Section 8.2, removed rule [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens). It wasn't relevant additionally it is explained in 8.4.
-  - On Section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.
+  - On section 8.2, removed rule [`arrow-parens`](https://eslint.org/docs/latest/rules/arrow-parens). It wasn't relevant additionally it is explained in 8.4.
+  - On section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.
+  - On section 11.1, removed [`no-iterator`](https://eslint.org/docs/latest/rules/no-iterator) because the explanation does not match the rule.
+  - On section 13.1, removed [`prefer-const`](https://eslint.org/docs/latest/rules/prefer-const) since it isn't relevant.
+  - On section 13.7, removed rule [`operator-linebreak`](https://eslint.org/docs/latest/rules/operator-linebreak). It wasn't relevant 

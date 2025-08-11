@@ -12,6 +12,8 @@ const linter = new Linter({
   globalEslintConfig: [
     '@stylistic/quotes: "off"',
     'func-names: "off"',
+    'no-undef: "off"',
+    'no-unused-vars: "off"',
   ]
 });
 
@@ -86,5 +88,80 @@ describe('ES5 (legacy) Rules', () => {
 
   it("should lint expectedly for '@stylistic/function-paren-newline'", async () => {
     await linter.checkRule('@stylistic/function-paren-newline');
+  });
+
+  // Iterators and Generators rules
+  it("should lint expectedly for 'no-restricted-syntax'", async () => {
+    await linter.checkRule('no-restricted-syntax');
+  });
+
+  // Properties rules
+  it("should lint expectedly for 'dot-notation'", async () => {
+    await linter.checkRule('dot-notation');
+  });
+
+  // Variables rules
+  it("should lint expectedly for 'no-undef'", async () => {
+    await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
+  });
+
+  it("should lint expectedly for 'one-var'", async () => {
+    await linter.checkRule('one-var');
+  });
+
+  it("should lint expectedly for 'no-multi-assign'", async () => {
+    await linter.checkRule('no-multi-assign');
+  });
+
+  it("should lint expectedly for 'no-plusplus'", async () => {
+    await linter.checkRule('no-plusplus');
+  });
+
+  it("should lint expectedly for 'no-unused-vars'", async () => {
+    await linter.checkRule('no-unused-vars', { ignoreGlobalConfig: true });
+  });
+
+  // Hoisting rules
+  it("should lint expectedly for 'no-use-before-define'", async () => {
+    await linter.checkRule('no-use-before-define');
+  });
+
+  // Comparison Operators & Equality rules
+  it("should lint expectedly for 'eqeqeq'", async () => {
+    await linter.checkRule('eqeqeq');
+  });
+
+  it("should lint expectedly for 'no-case-declarations'", async () => {
+    await linter.checkRule('no-case-declarations');
+  });
+
+  it("should lint expectedly for 'no-nested-ternary'", async () => {
+    await linter.checkRule('no-nested-ternary');
+  });
+
+  it("should lint expectedly for 'no-unneeded-ternary'", async () => {
+    await linter.checkRule('no-unneeded-ternary');
+  });
+
+  it("should lint expectedly for 'no-mixed-operators'", async () => {
+    await linter.checkRule('no-mixed-operators');
+  });
+
+  // Blocks rules
+  it("should lint expectedly for '@stylistic/nonblock-statement-body-position'", async () => {
+    await linter.checkRule('@stylistic/nonblock-statement-body-position');
+  });
+
+  it("should lint expectedly for '@stylistic/brace-style'", async () => {
+    await linter.checkRule('@stylistic/brace-style');
+  });
+
+  it("should lint expectedly for 'no-else-return'", async () => {
+    await linter.checkRule('no-else-return');
+  });
+
+  // Comments rules
+  it("should lint expectedly for '@stylistic/spaced-comment'", async () => {
+    await linter.checkRule('@stylistic/spaced-comment');
   });
 });
