@@ -2,7 +2,7 @@ import fs from 'fs';
 
 // helper function to remove common leading indentation
 function dedent(str) {
-  const lines = str.replace(/\t/g, '  ').split('\n');
+  const lines = str.split('\n');
   // Ignore empty lines at start/end
   while (lines.length && lines[0].trim() === '') lines.shift();
   while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();

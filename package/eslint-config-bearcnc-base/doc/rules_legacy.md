@@ -17,6 +17,7 @@
   - [Blocks](#blocks)
   - [Control Statements](#control-statements)
   - [Comments](#comments)
+  - [Whitespace](#whitespace)
 
 ## See also
 
@@ -346,7 +347,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 1)
 
   ```js
   var double = "double";
@@ -354,7 +355,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var single = 'single';
@@ -364,7 +365,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var double = "a string containing 'single' quotes";
@@ -533,7 +534,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
   ```js
   Foo.prototype.bar = function () {};
@@ -551,7 +552,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   Foo.prototype.bar = function bar() {};
@@ -1104,7 +1105,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 1)
 
   ```js
   foo = 'foo';
@@ -1112,7 +1113,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var foo = 'foo';
@@ -1120,7 +1121,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 2)
 
   ```js
   var foo = someFunction();
@@ -1129,7 +1130,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   /* global someFunction, a */
@@ -1294,7 +1295,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 6, eslint: 'func-names: "off"')
+  [//]: # (expectedErrors: 6)
 
   ```js
   /* global some_unused_var */
@@ -1326,7 +1327,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'func-names: "off", no-var: "off", no-undef: "off", no-use-before-define: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'no-use-before-define: "off"')
 
   ```js
   var x = 10;
@@ -2254,5 +2255,39 @@ This doc was created by referencing the following material:
       // TODO: total should be configurable by an options param
       this.total = 0;
     }
+  }
+  ```
+
+## Whitespace
+
+- 19.1 Use soft tabs (space character) set to 2 spaces. eslint: [`@stylistic/indent`](https://eslint.style/rules/indent)
+
+  **Note:** Originally it was eslint: [`indent`](https://eslint.org/docs/latest/rules/indent) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  // 4 spaces
+  function foo1() {
+      var a = 'foo';
+  }
+
+  // tab indentation
+  function foo2() {
+  	var a = 'foo';
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+    var a = 'foo';
   }
   ```

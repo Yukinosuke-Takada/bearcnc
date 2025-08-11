@@ -10,6 +10,7 @@ const linter = new Linter({
   docPath: path.resolve(__dirname, '../doc/rules_legacy.md'),
   configType: 'es5',
   globalEslintConfig: [
+    '@stylistic/indent: "off"',
     '@stylistic/quotes: "off"',
     'func-names: "off"',
     'no-undef: "off"',
@@ -18,7 +19,7 @@ const linter = new Linter({
 });
 
 describe('ES5 (legacy) Rules', () => {
-  // Objects rules
+  // 3 Objects rules
   it("should lint expectedly for 'no-object-constructor'", async () => {
     await linter.checkRule('no-object-constructor');
   });
@@ -31,7 +32,7 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('no-prototype-builtins');
   });
 
-  // Arrays rules
+  // 4 Arrays rules
   it("should lint expectedly for 'no-array-constructor'", async () => {
     await linter.checkRule('no-array-constructor');
   });
@@ -40,9 +41,9 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('array-callback-return');
   });
 
-  // Strings rules
+  // 6 Strings rules
   it("should lint expectedly for '@stylistic/quotes'", async () => {
-    await linter.checkRule('@stylistic/quotes', { ignoreGlobalConfig: true });
+    await linter.checkRule('@stylistic/quotes');
   });
 
   it("should lint expectedly for 'no-eval'", async () => {
@@ -53,13 +54,13 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('no-useless-escape');
   });
 
-  // Functions rules
+  // 7 Functions rules
   // it("should lint expectedly for 'func-style'", async () => {
   //   await linter.checkRule('func-style');
   // });
 
   it("should lint expectedly for 'func-names'", async () => {
-    await linter.checkRule('func-names', { ignoreGlobalConfig: true });
+    await linter.checkRule('func-names');
   });
 
   it("should lint expectedly for '@stylistic/wrap-iife'", async () => {
@@ -90,19 +91,19 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('@stylistic/function-paren-newline');
   });
 
-  // Iterators and Generators rules
+  // 11 Iterators and Generators rules
   it("should lint expectedly for 'no-restricted-syntax'", async () => {
     await linter.checkRule('no-restricted-syntax');
   });
 
-  // Properties rules
+  // 12 Properties rules
   it("should lint expectedly for 'dot-notation'", async () => {
     await linter.checkRule('dot-notation');
   });
 
-  // Variables rules
+  // 13 Variables rules
   it("should lint expectedly for 'no-undef'", async () => {
-    await linter.checkRule('no-undef', { ignoreGlobalConfig: true });
+    await linter.checkRule('no-undef');
   });
 
   it("should lint expectedly for 'one-var'", async () => {
@@ -118,15 +119,15 @@ describe('ES5 (legacy) Rules', () => {
   });
 
   it("should lint expectedly for 'no-unused-vars'", async () => {
-    await linter.checkRule('no-unused-vars', { ignoreGlobalConfig: true });
+    await linter.checkRule('no-unused-vars');
   });
 
-  // Hoisting rules
+  // 14 Hoisting rules
   it("should lint expectedly for 'no-use-before-define'", async () => {
     await linter.checkRule('no-use-before-define');
   });
 
-  // Comparison Operators & Equality rules
+  // 15 Comparison Operators & Equality rules
   it("should lint expectedly for 'eqeqeq'", async () => {
     await linter.checkRule('eqeqeq');
   });
@@ -147,7 +148,7 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('no-mixed-operators');
   });
 
-  // Blocks rules
+  // 16 Blocks rules
   it("should lint expectedly for '@stylistic/nonblock-statement-body-position'", async () => {
     await linter.checkRule('@stylistic/nonblock-statement-body-position');
   });
@@ -160,8 +161,13 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('no-else-return');
   });
 
-  // Comments rules
+  // 18 Comments rules
   it("should lint expectedly for '@stylistic/spaced-comment'", async () => {
     await linter.checkRule('@stylistic/spaced-comment');
+  });
+
+  // 19 Whitespace rules
+  it("should lint expectedly for '@stylistic/indent'", async () => {
+    await linter.checkRule('@stylistic/indent');
   });
 });

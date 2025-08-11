@@ -10,6 +10,7 @@ import objectsConfig from './objects.js';
 import propertiesConfig from './properties.js';
 import stringsConfig from './strings.js';
 import variablesConfig from './variables.js';
+import whitespaceConfig from './whitespace.js';
 
 export default defineConfig([
   arraysConfig,
@@ -23,6 +24,7 @@ export default defineConfig([
   propertiesConfig,
   stringsConfig,
   variablesConfig,
+  whitespaceConfig,
   {
     languageOptions: {
       ecmaVersion: 5,

@@ -11,13 +11,12 @@ class Linter {
     this.configType = configType;
     // globalEslintConfig is an array of strings
     this.globalEslintConfig = globalEslintConfig;
-    this.globalEslintConfigString = Array.isArray(globalEslintConfig) ? globalEslintConfig.join(', ') : '';
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
     });
   }
 
-  async checkRule(rule, { ignoreGlobalConfig = false } = {}) {
+  async checkRule(rule) {
     const { availability, testCases } = getTestCasesData(rule, this.docPath);
 
     // check if the config type is available for the rule
@@ -34,13 +33,17 @@ class Linter {
       }
     });
 
+    // Prepare globalEslintConfigString, filtering out items that start with `rule + ':'`
+    const globalEslintConfigString = Array.isArray(this.globalEslintConfig)
+      ? this.globalEslintConfig.filter((item) => !item.startsWith(`${rule}:`)).join(', ')
+      : '';
+
     // check if the code has expected errors counts
     for (let i = 0; i < testCases.length; i += 1) {
       const { code, expectedErrors, title } = testCases[i];
-      const codeWithGlobalConfig =
-        !ignoreGlobalConfig && this.globalEslintConfigString
-          ? `/* eslint ${this.globalEslintConfigString} */\n${code}`
-          : code;
+      const codeWithGlobalConfig = globalEslintConfigString
+        ? `/* eslint ${globalEslintConfigString} */\n${code}`
+        : code;
       const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
         console.log(`[${title}]\n`);
