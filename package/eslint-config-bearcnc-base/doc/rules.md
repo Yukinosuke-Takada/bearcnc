@@ -1282,9 +1282,9 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note1** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
+  **Note1:** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
 
-  **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
+  **Note2:** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
 
   Good:
 
@@ -1510,7 +1510,9 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+  **Note1:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Note2:** See, Section 19.2 for eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   Bad:
 
@@ -1579,63 +1581,6 @@ This doc was created by referencing the following material:
       // ...
   }
   ```
-
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
-
-  **Availability:** `es5`, `es6`
-
-  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
-
-  Bad:
-
-  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
-
-  ```js
-  function a(){}
-  
-  if (a){
-      b();
-  }
-  
-  for (;;){
-      b();
-  }
-  
-  try {} catch (a){}
-  
-  class Foo{
-    constructor(){}
-  }
-  ```
-
-  Good:
-
-  [//]: # (expectedErrors: 0)
-
-  ```js
-  function a() {}
-
-  if (a) {
-      b();
-  }
-  
-  if (a) {
-      b();
-  } else{ /* no error. this is checked by `keyword-spacing` rule. */
-      c();
-  }
-  
-  class C {
-      static{} /* no error. this is checked by `keyword-spacing` rule. */
-  }
-
-  for (;;) {
-      b();
-  }
-  
-  try {} catch (a) {}
-  ```
-
 
 - 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
 
@@ -4576,5 +4521,55 @@ This doc was created by referencing the following material:
   ```js
   function foo1() {
     const a = 'foo';
+  }
+  ```
+
+
+- 19.2 Place 1 space before the leading brace. eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
+
+  ```js
+  function a(){}
+
+  if (a){
+      b();
+  }
+
+  for (;;){
+      b();
+  }
+
+  try {} catch (a){}
+
+  class Foo{
+    constructor(){}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
+  ```js
+  function a() {}
+
+  if (a) {
+      b();
+  }
+
+  for (;;) {
+      b();
+  }
+
+  try {} catch (a) {}
+
+  class Foo {
+    constructor() {}
   }
   ```

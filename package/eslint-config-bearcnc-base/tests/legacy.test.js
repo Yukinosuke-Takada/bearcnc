@@ -79,10 +79,6 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('@stylistic/space-before-function-paren');
   });
 
-  it("should lint expectedly for '@stylistic/space-before-blocks'", async () => {
-    await linter.checkRule('@stylistic/space-before-blocks');
-  });
-
   it("should lint expectedly for 'no-param-reassign'", async () => {
     await linter.checkRule('no-param-reassign');
   });
@@ -169,5 +165,9 @@ describe('ES5 (legacy) Rules', () => {
   // 19 Whitespace rules
   it("should lint expectedly for '@stylistic/indent'", async () => {
     await linter.checkRule('@stylistic/indent');
+  });
+
+  it("should lint expectedly for '@stylistic/space-before-blocks'", async () => {
+    await linter.checkRule('@stylistic/space-before-blocks');
   });
 });

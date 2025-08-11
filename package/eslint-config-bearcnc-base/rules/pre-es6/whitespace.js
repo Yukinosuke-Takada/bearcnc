@@ -33,5 +33,8 @@ export default defineConfig({
         flatTernaryExpressions: false,
       },
     ],
+
+    // (19.2) Enforce consistent spacing before blocks
+    '@stylistic/space-before-blocks': 'error',
   },
 });

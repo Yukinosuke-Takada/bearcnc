@@ -776,7 +776,9 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+  **Note1:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Note2:** See, Section 19.2 for eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   Bad:
 
@@ -816,54 +818,6 @@ This doc was created by referencing the following material:
   } catch (e) {
       // ...
   }
-  ```
-
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
-
-  **Availability:** `es5`, `es6`
-
-  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
-
-  Bad:
-
-  [//]: # (expectedErrors: 4)
-
-  ```js
-  function a(){}
-
-  if (a){
-      b();
-  }
-
-  for (;;){
-      b();
-  }
-
-  try {} catch (a){}
-  ```
-
-  Good:
-
-  [//]: # (expectedErrors: 0)
-
-  ```js
-  function a() {}
-
-  if (a) {
-      b();
-  }
-
-  if (a) {
-      b();
-  } else{ /* no error. this is checked by `keyword-spacing` rule. */
-      c();
-  }
-
-  for (;;) {
-      b();
-  }
-
-  try {} catch (a) {}
   ```
 
 - 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
@@ -2290,4 +2244,45 @@ This doc was created by referencing the following material:
   function foo1() {
     var a = 'foo';
   }
+  ```
+
+- 19.2 Place 1 space before the leading brace. eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'no-useless-constructor: "off"')
+
+  ```js
+  function a(){}
+
+  if (a){
+      b();
+  }
+
+  for (;;){
+      b();
+  }
+
+  try {} catch (a){}
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
+  ```js
+  function a() {}
+
+  if (a) {
+      b();
+  }
+
+  for (;;) {
+      b();
+  }
+
+  try {} catch (a) {}
   ```
