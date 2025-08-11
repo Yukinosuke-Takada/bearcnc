@@ -6,6 +6,7 @@ export default defineConfig({
     '@stylistic': stylistic,
   },
   rules: {
+    // (18.3) Enforce consistent spacing on comments
     '@stylistic/spaced-comment': [
       'error',
       'always',
