@@ -876,7 +876,7 @@ This doc was created by referencing the following material:
   const foo = array[0];
   const arr = array[someIndex];
 
-  const [ foo2 ] = array;
+  const [foo2] = array;
 
   // Objects
   const { baz } = object;
@@ -4690,7 +4690,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  d3.select("body").selectAll("p").data([4, 8, 15, 16, 23, 42 ]).enter().append("p").text((d) => `I'm number ${d}!`);
+  d3.select("body").selectAll("p").data([4, 8, 15, 16, 23, 42]).enter().append("p").text((d) => `I'm number ${d}!`);
   ```
 
   Good:
@@ -4891,4 +4891,92 @@ This doc was created by referencing the following material:
 
   // Only 1 newline at the end
 
+  ```
+
+- 19.10 Do not add spaces inside parentheses. eslint: [`@stylistic/space-in-parens`](https://eslint.style/rules/space-in-parens)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-in-parens`](https://eslint.org/docs/latest/rules/space-in-parens) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 12, eslint: 'no-use-before-define: "off"')
+
+  ```js
+  foo( );
+
+  foo( 'bar');
+  foo('bar' );
+  foo( 'bar' );
+
+  foo( /* bar */ );
+
+  var foo = ( 1 + 2 ) * 3;
+  ( function () { return 'bar'; }() );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-use-before-define: "off"')
+
+  ```js
+  foo();
+
+  foo('bar');
+
+  foo(/* bar */);
+
+  var foo = (1 + 2) * 3;
+  (function () { return 'bar'; }());
+  ```
+
+- 19.11 Do not add spaces inside brackets. eslint: [`@stylistic/array-bracket-spacing`](https://eslint.style/rules/array-bracket-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`array-bracket-spacing`](https://eslint.org/docs/latest/rules/array-bracket-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 15)
+
+  ```js
+  var arr = [ 'foo', 'bar' ];
+  var arr = ['foo', 'bar' ];
+  var arr = [ ['foo'], 'bar'];
+  var arr = [[ 'foo' ], 'bar'];
+  var arr = [ 'foo',
+    'bar'
+  ];
+  var [ x, y ] = z;
+  var [ x,y ] = z;
+  var [ x, ...y ] = z;
+  var [ ,,x, ] = z;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var arr = [];
+  var arr = ['foo', 'bar', 'baz'];
+  var arr = [['foo'], 'bar', 'baz'];
+  var arr = [
+    'foo',
+    'bar',
+    'baz'
+  ];
+  var arr = ['foo',
+    'bar'
+  ];
+  var arr = [
+    'foo',
+    'bar'];
+
+  var [x, y] = z;
+  var [x,y] = z;
+  var [x, ...y] = z;
+  var [,,x,] = z;
   ```

@@ -203,4 +203,12 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for '@stylistic/no-multiple-empty-lines'", async () => {
     await linter.checkRule('@stylistic/no-multiple-empty-lines');
   });
+
+  it("should lint expectedly for '@stylistic/space-in-parens'", async () => {
+    await linter.checkRule('@stylistic/space-in-parens');
+  });
+
+  it("should lint expectedly for '@stylistic/array-bracket-spacing'", async () => {
+    await linter.checkRule('@stylistic/array-bracket-spacing');
+  });
 });

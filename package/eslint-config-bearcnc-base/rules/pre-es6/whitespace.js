@@ -6,6 +6,9 @@ export default defineConfig({
     '@stylistic': stylistic,
   },
   rules: {
+    // (19.11) Disallow spacing in brackets
+    '@stylistic/array-bracket-spacing': 'error',
+
     // (19.5) Enforce newline at the end of files
     '@stylistic/eol-last': 'error',
 
@@ -70,5 +73,8 @@ export default defineConfig({
 
     // (19.4) Enforce consistent spacing around infix operators
     '@stylistic/space-infix-ops': 'error',
+
+    // (19.10) Disallow spaces in parentheses
+    '@stylistic/space-in-parens': 'error',
   },
 });
