@@ -59,6 +59,9 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) → [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
   -  [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) → [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
   -  [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) → [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
+  -  [`padding-line-between-statements`](https://eslint.org/docs/latest/rules/padding-line-between-statements) → [`@stylistic/padding-line-between-statements`](https://eslint.style/rules/padding-line-between-statements)
+  -  [`padded-blocks`](https://eslint.org/docs/latest/rules/padded-blocks) → [`@stylistic/padded-blocks`](https://eslint.style/rules/padded-blocks)
+  -  [`no-multiple-empty-lines`](https://eslint.org/docs/latest/rules/no-multiple-empty-lines) → [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`
@@ -69,4 +72,7 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   - On section 10.4, it was rule [`no-duplicate-imports`](https://eslint.org/docs/latest/rules/no-duplicate-imports) but changed to [`import/no-duplicates`](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md) following the source code.
   - On section 11.1, removed [`no-iterator`](https://eslint.org/docs/latest/rules/no-iterator) because the explanation does not match the rule.
   - On section 13.1, removed [`prefer-const`](https://eslint.org/docs/latest/rules/prefer-const) since it isn't relevant.
-  - On section 13.7, removed rule [`operator-linebreak`](https://eslint.org/docs/latest/rules/operator-linebreak). It wasn't relevant 
+  - On section 13.7, removed rule [`operator-linebreak`](https://eslint.org/docs/latest/rules/operator-linebreak). It wasn't relevant
+  - On section 19.6, "(more than 2 method chains)" → "(more than 4 method chains)" following the source code.
+  - On section 19.7. Added the corresponding rule [`@stylistic/padding-line-between-statements`](https://eslint.style/rules/padding-line-between-statements)
+

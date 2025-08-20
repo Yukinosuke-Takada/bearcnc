@@ -313,4 +313,24 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/eol-last'", async () => {
     await linter.checkRule('@stylistic/eol-last');
   });
+
+  it("should lint expectedly for '@stylistic/newline-per-chained-call'", async () => {
+    await linter.checkRule('@stylistic/newline-per-chained-call');
+  });
+
+  it("should lint expectedly for '@stylistic/no-whitespace-before-property'", async () => {
+    await linter.checkRule('@stylistic/no-whitespace-before-property');
+  });
+
+  // it("should lint expectedly for '@stylistic/padding-line-between-statements'", async () => {
+  //   await linter.checkRule('@stylistic/padding-line-between-statements');
+  // });
+
+  it("should lint expectedly for '@stylistic/padded-blocks'", async () => {
+    await linter.checkRule('@stylistic/padded-blocks');
+  });
+
+  it("should lint expectedly for '@stylistic/no-multiple-empty-lines'", async () => {
+    await linter.checkRule('@stylistic/no-multiple-empty-lines');
+  });
 });

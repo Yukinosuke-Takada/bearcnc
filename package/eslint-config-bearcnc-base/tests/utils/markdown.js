@@ -3,8 +3,6 @@ import fs from 'fs';
 // helper function to remove common leading indentation
 function dedent(str) {
   const lines = str.split('\n');
-  // Ignore empty lines at start
-  while (lines.length && lines[0].trim() === '') lines.shift();
   // Find minimum indentation (ignore empty lines)
   const indents = lines.filter((line) => line.trim()).map((line) => line.match(/^ */)[0].length);
   const minIndent = indents.length ? Math.min(...indents) : 0;

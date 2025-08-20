@@ -2383,3 +2383,203 @@ This doc was created by referencing the following material:
   }
 
   ```
+
+- 19.6 Use indentation when making long method chains (more than 4 method chains). Use a leading dot, which emphasizes that the line is a method call, not a new statement. eslint: [`@stylistic/newline-per-chained-call`](https://eslint.style/rules/newline-per-chained-call)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`newline-per-chained-call`](https://eslint.org/docs/latest/rules/newline-per-chained-call) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  d3.select("body").selectAll("p").data([4, 8, 15, 16, 23, 42 ]).enter().append("p").text(function (d) { return "I'm number " + d + "!"; });
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  d3
+    .select("body")
+    .selectAll("p")
+    .data([
+        4,
+        8,
+        15,
+        16,
+        23,
+        42
+    ])
+    .enter()
+    .append("p")
+    .text(function (d) {
+      return "I'm number " + d + "!";
+    })
+  ```
+
+- 19.6.1 eslint: [`@stylistic/no-whitespace-before-property`](https://eslint.style/rules/no-whitespace-before-property)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-whitespace-before-property`](https://eslint.org/docs/latest/rules/no-whitespace-before-property) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 7)
+
+  ```js
+  foo [bar]
+
+  foo. bar
+
+  foo .bar
+
+  foo. bar. baz
+
+  foo. bar()
+    .baz()
+
+  foo
+    .bar(). baz()
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  foo.bar
+
+  foo[bar]
+
+  foo[ bar ]
+
+  foo.bar.baz
+
+  foo
+    .bar().baz()
+
+  foo
+    .bar()
+    .baz()
+
+  foo.
+    bar().
+    baz()
+  ```
+
+- 19.7 Leave a blank line after blocks and before the next statement. eslint: [`@stylistic/padding-line-between-statements`](https://eslint.style/rules/padding-line-between-statements)
+
+  **Availability:** `es5`, `es6`
+
+  **Note1:** Originally it was eslint: [`padding-line-between-statements`](https://eslint.org/docs/latest/rules/padding-line-between-statements) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Note2:** This rule is currently disabled.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function foo() {
+      bar();
+          return;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+      bar();
+
+      return;
+  }
+
+  function foo2() {
+      return;
+  }
+  ```
+
+- 19.8 Do not pad your blocks with blank lines.  eslint: [`@stylistic/padded-blocks`](https://eslint.style/rules/padded-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`padded-blocks`](https://eslint.org/docs/latest/rules/padded-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4)
+
+  ```js
+  if (a) {
+
+      b();
+
+  }
+
+  switch (a) {
+
+      case 0: foo2();
+
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (a) {
+      b();
+  }
+
+  switch (a) {
+      case 0: foo2();
+  }
+  ```
+
+- 19.9 Do not use multiple blank lines to pad your code. eslint: [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/latest/rules/no-multiple-empty-lines) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+
+  // Newline at the beginning
+
+  var foo = 5;
+
+
+  var bar = 3;
+
+  // More than 2 newlines at the end
+
+
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // No newline at the beginning
+
+  var foo = 5;
+
+  var bar = 3;
+
+  // Only 1 newline at the end
+
+  ```

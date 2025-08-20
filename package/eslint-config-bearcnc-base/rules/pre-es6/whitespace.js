@@ -40,6 +40,31 @@ export default defineConfig({
     // (19.3) Enforce consistent spacing before and after keywords
     '@stylistic/keyword-spacing': 'error',
 
+    // (19.6) Enforce linebreaks on long chains of method calls
+    '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
+
+    // (19.9) Disallow multiple empty lines
+    '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
+
+    // (19.6.1) Disallow whitespace before properties
+    '@stylistic/no-whitespace-before-property': 'error',
+
+    // (19.8) Enforce consistent line breaks inside blocks
+    '@stylistic/padded-blocks': [
+      'error',
+      {
+        blocks: 'never',
+        classes: 'never',
+        switches: 'never',
+      },
+      {
+        allowSingleLineBlocks: true,
+      },
+    ],
+
+    // (19.7) Enforce line breaks between statements
+    '@stylistic/padding-line-between-statements': 'off',
+
     // (19.2) Enforce consistent spacing before blocks
     '@stylistic/space-before-blocks': 'error',
 
