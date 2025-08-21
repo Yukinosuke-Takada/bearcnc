@@ -52,6 +52,9 @@ export default defineConfig({
     // (19.6.1) Disallow whitespace before properties
     '@stylistic/no-whitespace-before-property': 'error',
 
+    // (19.12) Enforce spaces inside curly braces
+    '@stylistic/object-curly-spacing': ['error', 'always'],
+
     // (19.8) Enforce consistent line breaks inside blocks
     '@stylistic/padded-blocks': [
       'error',

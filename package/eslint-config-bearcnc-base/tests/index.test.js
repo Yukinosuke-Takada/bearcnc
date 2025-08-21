@@ -341,4 +341,8 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/array-bracket-spacing'", async () => {
     await linter.checkRule('@stylistic/array-bracket-spacing');
   });
+
+  it("should lint expectedly for '@stylistic/object-curly-spacing'", async () => {
+    await linter.checkRule('@stylistic/object-curly-spacing');
+  });
 });

@@ -2340,7 +2340,7 @@ This doc was created by referencing the following material:
 
   a?b:c
 
-  var d={b:1};
+  var d={ b:1 };
   ```
 
   Good:
@@ -2354,7 +2354,7 @@ This doc was created by referencing the following material:
 
   a ? b : c
 
-  var d = {b:1};
+  var d = { b:1 };
   ```
 
 - 19.5 End files with a single newline character.  eslint: [`@stylistic/eol-last`](https://eslint.style/rules/eol-last)
@@ -2662,4 +2662,40 @@ This doc was created by referencing the following material:
   var arr = [
     'foo',
     'bar'];
+  ```
+
+- 19.12 Add spaces inside curly braces. eslint: [`@stylistic/object-curly-spacing`](https://eslint.style/rules/object-curly-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`object-curly-spacing`](https://eslint.org/docs/latest/rules/object-curly-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 10, eslint: '@stylistic/quote-props: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  var obj = {'foo': 'bar'};
+  var obj = {'foo': 'bar' };
+  var obj = { baz: {'foo': 'qux'}, bar: bar};
+  var obj = {baz: { 'foo': 'qux' }, bar: bar};
+  var obj = {'foo': 'bar'
+  };
+  var obj = {
+    'foo':'bar'};
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/quote-props: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  var obj = { 'foo': 'bar' };
+  var obj = { 'foo': 'bar' };
+  var obj = { baz: { 'foo': 'qux' }, bar: bar };
+  var obj = { baz: { 'foo': 'qux' }, bar: bar };
+  var obj = { 'foo': 'bar'
+  };
+  var obj = {
+    'foo':'bar' };
   ```

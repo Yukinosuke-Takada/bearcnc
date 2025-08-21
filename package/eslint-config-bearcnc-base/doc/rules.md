@@ -148,7 +148,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  let {a, b} = obj;    /* error 'b' is never reassigned, use 'const' instead. */
+  let { a, b } = obj;    /* error 'b' is never reassigned, use 'const' instead. */
   a = a + 1;
   ```
 
@@ -158,11 +158,11 @@ This doc was created by referencing the following material:
 
   ```js
   // using const.
-  const {a: a0, b} = obj;
+  const { a: a0, b } = obj;
   const a = a0 + 1;
   
   // all variables are reassigned.
-  let {c, d} = obj;
+  let { c, d } = obj;
   c = c + 1;
   d = d + 1;
   ```
@@ -273,7 +273,7 @@ This doc was created by referencing the following material:
       console.log(a);
   }
   ```
-  
+
 - 2.2 If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](https://eslint.org/docs/latest/rules/no-var)
 
   **Availability:** `es6`, ("off" for `es5`)
@@ -401,7 +401,7 @@ This doc was created by referencing the following material:
 
   ```js
   // properties
-  const foo = {x, y, z};
+  const foo = { x, y, z };
   
   // methods
   const bar = {
@@ -4627,9 +4627,9 @@ This doc was created by referencing the following material:
 
   a?b:c
 
-  const d={b:1};
+  const d={ b:1 };
 
-  var {e=0}=bar;
+  var { e=0 }=bar;
 
   function foo(a=0) { }
   ```
@@ -4645,9 +4645,9 @@ This doc was created by referencing the following material:
 
   a ? b : c
 
-  const d = {b:1};
+  const d = { b:1 };
 
-  var {e = 0} = bar;
+  var { e = 0 } = bar;
 
   function foo(a = 0) { }
   ```
@@ -4979,4 +4979,50 @@ This doc was created by referencing the following material:
   var [x,y] = z;
   var [x, ...y] = z;
   var [,,x,] = z;
+  ```
+
+- 19.12 Add spaces inside curly braces. eslint: [`@stylistic/object-curly-spacing`](https://eslint.style/rules/object-curly-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`object-curly-spacing`](https://eslint.org/docs/latest/rules/object-curly-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 14, eslint: '@stylistic/quote-props: "off", import/prefer-default-export: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  import {foo } from 'bar';
+
+  var obj = {'foo': 'bar'};
+  var obj = {'foo': 'bar' };
+  var obj = { baz: {'foo': 'qux'}, bar};
+  var obj = {baz: { 'foo': 'qux' }, bar};
+  var obj = {'foo': 'bar'
+  };
+  var obj = {
+    'foo':'bar'};
+  var {x} = y;
+
+  export {foo };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/quote-props: "off", import/prefer-default-export: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  import { foo } from 'bar';
+
+  var obj = { 'foo': 'bar' };
+  var obj = { 'foo': 'bar' };
+  var obj = { baz: { 'foo': 'qux' }, bar };
+  var obj = { baz: { 'foo': 'qux' }, bar };
+  var obj = { 'foo': 'bar'
+  };
+  var obj = {
+    'foo':'bar' };
+  var { x } = y;
+
+  export { foo };
   ```
