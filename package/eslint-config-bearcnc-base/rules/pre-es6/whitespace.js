@@ -9,6 +9,9 @@ export default defineConfig({
     // (19.11) Disallow spacing in brackets
     '@stylistic/array-bracket-spacing': 'error',
 
+    // (19.14) Enforce consistent spacing inside blocks
+    '@stylistic/block-spacing': 'error',
+
     // (19.5) Enforce newline at the end of files
     '@stylistic/eol-last': 'error',
 

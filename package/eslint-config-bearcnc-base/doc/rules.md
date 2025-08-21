@@ -1266,8 +1266,8 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  var x = function () { return { y: 1 };}(); // unwrapped
-  var x = (function () { return { y: 1 };})(); // wrapped function expression
+  var x = function () { return { y: 1 }; }(); // unwrapped
+  var x = (function () { return { y: 1 }; })(); // wrapped function expression
   ```
 
   Good:
@@ -1275,7 +1275,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var x = (function () { return { y: 1 };}()); // wrapped call expression
+  var x = (function () { return { y: 1 }; }()); // wrapped call expression
   ```
 
 - 7.3 Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears. eslint: [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations)
@@ -1860,8 +1860,8 @@ This doc was created by referencing the following material:
   (a) =>{};
   a =>a;
   a=> a;
-  ()=> {'\n'};
-  () =>{'\n'};
+  ()=> { '\n' };
+  () =>{ '\n' };
   ```
 
   Good:
@@ -1872,7 +1872,7 @@ This doc was created by referencing the following material:
   () => {};
   (a) => {};
   a => a;
-  () => {'\n'};
+  () => { '\n' };
   ```
 
 - 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`arrow-body-style`](https://eslint.org/docs/latest/rules/arrow-body-style)
@@ -1991,7 +1991,7 @@ This doc was created by referencing the following material:
   ```js
   a => {};
   a => a;
-  a => {'\n'};
+  a => { '\n' };
   a.then(foo => {});
   a.then(foo => a);
   a(foo => { if (true) {} });
@@ -2005,7 +2005,7 @@ This doc was created by referencing the following material:
   () => {};
   (a) => {};
   (a) => a;
-  (a) => {'\n'}
+  (a) => { '\n' }
   a.then((foo) => {});
   a.then((foo) => { if (true) {} });
   ```
@@ -5066,4 +5066,39 @@ This doc was created by referencing the following material:
   var longRegex = /^(?=.{12,128}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]).+[A-Za-z\d!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]{12,128}$/;
 
   var longTemplateLiteral = `This is a very very very long template literal that contains: ${longString}`
+  ```
+
+- 19.14 Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line. eslint: [`@stylistic/block-spacing`](https://eslint.style/rules/block-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`block-spacing`](https://eslint.org/docs/latest/rules/block-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: '@stylistic/brace-style: "off", prefer-const: "off"')
+
+  ```js
+  function foo() {return true;}
+  if (foo) { bar = 0;}
+  function baz() {let i = 0;
+      return i;
+  }
+
+  class C {
+      static {this.bar = 0;}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() { return true; }
+  if (foo) { bar = 0; }
+
+  class C {
+      static { this.bar = 0; }
+  }
   ```

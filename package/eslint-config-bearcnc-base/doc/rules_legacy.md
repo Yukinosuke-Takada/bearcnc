@@ -581,8 +581,8 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  var x = function () { return { y: 1 };}(); // unwrapped
-  var x = (function () { return { y: 1 };})(); // wrapped function expression
+  var x = function () { return { y: 1 }; }(); // unwrapped
+  var x = (function () { return { y: 1 }; })(); // wrapped function expression
   ```
 
   Good:
@@ -590,7 +590,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var x = (function () { return { y: 1 };}()); // wrapped call expression
+  var x = (function () { return { y: 1 }; }()); // wrapped call expression
   ```
 
 - 7.3 Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears. eslint: [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations)
@@ -2736,4 +2736,31 @@ This doc was created by referencing the following material:
   var longString = 'This is a very very very very very very long string resulting more than 100 characters!'
 
   var longRegex = /^(?=.{12,128}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]).+[A-Za-z\d!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]{12,128}$/;
+  ```
+
+- 19.14 Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line. eslint: [`@stylistic/block-spacing`](https://eslint.style/rules/block-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`block-spacing`](https://eslint.org/docs/latest/rules/block-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: '@stylistic/brace-style: "off"')
+
+  ```js
+  function foo() {return true;}
+  if (foo) { bar = 0;}
+  function baz() {var i = 0;
+      return i;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() { return true; }
+  if (foo) { bar = 0; }
   ```

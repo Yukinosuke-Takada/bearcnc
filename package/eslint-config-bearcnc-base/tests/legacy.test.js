@@ -219,4 +219,8 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for '@stylistic/max-len'", async () => {
     await linter.checkRule('@stylistic/max-len');
   });
+
+  it("should lint expectedly for '@stylistic/block-spacing'", async () => {
+    await linter.checkRule('@stylistic/block-spacing');
+  });
 });
