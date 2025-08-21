@@ -1,4 +1,5 @@
 import fs from 'fs';
+import generateEsComment from './eslint.js';
 
 // helper function to remove common leading indentation
 function dedent(str) {
@@ -71,10 +72,11 @@ function getTestCasesData(rule, docPath) {
         })();
 
     // Extract eslint config if present
-    let eslintConfig = null;
+    let eslintConfig = [];
     const eslintConfigMatch = commentOut.match(/eslint:\s*'([^']+)'/);
     if (eslintConfigMatch) {
-      [, eslintConfig] = eslintConfigMatch;
+      const [, eslintConfigString] = eslintConfigMatch;
+      eslintConfig = eslintConfigString.split(', ').map((item) => item.trim());
     }
 
     const codeSectionParts = section.code.split('```js');
@@ -85,9 +87,7 @@ function getTestCasesData(rule, docPath) {
     let code = dedent(codeRaw.substring(0, codeRaw.lastIndexOf('\n')));
 
     // Prefix eslint config if present
-    if (eslintConfig) {
-      code = `/* eslint ${eslintConfig} */\n${code}`;
-    }
+    code = generateEsComment(eslintConfig) + code;
 
     testCases.push({
       isGood: section.isGood,

@@ -43,6 +43,20 @@ export default defineConfig({
     // (19.3) Enforce consistent spacing before and after keywords
     '@stylistic/keyword-spacing': 'error',
 
+    // (19.13) Enforce maximum line length
+    '@stylistic/max-len': [
+      'error',
+      {
+        code: 100,
+        tabWidth: 2,
+        ignoreUrls: true,
+        ignoreComments: false,
+        ignoreRegExpLiterals: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+      },
+    ],
+
     // (19.6) Enforce linebreaks on long chains of method calls
     '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
 

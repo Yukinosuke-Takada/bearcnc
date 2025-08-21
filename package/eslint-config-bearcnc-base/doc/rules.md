@@ -1657,7 +1657,8 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
-  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
+  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res',
+  // 'response', '$scope', 'staticContext'.
 
   const foo = function (e) {
       e.prop = "value";
@@ -3429,7 +3430,8 @@ This doc was created by referencing the following material:
       return n * fact(n - 1);
   }
 
-  // When a function definition destructures an array, unused entries from the array also cause warnings.
+  // When a function definition destructures an array, unused entries from the array also cause
+  // warnings.
   function getY([x, y]) {
       return y;
   }
@@ -5025,4 +5027,43 @@ This doc was created by referencing the following material:
   var { x } = y;
 
   export { foo };
+  ```
+
+- 19.13 Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per above, long strings are exempt from this rule, and should not be broken up.  eslint: [`@stylistic/max-len`](https://eslint.style/rules/max-len)
+
+  > Why? This ensures readability and maintainability.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`max-len`](https://eslint.org/docs/latest/rules/max-len) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var foo = somethingLong.long && somethingLong.veryLong && somethingLong.veryVeryLong && somethingLong.veryVeryVeryLong;
+
+  // This is a very very very very very very very long comment that stretches more than 100 characters.
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = somethingLong.long
+    && somethingLong.veryLong
+    && somethingLong.veryVeryLong
+    && somethingLong.veryVeryVeryLong
+
+  // This is a very very very very very very very long comment that stretches more than 100
+  // characters.
+
+  // Exemption:
+  var longString = 'This is a very very very very very very long string resulting more than 100 characters!'
+
+  var longRegex = /^(?=.{12,128}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]).+[A-Za-z\d!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]{12,128}$/;
+
+  var longTemplateLiteral = `This is a very very very long template literal that contains: ${longString}`
   ```

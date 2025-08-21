@@ -1,8 +1,9 @@
 import { ESLint } from 'eslint';
 import getTestCasesData from './markdown.js';
 import { expect } from 'chai';
+import generateEsComment from './eslint.js';
 
-const DEBUG = true; // Set to true to enable debug logging
+const DEBUG = false; // Set to true to enable debug logging
 
 class Linter {
   constructor({ configFilePath, docPath, configType, globalEslintConfig = [] }) {
@@ -33,17 +34,12 @@ class Linter {
       }
     });
 
-    // Prepare globalEslintConfigString, filtering out items that start with `rule + ':'`
-    const globalEslintConfigString = Array.isArray(this.globalEslintConfig)
-      ? this.globalEslintConfig.filter((item) => !item.startsWith(`${rule}:`)).join(', ')
-      : '';
+    const filteredGlobalConfig = this.globalEslintConfig.filter((item) => !item.startsWith(`${rule}:`));
 
     // check if the code has expected errors counts
     for (let i = 0; i < testCases.length; i += 1) {
       const { code, expectedErrors, title } = testCases[i];
-      const codeWithGlobalConfig = globalEslintConfigString
-        ? `/* eslint ${globalEslintConfigString} */\n${code}`
-        : code;
+      const codeWithGlobalConfig = generateEsComment(filteredGlobalConfig) + code;
       const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
         console.log(`[${title}]\n`);
