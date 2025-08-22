@@ -184,11 +184,11 @@ describe('ES5 (legacy) Rules', () => {
     await linter.checkRule('@stylistic/eol-last');
   });
 
-  it("should not lint for '@stylistic/newline-per-chained-call'", async () => {
+  it("should lint expectedly for '@stylistic/newline-per-chained-call'", async () => {
     await linter.checkRule('@stylistic/newline-per-chained-call', false);
   });
 
-  it("should not lint for '@stylistic/no-whitespace-before-property'", async () => {
+  it("should lint expectedly for '@stylistic/no-whitespace-before-property'", async () => {
     await linter.checkRule('@stylistic/no-whitespace-before-property', false);
   });
 
