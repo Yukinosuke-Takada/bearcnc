@@ -67,6 +67,9 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`object-curly-spacing`](https://eslint.org/docs/latest/rules/object-curly-spacing) → [`@stylistic/object-curly-spacing`](https://eslint.style/rules/object-curly-spacing)
   -  [`max-len`](https://eslint.org/docs/latest/rules/max-len) → [`@stylistic/max-len`](https://eslint.style/rules/max-len)
   -  [`block-spacing`](https://eslint.org/docs/latest/rules/block-spacing) → [`@stylistic/block-spacing`](https://eslint.style/rules/block-spacing)
+  -  [`comma-spacing`](https://eslint.org/docs/latest/rules/comma-spacing) → [`@stylistic/comma-spacing`](https://eslint.style/rules/comma-spacing)
+  -  [`computed-property-spacing`](https://eslint.org/docs/latest/rules/computed-property-spacing) → [`@stylistic/computed-property-spacing`](https://eslint.style/rules/computed-property-spacing)
+  -  [`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing) → [`@stylistic/function-call-spacing`](https://eslint.style/rules/function-call-spacing)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`

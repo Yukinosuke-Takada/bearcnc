@@ -12,8 +12,17 @@ export default defineConfig({
     // (19.14) Enforce consistent spacing inside blocks
     '@stylistic/block-spacing': 'error',
 
+    // (19.15) Enforce consistent spacing around commas
+    '@stylistic/comma-spacing': 'error',
+
+    // (19.16) Enforce consistent spacing around computed properties
+    '@stylistic/computed-property-spacing': 'error',
+
     // (19.5) Enforce newline at the end of files
     '@stylistic/eol-last': 'error',
+
+    // (19.17) Enforce consistent spacing in function calls
+    '@stylistic/function-call-spacing': 'error',
 
     // (19.1) Enforce consistent indentation
     '@stylistic/indent': [

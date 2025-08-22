@@ -353,4 +353,16 @@ describe('ES6 Rules', () => {
   it("should lint expectedly for '@stylistic/block-spacing'", async () => {
     await linter.checkRule('@stylistic/block-spacing');
   });
+
+  it("should lint expectedly for '@stylistic/comma-spacing'", async () => {
+    await linter.checkRule('@stylistic/comma-spacing');
+  });
+
+  it("should lint expectedly for '@stylistic/computed-property-spacing'", async () => {
+    await linter.checkRule('@stylistic/computed-property-spacing');
+  });
+
+  it("should lint expectedly for '@stylistic/function-call-spacing'", async () => {
+    await linter.checkRule('@stylistic/function-call-spacing');
+  });
 });

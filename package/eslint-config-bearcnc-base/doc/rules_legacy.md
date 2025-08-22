@@ -541,7 +541,7 @@ This doc was created by referencing the following material:
 
   var cat = {
     meow: function () {}
-  }
+  };
 
   (function () {
       // ...
@@ -2450,7 +2450,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0)
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/computed-property-spacing: "off"')
 
   ```js
   foo.bar
@@ -2763,4 +2763,91 @@ This doc was created by referencing the following material:
   ```js
   function foo() { return true; }
   if (foo) { bar = 0; }
+  ```
+
+- 19.15 Avoid spaces before commas and require a space after commas. eslint: [`@stylistic/comma-spacing`](https://eslint.style/rules/comma-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`comma-spacing`](https://eslint.org/docs/latest/rules/comma-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 13, eslint: 'one-var: "off"')
+
+  ```js
+  var foo = 1 ,bar = 2;
+  var arr = [1 , 2];
+  var obj = { foo: "bar" ,baz: "qur" };
+  foo(a ,b);
+  new Foo(a ,b);
+  function baz(a ,b) {}
+  a ,b
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'one-var: "off"')
+
+  ```js
+  var foo = 1, bar = 2
+      , baz = 3;
+  var arr = [1, 2];
+  var arr = [1,, 3]
+  var obj = { foo: "bar", baz: "qur" };
+  foo(a, b);
+  new Foo(a, b);
+  function qur(a, b) {}
+  a, b
+  ```
+
+- 19.16 Enforce spacing inside of computed property brackets. eslint: [`@stylistic/computed-property-spacing`](https://eslint.style/rules/computed-property-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`computed-property-spacing`](https://eslint.org/docs/latest/rules/computed-property-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 4, eslint: 'dot-notation: "off"')
+
+  ```js
+  obj[foo ]
+  obj[ 'foo']
+  obj[foo[ bar ]]
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'dot-notation: "off"')
+
+  ```js
+  obj[foo]
+  obj['foo']
+  obj[foo[bar]]
+  ```
+
+- 19.17 Avoid spaces between functions and their invocations. eslint: [`@stylistic/function-call-spacing`](https://eslint.style/rules/function-call-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  fn ();
+
+  fn
+  ();
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  fn();
   ```
