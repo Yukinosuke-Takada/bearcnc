@@ -59,6 +59,14 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`object-curly-newline`](https://eslint.org/docs/latest/rules/object-curly-newline) → [`@stylistic/object-curly-newline`](https://eslint.style/rules/object-curly-newline)
   -  [`nonblock-statement-body-position`](https://eslint.org/docs/latest/rules/nonblock-statement-body-position) → [`@stylistic/nonblock-statement-body-position`](https://eslint.style/rules/nonblock-statement-body-position)
   -  [`brace-style`](https://eslint.org/docs/latest/rules/brace-style) → [`@stylistic/brace-style`](https://eslint.style/rules/brace-style)
+  -  [`spaced-comment`](https://eslint.org/docs/latest/rules/spaced-comment) → [`@stylistic/spaced-comment`](https://eslint.style/rules/spaced-comment)
+  -  [`indent`](https://eslint.org/docs/latest/rules/indent) → [`@stylistic/indent`](https://eslint.style/rules/indent)
+  -  [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) → [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
+  -  [`keyword-spacing`](https://eslint.org/docs/latest/rules/keyword-spacing) → [`@stylistic/keyword-spacing`](https://eslint.style/rules/keyword-spacing)
+  -  [`space-infix-ops`](https://eslint.org/docs/latest/rules/space-infix-ops) → [`@stylistic/space-infix-ops`](https://eslint.style/rules/space-infix-ops)
+  -  [`eol-last`](https://eslint.org/docs/latest/rules/eol-last) → [`@stylistic/eol-last`](https://eslint.style/rules/eol-last)
+  -  [`newline-per-chained-call`](https://eslint.org/docs/latest/rules/newline-per-chained-call) → [`@stylistic/newline-per-chained-call`](https://eslint.style/rules/newline-per-chained-call)
+  -  [`no-whitespace-before-property`](https://eslint.org/docs/latest/rules/no-whitespace-before-property) → [`@stylistic/no-whitespace-before-property`](https://eslint.style/rules/no-whitespace-before-property)
   -  [`padding-line-between-statements`](https://eslint.org/docs/latest/rules/padding-line-between-statements) → [`@stylistic/padding-line-between-statements`](https://eslint.style/rules/padding-line-between-statements)
   -  [`padded-blocks`](https://eslint.org/docs/latest/rules/padded-blocks) → [`@stylistic/padded-blocks`](https://eslint.style/rules/padded-blocks)
   -  [`no-multiple-empty-lines`](https://eslint.org/docs/latest/rules/no-multiple-empty-lines) → [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)
@@ -70,6 +78,8 @@ Bearcnc is a rewrite of [airbnb/javascript](https://github.com/airbnb/javascript
   -  [`comma-spacing`](https://eslint.org/docs/latest/rules/comma-spacing) → [`@stylistic/comma-spacing`](https://eslint.style/rules/comma-spacing)
   -  [`computed-property-spacing`](https://eslint.org/docs/latest/rules/computed-property-spacing) → [`@stylistic/computed-property-spacing`](https://eslint.style/rules/computed-property-spacing)
   -  [`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing) → [`@stylistic/function-call-spacing`](https://eslint.style/rules/function-call-spacing)
+  -  [`key-spacing`](https://eslint.org/docs/latest/rules/key-spacing) → [`@stylistic/key-spacing`](https://eslint.style/rules/key-spacing)
+  -  [`no-trailing-spaces`](https://eslint.org/docs/latest/rules/no-trailing-spaces) → [`@stylistic/no-trailing-spaces`](https://eslint.style/rules/no-trailing-spaces)
 
 - Changes to Rules due to new options:
   - [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations): considering the reasoning of the rule, it is set to: `no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]`

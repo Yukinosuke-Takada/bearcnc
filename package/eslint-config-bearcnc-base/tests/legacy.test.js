@@ -235,4 +235,12 @@ describe('ES5 (legacy) Rules', () => {
   it("should lint expectedly for '@stylistic/function-call-spacing'", async () => {
     await linter.checkRule('@stylistic/function-call-spacing');
   });
+
+  it("should lint expectedly for '@stylistic/key-spacing'", async () => {
+    await linter.checkRule('@stylistic/key-spacing');
+  });
+
+  it("should lint expectedly for '@stylistic/no-trailing-spaces'", async () => {
+    await linter.checkRule('@stylistic/no-trailing-spaces');
+  });
 });

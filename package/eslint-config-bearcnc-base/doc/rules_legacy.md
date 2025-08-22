@@ -1925,7 +1925,7 @@ This doc was created by referencing the following material:
               return y;
           }
           return x;
-      } 
+      }
       return z;
   }
   ```
@@ -2341,7 +2341,7 @@ This doc was created by referencing the following material:
 
   a?b:c
 
-  var d={ b:1 };
+  var d={ b: 1 };
   ```
 
   Good:
@@ -2355,7 +2355,7 @@ This doc was created by referencing the following material:
 
   a ? b : c
 
-  var d = { b:1 };
+  var d = { b: 1 };
   ```
 
 - 19.5 End files with a single newline character.  eslint: [`@stylistic/eol-last`](https://eslint.style/rules/eol-last)
@@ -2683,7 +2683,7 @@ This doc was created by referencing the following material:
   var obj = {'foo': 'bar'
   };
   var obj = {
-    'foo':'bar'};
+    'foo': 'bar'};
   ```
 
   Good:
@@ -2698,7 +2698,7 @@ This doc was created by referencing the following material:
   var obj = { 'foo': 'bar'
   };
   var obj = {
-    'foo':'bar' };
+    'foo': 'bar' };
   ```
 
 - 19.13 Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per above, long strings are exempt from this rule, and should not be broken up.  eslint: [`@stylistic/max-len`](https://eslint.style/rules/max-len)
@@ -2851,3 +2851,59 @@ This doc was created by referencing the following material:
   ```js
   fn();
   ```
+
+- 19.18 Enforce spacing between keys and values in object literal properties. eslint: [`@stylistic/key-spacing`](https://eslint.style/rules/key-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`key-spacing`](https://eslint.org/docs/latest/rules/key-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var obj1 = { foo : 42 };
+
+  var obj2 = { foo:42 };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var obj1 = { foo: 42 };
+
+  var obj2 = { foo: 42 };
+  ```
+
+- 19.19 Avoid trailing spaces at the end of lines. eslint: [`@stylistic/no-trailing-spaces`](https://eslint.style/rules/no-trailing-spaces)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-trailing-spaces`](https://eslint.org/docs/latest/rules/no-trailing-spaces) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3, eslint: '@stylistic/no-multiple-empty-lines: "off"')
+
+  ```js
+  var foo = 0; 
+  var baz = 5;  
+    
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = 0;
+  var baz = 5;
+
+  ```
+
+- 19.20 Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. 
+
+  **Note:** See, Section 19.9 for eslint: [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)

@@ -52,6 +52,9 @@ export default defineConfig({
       },
     ],
 
+    // (19.18) Enforce consistent spacing around colons in object literals
+    '@stylistic/key-spacing': 'error',
+
     // (19.3) Enforce consistent spacing before and after keywords
     '@stylistic/keyword-spacing': 'error',
 
@@ -74,6 +77,9 @@ export default defineConfig({
 
     // (19.9) Disallow multiple empty lines
     '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
+
+    // (19.20) Disallow trailing whitespace
+    '@stylistic/no-trailing-spaces': 'error',
 
     // (19.6.1) Disallow whitespace before properties
     '@stylistic/no-whitespace-before-property': 'error',
