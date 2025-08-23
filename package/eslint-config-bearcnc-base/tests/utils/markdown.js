@@ -1,11 +1,9 @@
 import fs from 'fs';
+import generateEsComment from './eslint.js';
 
 // helper function to remove common leading indentation
 function dedent(str) {
-  const lines = str.replace(/\t/g, '  ').split('\n');
-  // Ignore empty lines at start/end
-  while (lines.length && lines[0].trim() === '') lines.shift();
-  while (lines.length && lines[lines.length - 1].trim() === '') lines.pop();
+  const lines = str.split('\n');
   // Find minimum indentation (ignore empty lines)
   const indents = lines.filter((line) => line.trim()).map((line) => line.match(/^ */)[0].length);
   const minIndent = indents.length ? Math.min(...indents) : 0;
@@ -74,22 +72,22 @@ function getTestCasesData(rule, docPath) {
         })();
 
     // Extract eslint config if present
-    let eslintConfig = null;
+    let eslintConfig = [];
     const eslintConfigMatch = commentOut.match(/eslint:\s*'([^']+)'/);
     if (eslintConfigMatch) {
-      [, eslintConfig] = eslintConfigMatch;
+      const [, eslintConfigString] = eslintConfigMatch;
+      eslintConfig = eslintConfigString.split(', ').map((item) => item.trim());
     }
 
-    const codeSectionSplit = section.code.split('```js');
-    if (codeSectionSplit.length === 1) {
+    const codeSectionParts = section.code.split('```js');
+    if (codeSectionParts.length === 1) {
       throw new Error(`Code section not found in test case for "${title}"`);
     }
-    let code = dedent(codeSectionSplit[1].split('```')[0]);
+    const codeRaw = codeSectionParts[1].split('```')[0];
+    let code = dedent(codeRaw.substring(0, codeRaw.lastIndexOf('\n')));
 
     // Prefix eslint config if present
-    if (eslintConfig) {
-      code = `/* eslint ${eslintConfig} */\n${code}`;
-    }
+    code = generateEsComment(eslintConfig) + code;
 
     testCases.push({
       isGood: section.isGood,

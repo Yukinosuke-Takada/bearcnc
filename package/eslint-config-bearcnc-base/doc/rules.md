@@ -22,6 +22,7 @@
   - [Blocks](#blocks)
   - [Control Statements](#control-statements)
   - [Comments](#comments)
+  - [Whitespace](#whitespace)
 
 ## See also
 
@@ -147,7 +148,7 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 1)
 
   ```js
-  let {a, b} = obj;    /* error 'b' is never reassigned, use 'const' instead. */
+  let { a, b } = obj;    /* error 'b' is never reassigned, use 'const' instead. */
   a = a + 1;
   ```
 
@@ -157,11 +158,11 @@ This doc was created by referencing the following material:
 
   ```js
   // using const.
-  const {a: a0, b} = obj;
+  const { a: a0, b } = obj;
   const a = a0 + 1;
   
   // all variables are reassigned.
-  let {c, d} = obj;
+  let { c, d } = obj;
   c = c + 1;
   d = d + 1;
   ```
@@ -272,14 +273,14 @@ This doc was created by referencing the following material:
       console.log(a);
   }
   ```
-  
+
 - 2.2 If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](https://eslint.org/docs/latest/rules/no-var)
 
   **Availability:** `es6`, ("off" for `es5`)
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: '@stylistic/quotes: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 2)
 
   ```js
   var x = "y";
@@ -288,7 +289,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off", @stylistic/quotes: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'prefer-const: "off"')
 
   ```js
   let x = "y";
@@ -400,7 +401,7 @@ This doc was created by referencing the following material:
 
   ```js
   // properties
-  const foo = {x, y, z};
+  const foo = { x, y, z };
   
   // methods
   const bar = {
@@ -875,7 +876,7 @@ This doc was created by referencing the following material:
   const foo = array[0];
   const arr = array[someIndex];
 
-  const [ foo2 ] = array;
+  const [foo2] = array;
 
   // Objects
   const { baz } = object;
@@ -959,7 +960,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-var: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 2)
 
   ```js
   var double = "double";
@@ -968,7 +969,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-undef: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var single = 'single';
@@ -979,7 +980,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-var: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   var double = "a string containing 'single' quotes";
@@ -1218,14 +1219,14 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off", no-undef: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 4, eslint: 'object-shorthand: "off"')
 
   ```js
   Foo.prototype.bar = function () {};
 
   const cat = {
     meow: function () {}
-  }
+  };
 
   (function () {
       // ...
@@ -1236,14 +1237,14 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-undef: "off", no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   Foo.prototype.bar = function bar() {};
 
   const cat = {
     meow() {}
-  }
+  };
 
   (function bar() {
       // ...
@@ -1265,8 +1266,8 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 2)
 
   ```js
-  var x = function () { return { y: 1 };}(); // unwrapped
-  var x = (function () { return { y: 1 };})(); // wrapped function expression
+  var x = function () { return { y: 1 }; }(); // unwrapped
+  var x = (function () { return { y: 1 }; })(); // wrapped function expression
   ```
 
   Good:
@@ -1274,16 +1275,16 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0)
 
   ```js
-  var x = (function () { return { y: 1 };}()); // wrapped call expression
+  var x = (function () { return { y: 1 }; }()); // wrapped call expression
   ```
 
 - 7.3 Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears. eslint: [`no-inner-declarations`](https://eslint.org/docs/latest/rules/no-inner-declarations)
 
   **Availability:** `es5`, `es6`
 
-  **Note1** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
+  **Note1:** ESLint v9 provided new option [doc](https://eslint.org/docs/latest/use/migrate-to-9.0.0#-no-inner-declarations-has-a-new-default-behavior-with-a-new-option). On migrating, it should be `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "disallow" }]*/` However, based on the reasoning of the rule (above), `/*eslint no-inner-declarations: ["error", "functions", { blockScopedFunctions: "allow" }]*/` is appropriate.
 
-  **Note2** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
+  **Note2:** Due to the reasons mentioned in Note 1, linting behaves differently for ES5 and ES6+. Please check the documentation for other related rules as well.
 
   Good:
 
@@ -1509,7 +1510,9 @@ This doc was created by referencing the following material:
 
   **Availability:** `es5`, `es6`
 
-  **Note:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+  **Note1:** Originally it was eslint: [`space-before-function-paren`](https://eslint.org/docs/latest/rules/space-before-function-paren) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Note2:** See, Section 19.2 for eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
 
   Bad:
 
@@ -1578,63 +1581,6 @@ This doc was created by referencing the following material:
       // ...
   }
   ```
-
-- 7.11.1 eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
-
-  **Availability:** `es5`, `es6`
-
-  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
-
-  Bad:
-
-  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
-
-  ```js
-  function a(){}
-  
-  if (a){
-      b();
-  }
-  
-  for (;;){
-      b();
-  }
-  
-  try {} catch (a){}
-  
-  class Foo{
-    constructor(){}
-  }
-  ```
-
-  Good:
-
-  [//]: # (expectedErrors: 0)
-
-  ```js
-  function a() {}
-
-  if (a) {
-      b();
-  }
-  
-  if (a) {
-      b();
-  } else{ /* no error. this is checked by `keyword-spacing` rule. */
-      c();
-  }
-  
-  class C {
-      static{} /* no error. this is checked by `keyword-spacing` rule. */
-  }
-
-  for (;;) {
-      b();
-  }
-  
-  try {} catch (a) {}
-  ```
-
 
 - 7.12, 7.13 Never mutate parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/latest/rules/no-param-reassign)
 
@@ -1711,7 +1657,8 @@ This doc was created by referencing the following material:
   [//]: # (expectedErrors: 0, eslint: 'no-restricted-syntax: "off"')
 
   ```js
-  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res', 'response', '$scope', 'staticContext'.
+  // Allowed properties are: 'acc', 'accumulator', 'e', 'ctx', 'context', 'req', 'request', 'res',
+  // 'response', '$scope', 'staticContext'.
 
   const foo = function (e) {
       e.prop = "value";
@@ -1913,8 +1860,8 @@ This doc was created by referencing the following material:
   (a) =>{};
   a =>a;
   a=> a;
-  ()=> {'\n'};
-  () =>{'\n'};
+  ()=> { '\n' };
+  () =>{ '\n' };
   ```
 
   Good:
@@ -1925,7 +1872,7 @@ This doc was created by referencing the following material:
   () => {};
   (a) => {};
   a => a;
-  () => {'\n'};
+  () => { '\n' };
   ```
 
 - 8.2 If the function body consists of a single statement returning an expression without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a return statement. eslint: [`arrow-body-style`](https://eslint.org/docs/latest/rules/arrow-body-style)
@@ -2044,7 +1991,7 @@ This doc was created by referencing the following material:
   ```js
   a => {};
   a => a;
-  a => {'\n'};
+  a => { '\n' };
   a.then(foo => {});
   a.then(foo => a);
   a(foo => { if (true) {} });
@@ -2058,7 +2005,7 @@ This doc was created by referencing the following material:
   () => {};
   (a) => {};
   (a) => a;
-  (a) => {'\n'}
+  (a) => { '\n' }
   a.then((foo) => {});
   a.then((foo) => { if (true) {} });
   ```
@@ -3145,7 +3092,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 1, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 1)
 
   ```js
   foo = 'foo';
@@ -3153,7 +3100,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   const foo = 'foo';
@@ -3161,7 +3108,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 2, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 2)
 
   ```js
   const foo = someFunction();
@@ -3170,7 +3117,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'no-unused-vars: "off"')
+  [//]: # (expectedErrors: 0)
 
   ```js
   /* global someFunction, a */
@@ -3454,7 +3401,7 @@ This doc was created by referencing the following material:
 
   Bad:
 
-  [//]: # (expectedErrors: 7, eslint: 'func-names: "off"')
+  [//]: # (expectedErrors: 7)
 
   ```js
   /* global some_unused_var */
@@ -3483,7 +3430,8 @@ This doc was created by referencing the following material:
       return n * fact(n - 1);
   }
 
-  // When a function definition destructures an array, unused entries from the array also cause warnings.
+  // When a function definition destructures an array, unused entries from the array also cause
+  // warnings.
   function getY([x, y]) {
       return y;
   }
@@ -3492,7 +3440,7 @@ This doc was created by referencing the following material:
 
   Good:
 
-  [//]: # (expectedErrors: 0, eslint: 'func-names: "off", no-var: "off", no-undef: "off", prefer-arrow-callback: "off", no-use-before-define: "off"')
+  [//]: # (expectedErrors: 0, eslint: 'prefer-arrow-callback: "off", no-use-before-define: "off"')
 
   ```js
   const x = 10;
@@ -4256,7 +4204,7 @@ This doc was created by referencing the following material:
               return y;
           }
           return x;
-      } 
+      }
       return z;
   }
   ```
@@ -4542,3 +4490,764 @@ This doc was created by referencing the following material:
     }
   }
   ```
+
+
+## Whitespace
+
+- 19.1 Use soft tabs (space character) set to 2 spaces. eslint: [`@stylistic/indent`](https://eslint.style/rules/indent)
+
+  **Note:** Originally it was eslint: [`indent`](https://eslint.org/docs/latest/rules/indent) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Availability:** `es5`, `es6`
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  // 4 spaces
+  function foo1() {
+      const a = 'foo';
+  }
+
+  // tab indentation
+  function foo2() {
+  	const a = 'foo';
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+    const a = 'foo';
+  }
+  ```
+
+
+- 19.2 Place 1 space before the leading brace. eslint: [`@stylistic/space-before-blocks`](https://eslint.style/rules/space-before-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-before-blocks`](https://eslint.org/docs/latest/rules/space-before-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: 'no-useless-constructor: "off"')
+
+  ```js
+  function a(){}
+
+  if (a){
+      b();
+  }
+
+  for (;;){
+      b();
+  }
+
+  try {} catch (a){}
+
+  class Foo{
+    constructor(){}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-useless-constructor: "off"')
+  ```js
+  function a() {}
+
+  if (a) {
+      b();
+  }
+
+  for (;;) {
+      b();
+  }
+
+  try {} catch (a) {}
+
+  class Foo {
+    constructor() {}
+  }
+  ```
+
+- 19.3 Place 1 space before the opening parenthesis in control statements (if, while etc.). Place no space between the argument list and the function name in function calls and declarations. eslint: [`@stylistic/keyword-spacing`](https://eslint.style/rules/keyword-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`keyword-spacing`](https://eslint.org/docs/latest/rules/keyword-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+  if (foo) {
+      // ...
+  }else if (bar) {
+      // ...
+  }else{
+      // ...
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (foo) {
+      // ...
+  } else if (bar) {
+      // ...
+  } else {
+      // ...
+  }
+  ```
+
+- 19.4 Set off operators with spaces. eslint: [`@stylistic/space-infix-ops`](https://eslint.style/rules/space-infix-ops)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-infix-ops`](https://eslint.org/docs/latest/rules/space-infix-ops) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 9)
+
+  ```js
+  a+b
+
+  a+ b
+
+  a +b
+
+  a?b:c
+
+  const d={ b: 1 };
+
+  var { e=0 }=bar;
+
+  function foo(a=0) { }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  a + b
+
+  a       + b
+
+  a ? b : c
+
+  const d = { b: 1 };
+
+  var { e = 0 } = bar;
+
+  function foo(a = 0) { }
+  ```
+
+- 19.5 End files with a single newline character.  eslint: [`@stylistic/eol-last`](https://eslint.style/rules/eol-last)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`eol-last`](https://eslint.org/docs/latest/rules/eol-last) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function doSomething() {
+    var foo = 2;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function doSomething() {
+    var foo = 2;
+  }
+
+  ```
+
+- 19.6 Use indentation when making long method chains (more than 4 method chains). Use a leading dot, which emphasizes that the line is a method call, not a new statement. eslint: [`@stylistic/newline-per-chained-call`](https://eslint.style/rules/newline-per-chained-call)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`newline-per-chained-call`](https://eslint.org/docs/latest/rules/newline-per-chained-call) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  d3.select("body").selectAll("p").data([4, 8, 15, 16, 23, 42]).enter().append("p").text((d) => `I'm number ${d}!`);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  d3
+    .select("body")
+    .selectAll("p")
+    .data([
+        4,
+        8,
+        15,
+        16,
+        23,
+        42
+    ])
+    .enter()
+    .append("p")
+    .text((d) => `I'm number ${d}!`);
+  ```
+
+- 19.6.1 eslint: [`@stylistic/no-whitespace-before-property`](https://eslint.style/rules/no-whitespace-before-property)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-whitespace-before-property`](https://eslint.org/docs/latest/rules/no-whitespace-before-property) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 7)
+
+  ```js
+  foo [bar]
+
+  foo. bar
+
+  foo .bar
+
+  foo. bar. baz
+
+  foo. bar()
+    .baz()
+
+  foo
+    .bar(). baz()
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/computed-property-spacing: "off"')
+
+  ```js
+  foo.bar
+
+  foo[bar]
+
+  foo[ bar ]
+
+  foo.bar.baz
+
+  foo
+    .bar().baz()
+
+  foo
+    .bar()
+    .baz()
+
+  foo.
+    bar().
+    baz()
+  ```
+
+- 19.7 Leave a blank line after blocks and before the next statement. eslint: [`@stylistic/padding-line-between-statements`](https://eslint.style/rules/padding-line-between-statements)
+
+  **Availability:** `es5`, `es6`
+
+  **Note1:** Originally it was eslint: [`padding-line-between-statements`](https://eslint.org/docs/latest/rules/padding-line-between-statements) but was deprecated as of V8.53.0 so it was replaced.
+
+  **Note2:** This rule is currently disabled.
+
+  Bad:
+
+  [//]: # (expectedErrors: 1)
+
+  ```js
+  function foo() {
+      bar();
+          return;
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo1() {
+      bar();
+
+      return;
+  }
+
+  function foo2() {
+      return;
+  }
+  ```
+
+- 19.8 Do not pad your blocks with blank lines.  eslint: [`@stylistic/padded-blocks`](https://eslint.style/rules/padded-blocks)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`padded-blocks`](https://eslint.org/docs/latest/rules/padded-blocks) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 8)
+
+  ```js
+  if (a) {
+
+      b();
+
+  }
+
+  class C {
+
+      static {
+
+          foo1();
+
+      }
+
+  }
+
+  switch (a) {
+
+      case 0: foo2();
+
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  if (a) {
+      b();
+  }
+
+  class C {
+      static {
+          foo1();
+      }
+  }
+
+  switch (a) {
+      case 0: foo2();
+  }
+  ```
+
+- 19.9 Do not use multiple blank lines to pad your code. eslint: [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-multiple-empty-lines`](https://eslint.org/docs/latest/rules/no-multiple-empty-lines) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3)
+
+  ```js
+
+  // Newline at the beginning
+
+  var foo = 5;
+
+
+  var bar = 3;
+
+  // More than 2 newlines at the end
+
+
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  // No newline at the beginning
+
+  var foo = 5;
+
+  var bar = 3;
+
+  // Only 1 newline at the end
+
+  ```
+
+- 19.10 Do not add spaces inside parentheses. eslint: [`@stylistic/space-in-parens`](https://eslint.style/rules/space-in-parens)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`space-in-parens`](https://eslint.org/docs/latest/rules/space-in-parens) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 12, eslint: 'no-use-before-define: "off"')
+
+  ```js
+  foo( );
+
+  foo( 'bar');
+  foo('bar' );
+  foo( 'bar' );
+
+  foo( /* bar */ );
+
+  var foo = ( 1 + 2 ) * 3;
+  ( function () { return 'bar'; }() );
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'no-use-before-define: "off"')
+
+  ```js
+  foo();
+
+  foo('bar');
+
+  foo(/* bar */);
+
+  var foo = (1 + 2) * 3;
+  (function () { return 'bar'; }());
+  ```
+
+- 19.11 Do not add spaces inside brackets. eslint: [`@stylistic/array-bracket-spacing`](https://eslint.style/rules/array-bracket-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`array-bracket-spacing`](https://eslint.org/docs/latest/rules/array-bracket-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 13)
+
+  ```js
+  var arr = [ 'foo', 'bar' ];
+  var arr = ['foo', 'bar' ];
+  var arr = [ ['foo'], 'bar'];
+  var arr = [[ 'foo' ], 'bar'];
+  var arr = [ 'foo',
+    'bar'
+  ];
+  var [ x, y ] = z;
+  var [ x, ...y ] = z;
+  var [ ,,x, ] = z;
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var arr = [];
+  var arr = ['foo', 'bar', 'baz'];
+  var arr = [['foo'], 'bar', 'baz'];
+  var arr = [
+    'foo',
+    'bar',
+    'baz'
+  ];
+  var arr = ['foo',
+    'bar'
+  ];
+  var arr = [
+    'foo',
+    'bar'];
+
+  var [x, y] = z;
+  var [x, ...y] = z;
+  var [,,x,] = z;
+  ```
+
+- 19.12 Add spaces inside curly braces. eslint: [`@stylistic/object-curly-spacing`](https://eslint.style/rules/object-curly-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`object-curly-spacing`](https://eslint.org/docs/latest/rules/object-curly-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 14, eslint: '@stylistic/quote-props: "off", import/prefer-default-export: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  import {foo } from 'bar';
+
+  var obj = {'foo': 'bar'};
+  var obj = {'foo': 'bar' };
+  var obj = { baz: {'foo': 'qux'}, bar};
+  var obj = {baz: { 'foo': 'qux' }, bar};
+  var obj = {'foo': 'bar'
+  };
+  var obj = {
+    'foo': 'bar'};
+  var {x} = y;
+
+  export {foo };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: '@stylistic/quote-props: "off", import/prefer-default-export: "off", @stylistic/object-curly-newline: "off"')
+
+  ```js
+  import { foo } from 'bar';
+
+  var obj = { 'foo': 'bar' };
+  var obj = { 'foo': 'bar' };
+  var obj = { baz: { 'foo': 'qux' }, bar };
+  var obj = { baz: { 'foo': 'qux' }, bar };
+  var obj = { 'foo': 'bar'
+  };
+  var obj = {
+    'foo': 'bar' };
+  var { x } = y;
+
+  export { foo };
+  ```
+
+- 19.13 Avoid having lines of code that are longer than 100 characters (including whitespace). Note: per above, long strings are exempt from this rule, and should not be broken up.  eslint: [`@stylistic/max-len`](https://eslint.style/rules/max-len)
+
+  > Why? This ensures readability and maintainability.
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`max-len`](https://eslint.org/docs/latest/rules/max-len) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var foo = somethingLong.long && somethingLong.veryLong && somethingLong.veryVeryLong && somethingLong.veryVeryVeryLong;
+
+  // This is a very very very very very very very long comment that stretches more than 100 characters.
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = somethingLong.long
+    && somethingLong.veryLong
+    && somethingLong.veryVeryLong
+    && somethingLong.veryVeryVeryLong
+
+  // This is a very very very very very very very long comment that stretches more than 100
+  // characters.
+
+  // Exemption:
+  var longString = 'This is a very very very very very very long string resulting more than 100 characters!'
+
+  var longRegex = /^(?=.{12,128}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]).+[A-Za-z\d!@#$%^&*()\-_+={}[\]|\\;:'",.<>?/]{12,128}$/;
+
+  var longTemplateLiteral = `This is a very very very long template literal that contains: ${longString}`
+  ```
+
+- 19.14 Require consistent spacing inside an open block token and the next token on the same line. This rule also enforces consistent spacing inside a close block token and previous token on the same line. eslint: [`@stylistic/block-spacing`](https://eslint.style/rules/block-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`block-spacing`](https://eslint.org/docs/latest/rules/block-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 6, eslint: '@stylistic/brace-style: "off", prefer-const: "off"')
+
+  ```js
+  function foo() {return true;}
+  if (foo) { bar = 0;}
+  function baz() {let i = 0;
+      return i;
+  }
+
+  class C {
+      static {this.bar = 0;}
+  }
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  function foo() { return true; }
+  if (foo) { bar = 0; }
+
+  class C {
+      static { this.bar = 0; }
+  }
+  ```
+
+- 19.15 Avoid spaces before commas and require a space after commas. eslint: [`@stylistic/comma-spacing`](https://eslint.style/rules/comma-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`comma-spacing`](https://eslint.org/docs/latest/rules/comma-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 13, eslint: 'one-var: "off"')
+
+  ```js
+  var foo = 1 ,bar = 2;
+  var arr = [1 , 2];
+  var obj = { foo: "bar" ,baz: "qur" };
+  foo(a ,b);
+  new Foo(a ,b);
+  function baz(a ,b) {}
+  a ,b
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'one-var: "off"')
+
+  ```js
+  var foo = 1, bar = 2
+      , baz = 3;
+  var arr = [1, 2];
+  var arr = [1,, 3]
+  var obj = { foo: "bar", baz: "qur" };
+  foo(a, b);
+  new Foo(a, b);
+  function qur(a, b) {}
+  a, b
+  ```
+
+- 19.16 Enforce spacing inside of computed property brackets. eslint: [`@stylistic/computed-property-spacing`](https://eslint.style/rules/computed-property-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`computed-property-spacing`](https://eslint.org/docs/latest/rules/computed-property-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 10, eslint: 'dot-notation: "off"')
+
+  ```js
+  obj[foo ]
+  obj[ 'foo']
+  var x = { [ b ]: a }
+  obj[foo[ bar ]]
+
+  const { [ a ]: someProp } = obj;
+  ({ [ b ]: anotherProp } = anotherObj);
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0, eslint: 'dot-notation: "off"')
+
+  ```js
+  obj[foo]
+  obj['foo']
+  var x = { [b]: a }
+  obj[foo[bar]]
+
+  const { [a]: someProp } = obj;
+  ({ [b]: anotherProp } = anotherObj);
+  ```
+
+- 19.17 Avoid spaces between functions and their invocations. eslint: [`@stylistic/function-call-spacing`](https://eslint.style/rules/function-call-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`func-call-spacing`](https://eslint.org/docs/latest/rules/func-call-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  fn ();
+
+  fn
+  ();
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  fn();
+  ```
+
+- 19.18 Enforce spacing between keys and values in object literal properties. eslint: [`@stylistic/key-spacing`](https://eslint.style/rules/key-spacing)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`key-spacing`](https://eslint.org/docs/latest/rules/key-spacing) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 2)
+
+  ```js
+  var obj1 = { foo : 42 };
+
+  var obj2 = { foo:42 };
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var obj1 = { foo: 42 };
+
+  var obj2 = { foo: 42 };
+  ```
+
+- 19.19 Avoid trailing spaces at the end of lines. eslint: [`@stylistic/no-trailing-spaces`](https://eslint.style/rules/no-trailing-spaces)
+
+  **Availability:** `es5`, `es6`
+
+  **Note:** Originally it was eslint: [`no-trailing-spaces`](https://eslint.org/docs/latest/rules/no-trailing-spaces) but was deprecated as of V8.53.0 so it was replaced.
+
+  Bad:
+
+  [//]: # (expectedErrors: 3, eslint: '@stylistic/no-multiple-empty-lines: "off"')
+
+  ```js
+  var foo = 0; 
+  var baz = 5;  
+    
+  ```
+
+  Good:
+
+  [//]: # (expectedErrors: 0)
+
+  ```js
+  var foo = 0;
+  var baz = 5;
+
+  ```
+
+- 19.20 Avoid multiple empty lines, only allow one newline at the end of files, and avoid a newline at the beginning of files. 
+
+  **Note:** See, Section 19.9 for eslint: [`@stylistic/no-multiple-empty-lines`](https://eslint.style/rules/no-multiple-empty-lines)

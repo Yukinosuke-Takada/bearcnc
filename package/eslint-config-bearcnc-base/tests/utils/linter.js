@@ -1,6 +1,7 @@
 import { ESLint } from 'eslint';
 import getTestCasesData from './markdown.js';
 import { expect } from 'chai';
+import generateEsComment from './eslint.js';
 
 const DEBUG = false; // Set to true to enable debug logging
 
@@ -11,13 +12,12 @@ class Linter {
     this.configType = configType;
     // globalEslintConfig is an array of strings
     this.globalEslintConfig = globalEslintConfig;
-    this.globalEslintConfigString = Array.isArray(globalEslintConfig) ? globalEslintConfig.join(', ') : '';
     this.eslint = new ESLint({
       overrideConfigFile: this.configFilePath,
     });
   }
 
-  async checkRule(rule, { ignoreGlobalConfig = false } = {}) {
+  async checkRule(rule) {
     const { availability, testCases } = getTestCasesData(rule, this.docPath);
 
     // check if the config type is available for the rule
@@ -34,13 +34,12 @@ class Linter {
       }
     });
 
+    const filteredGlobalConfig = this.globalEslintConfig.filter((item) => !item.startsWith(`${rule}:`));
+
     // check if the code has expected errors counts
     for (let i = 0; i < testCases.length; i += 1) {
       const { code, expectedErrors, title } = testCases[i];
-      const codeWithGlobalConfig =
-        !ignoreGlobalConfig && this.globalEslintConfigString
-          ? `/* eslint ${this.globalEslintConfigString} */\n${code}`
-          : code;
+      const codeWithGlobalConfig = generateEsComment(filteredGlobalConfig) + code;
       const result = await this.eslint.lintText(codeWithGlobalConfig);
       if (DEBUG) {
         console.log(`[${title}]\n`);
